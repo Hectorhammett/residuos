@@ -1,0 +1,38 @@
+-Base de datos
+  Una base de datos centralizado por empresa.
+  Servidor de base de datos.
+
+-En la nube.
+  No es tan importante.
+  Posible escalación?
+  No es totalmente necesario.
+
+-Probablemente NWJS?
+
+
+- Un escaneado del ya firmado.
+  -Cadena
+    -Datos del generador
+    -Datos del transportista
+    -Se escanea la que ya pasó por todos.
+    -Guardar escaneado después del ciclo.
+
+- Reporte anual
+  -Los residuos son totalmente variables.
+  - En el campo de generador código.
+  - Con base a los reportes.
+
+- Guardar generador automatico.
+
+-Número de Manifiesto secuencial del gobieron (Autoridad), no se duplica, no se debe de poder reehacer un manifiesto.
+
+-Usuarios en el sistema.
+  -Identificados.
+  -Capturista.
+  -Administrador.
+
+-Autollenado:
+  -Múltiples sucursales.
+  -Cuando se llena poder editarlo.
+  -poder accesar a los documentos escaneados.
+  -Quemarlos en un Disco.

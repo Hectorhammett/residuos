@@ -1,0 +1,14 @@
+{
+  "name": "residuos",
+  "version": "1.0.0",
+  "description": "Program for Radilla",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Hector Mendoza Jacobo",
+  "license": "ISC",
+  "devDependencies": {
+    "electron-prebuilt": "^0.36.7"
+  }
+}
