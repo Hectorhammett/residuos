@@ -1,5 +1,11 @@
 {
   "name": "nw-demo",
   "version": "0.0.1",
-  "main": "pages/index.html"
+  "inject-js-start":"js/app.js",
+  "main": "index.html",
+  "dependencies": {
+    "bookshelf": "^0.9.1",
+    "knex": "^0.9.0",
+    "mysql": "^2.10.2"
+  }
 }

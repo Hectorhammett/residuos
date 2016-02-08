@@ -20,6 +20,10 @@ function getPage(url){
   })
   .fail(function(xhr,textStatus,errorThrown){
     alert("Hubo un error en la aplicación: " + textStatus);
+  })
+  .success(function(){
+    // console.log($('#inner-script').attr('src'));
+    // $.getScript($('#inner-script').attr('src'));
   });
 }
 
