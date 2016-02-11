@@ -1,11 +1,11 @@
 var Bookshelf = require('./js/bookshelf');
 
-console.log(Bookshelf);
-
-var test = Bookshelf.Model.extend({
+//Bookshelf Models ----------------------------------------------------
+var Report = Bookshelf.Model.extend({
   tableName: 'test'
 })
 
+//Event Handlers ---------------------------------------------------------------
 $(document).on('submit','#capture-form',function(event){
   event.preventDefault();
   event.stopImmediatePropagation();
@@ -14,12 +14,16 @@ $(document).on('submit','#capture-form',function(event){
   insertModel(form);
 });
 
+//functions---------------------------------------------------------------------
+/*
+  Function to insert a new model
+*/
 function insertModel(form){
-  new test({
-    Nombre:form.nombre,
-    Apellido:form.apellido,
-    Materno:form.materno
-  }).save();
+  // new test({
+  //   Nombre:form.nombre,
+  //   Apellido:form.apellido,
+  //   Materno:form.materno
+  // }).save();
 }
 
 $.fn.form = function() {
