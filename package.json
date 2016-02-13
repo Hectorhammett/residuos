@@ -2,8 +2,10 @@
   "name": "Residuos",
   "version": "0.0.0",
   "private": true,
-  "scripts": {
-    "start": "node ./bin/www"
+  "main": "views/login.html",
+  "inject-js-start":"init.js",
+  "window":{
+    "toolbar":false
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
@@ -14,6 +16,7 @@
     "express": "~4.13.1",
     "express-flash": "0.0.2",
     "express-session": "^1.13.0",
+    "fs": "0.0.2",
     "hjs": "~0.0.6",
     "knex": "^0.9.0",
     "moment": "^2.11.2",

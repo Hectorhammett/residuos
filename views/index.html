@@ -1,0 +1,18 @@
+<meta charset="utf-8" />
+<script>
+  if(global.user == undefined){
+    global.errorMessage = "No tienes permisos para acceder a esta sección";
+    window.history.back();
+  }
+  var Hogan = require('hjs');
+  var Fs = require('fs');
+  var data = {
+    username:global.user.attributes.username,
+    public: global.public,
+    views: global.views
+  };
+  var html = Fs.readFileSync(global.views+"index.hjs","utf8");
+  var template = Hogan.compile(html);
+  var page = template.render(data);
+  document.write(page);
+</script>

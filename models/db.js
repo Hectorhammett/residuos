@@ -4,7 +4,7 @@ var knex = require('knex')({
     host     : '127.0.0.1',
     user     : 'root',
     password : '',
-    database : 'restest',
+    database : 'residuos',
     charset  : 'UTF8_GENERAL_CI'
   }
 });

@@ -1,0 +1,9 @@
+<script>
+  var Hogan = require('hjs');
+  var Fs = require('fs');
+  var data = global.passedData;
+  var html = Fs.readFileSync(global.url,"utf8");
+  var template = Hogan.compile(html);
+  var page = template.render(data);
+  document.write(page);
+</script>

@@ -4,7 +4,8 @@ var models = [];
 
 var User = Bookshelf.Model.extend({
   tableName: 'user',
-  idAttribute: 'id'
+  idAttribute: 'id',
+  hasTimestamps: true
 });
 
 models["User"] = User;
