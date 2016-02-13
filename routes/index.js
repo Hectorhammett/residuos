@@ -8,22 +8,26 @@ var User = require('../models/models.js')("User");
 var flash = require('express-flash');
 /* GET home page. */
 
+
 //Route to get the login page
 router.get('/', function(req, res, next) {
-  res.render('login', { systemName: 'Ecological' , date:moment().locale('es').format('LL')});
+  if(!req.isAuthenticated())
+    res.render('login', { systemName: 'Ecological' , date:moment().locale('es').format('LL')});
+  else
+    res.redirect('/users/');
 });
 
 //Route to send the authentication to the server
 router.post('/login',function(req, res, next){
   passport.authenticate('local',{failureRedirect:'/'},function(err,user,info){
     if(err)
-      return res.render('login',{errorMessage:err.message});
+      return res.render('login',{errorMessage:err.message,systemName:'Ecological'});
     if(!user)
-      return res.render('login',{errorMessage:info.message});
+      return res.render('login',{errorMessage:info.message,systemName:'Ecological'});
     return req.login(user,function(err){
       if(err)
-        return res.render('login',{errorMessage:err.message});
-      return res.redirect('/users/dashboard');
+        return res.render('login',{errorMessage:err.message,systemName:'Ecological'});
+      return res.redirect('/users/');
     });
   })(req, res, next);
 });
@@ -33,6 +37,7 @@ router.get('/signup', function(req, res, next) {
   res.render('testSign', { systemName: 'Ecological' , date:moment().locale('es').format('LL')});
 });
 
+//Route that receives the post from the signup page
 router.post('/signup',function(req, res, next){
   var user = req.body;
   var userPromise = null;
@@ -54,5 +59,12 @@ router.post('/signup',function(req, res, next){
     }
   });
 });
+
+//Route to logOut
+router.get('/logout',function(req, res, next){
+  if(req.isAuthenticated())
+    req.logout();
+  res.redirect('/');
+})
 
 module.exports = router;

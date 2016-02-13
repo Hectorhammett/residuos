@@ -28,6 +28,7 @@
 </head>
 <body>
 <div class="background-image"></div>
+<div class="background-black"></div>
 <nav class="navbar navbar-transparent navbar-absolute">
     <div class="container">
         <div class="navbar-header">
