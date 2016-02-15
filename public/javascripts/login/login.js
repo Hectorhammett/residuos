@@ -1,6 +1,6 @@
 var Fs = require('fs');
 var Hogan = require('hjs');
-var User = require(global.models+'models.js')('User');
+var User = require(global.models)('User');
 var Bcrypt = require('bcrypt-nodejs');
 
 new User().count().then(function(total){

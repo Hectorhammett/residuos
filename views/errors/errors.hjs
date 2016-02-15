@@ -3,7 +3,7 @@
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
-    {{errorMessage}}
+    {{{errorMessage}}}
   </div>
 {{/errorMessage}}
 {{#successMessage}}
@@ -11,6 +11,6 @@
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
-    {{successMessage}}
+    {{{successMessage}}}
   </div>
 {{/successMessage}}

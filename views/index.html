@@ -7,10 +7,14 @@
   var Hogan = require('hjs');
   var Fs = require('fs');
   var data = {
-    username:global.user.attributes.username,
+    name:global.user.attributes.name,
+    lastname: global.user.attributes.lastname,
     public: global.public,
     views: global.views
   };
+  if(global.user.attributes.userLevel == 1){
+    data.admin = "admin";
+  }
   var html = Fs.readFileSync(global.views+"index.hjs","utf8");
   var template = Hogan.compile(html);
   var page = template.render(data);

@@ -1,0 +1,54 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="header">
+        <h4 class="title">Nuevo Usuario</h4>
+        <p class="category">Llenar la información completa del Usuario</p>
+      </div>
+      <div class="content">
+        <form data-namespace="newUser" data-function="createUser">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                  <label>Nombre</label>
+                  <input type="text" placeholder="Introducir Nombre(s)" name="name" class="form-control">
+              </div>
+              <div class="form-group">
+                  <label>Apellidos</label>
+                  <input type="text" placeholder="Introducir Apellidos" name="lastName" class="form-control">
+              </div>
+              <div class="form-group">
+                  <label>Nombre de Usuario</label>
+                  <input type="text" placeholder="Introducir Nombre de Usuario" name="username" class="form-control">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                  <label>Contraseña</label>
+                  <input type="password" placeholder="Contraseña" name="password" class="form-control">
+              </div>
+              <div class="form-group">
+                  <label>Repetir Contraseña</label>
+                  <input type="password" placeholder="Repetir Contraseña" name="passwordRepeated" class="form-control">
+              </div>
+              <div class="form-group">
+                  <label>Nivel de Accesso</label>
+                  <select name="userLevel" class="form-control">
+                    <option value="2">Capturista</option>
+                    <option value="1">Administrador</option>
+                  </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <button class="btn btn-primary">Crear Usuario</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

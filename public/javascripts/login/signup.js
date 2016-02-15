@@ -1,6 +1,8 @@
 var Fs = require('fs');
 var Hogan = require('hjs');
 var Bcrypt = require('bcrypt-nodejs');
+var Validator = require('validatorjs');
+Validator.useLang('es');
 
 $('form').submit(function(e){
   e.preventDefault();
@@ -12,26 +14,67 @@ function signUp(form){
   var User = require('../models/models.js')('User');
   new User({username:form.username}).fetch().then(function(model){
     if(model){
-      var messages = {
-        errorMessage: "El usuario ya existe"
-      }
-      loadErrors(message);
+      $.notify({
+        icon: 'pe-7s-close-circle',
+        message: "El usuario ya existe"
+      },{
+        type:"danger"
+      })
     }
     else{
-      var password = form.password;
-      var hash = Bcrypt.hashSync(password);
-      var user = new User({
+      var data = {
         username:form.username,
-        password:hash,
+        password:form.password,
+        passwordRepeated: form.passwordRepeated,
         name:form.name,
-        lastName:form.lastName,
-        userLevel: 1
+        lastName:form.lastName
+      }
+      var rules = {
+        username:"required|min:5",
+        password:"required|min:5",
+        passwordRepeated: "required|same:password",
+        name:"required|min:3",
+        lastName:"required|min:5",
+      }
+      var validator = new Validator(data,rules,{
+        "same.passwordRepeated": "El campo Repetir Contraseña y Contraseña deben coincidir."
       });
-      user.save().then(function(model){
-        var flashed = {};
-        global.successMessage = "El usuario ha sido creado correctamente"
-        document.location.href = global.views + "login.html";
+      validator.setAttributeNames({
+        username:"Nombre de Usuario",
+        password:"Contraseña",
+        passwordRepeated: "Repetir Contraseña",
+        name:"Nombre",
+        lastName:"Apellidos"
       });
+      if(validator.fails()){
+        var errors = validator.errors.all();
+        var string = "";
+        for(x in errors){
+          string += errors[x] + "<br/>";
+        }
+        $.notify({
+          icon: 'pe-7s-close-circle',
+          message: string
+        },{
+          type:"danger"
+        })
+      }
+      else{
+        var password = form.password;
+        var hash = Bcrypt.hashSync(password);
+        var user = new User({
+          username:form.username,
+          password:hash,
+          name:form.name,
+          lastName:form.lastName,
+          userLevel: 1
+        });
+        user.save().then(function(model){
+          var flashed = {};
+          global.successMessage = "El usuario ha sido creado correctamente"
+          document.location.href = global.views + "login.html";
+        });
+      }
     }
   });
 }
