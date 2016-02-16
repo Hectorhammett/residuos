@@ -74,6 +74,9 @@
             });
           }
         }
+      })
+      .catch(function(err){
+        alert(err);
       });
     }
 
