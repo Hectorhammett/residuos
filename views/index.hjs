@@ -31,6 +31,9 @@
     <link href='{{public}}stylesheets/fonts.css' rel='stylesheet' type='text/css'>
     <link href="{{public}}assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
 
+		<!-- Steps Css -->
+		<link href="{{public}}stylesheets/jquery.steps.css" rel="stylesheet"/>
+
 </head>
 <body>
 
@@ -59,7 +62,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="user.html">
+                    <a href="{{views}}manifest/newManifest.html">
                         <i class="pe-7s-plus"></i>
                         <p>Capturar Manifiesto</p>
                     </a>
@@ -234,6 +237,9 @@
     <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
 	<script src="{{public}}assets/js/light-bootstrap-dashboard.js"></script>
 
+	<!-- Wizard Plugin -->
+	<script src="{{public}}assets/jquery-steps/jquery.steps.js"></script>
+
   <!-- This is to make it more like an app, it makes all the a tags function as buttons -->
   <script src="{{public}}javascripts/users/index.js"></script>
 
@@ -241,6 +247,7 @@
 	<!-- Here i add all the JS, i'm loading them in one chunck to avoid loading them every time i need them -->
 	<script src="{{public}}javascripts/users/edit.js"></script>
 	<script src="{{public}}javascripts/admin/newUser.js"></script>
+	<script src="{{public}}javascripts/manifest/addManifest.js"></script>
 
 	<!-- Namespaces function -->
 	<script src="{{public}}javascripts/dashboard.js"></script>
