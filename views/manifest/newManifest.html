@@ -12,7 +12,7 @@
               <div class="row">
                 <div class="form-group col-sm-4">
                   <label>Identificación</label>
-                  <input type="text" class="form-control" name="identification"/>
+                  <input type="text" class="form-control" name="identification" id="test"/>
                 </div>
                 <div class="form-group col-sm-4">
                   <label>Número de Registro de I.N.E/Edo BC</label>
@@ -58,13 +58,171 @@
             </section>
             <h3>Residuos</h3>
             <section>
-                <p>Ill gonna have to user JS</p>
+              <div class="row">
+                <div class="col-sm-12">
+                  <table class="table table-bordered">
+                    <thead>
+                      <th>Descripción</th>
+                      <th>Cantidad</th>
+                      <th>Tipo de contenedor</th>
+                      <th>Cantidad total de residuo</th>
+                      <th>Unidad Vol/Pes</th>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><input type="text" class="form-control"/></td>
+                        <td><input type="text" class="form-control"/></td>
+                        <td><input type="text" class="form-control"/></td>
+                        <td><input type="text" class="form-control"/></td>
+                        <td><input type="text" class="form-control"/></td>
+                      </tr>
+                      <tr>
+                        <td><input type="text" class="form-control"/></td>
+                        <td><input type="text" class="form-control"/></td>
+                        <td><input type="text" class="form-control"/></td>
+                        <td><input type="text" class="form-control"/></td>
+                        <td><input type="text" class="form-control"/></td>
+                      </tr>
+                      <tr>
+                        <td><input type="text" class="form-control"/></td>
+                        <td><input type="text" class="form-control"/></td>
+                        <td><input type="text" class="form-control"/></td>
+                        <td><input type="text" class="form-control"/></td>
+                        <td><input type="text" class="form-control"/></td>
+                      </tr>
+                      <tr>
+                        <td><input type="text" class="form-control"/></td>
+                        <td><input type="text" class="form-control"/></td>
+                        <td><input type="text" class="form-control"/></td>
+                        <td><input type="text" class="form-control"/></td>
+                        <td><input type="text" class="form-control"/></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label>Nombre del Responsable</label>
+                    <input type="text" class="form-control"/>
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label>Instrucciones especiales e información adicional para el manejo seguro de los residuos</label>
+                    <textarea class="form-control" row="3"></textarea>
+                  </div>
+                </div>
+              </div>
             </section>
             <h3>Transportista</h3>
             <section>
                 <div class="row">
-                  <div class="col-sm-">
+                  <div class="col-sm-8 form-group">
+                    <label>Nombre de la empresa Transportadora</label>
+                    <input type="text" class="form-control"/>
+                  </div>
+                  <div class="col-sm-4 form-group">
+                    <label>Número del registro S.C.T.</label>
+                    <input type="text" class="form-control"/>
+                  </div>
+                  <div class="col-sm-9 form-group">
+                    <label>Domicilio</label>
+                    <input type="text" class="form-control"/>
+                  </div>
+                  <div class="col-sm-3 form-group">
+                    <label>Teléfono</label>
+                    <input type="text" class="form-control"/>
+                  </div>
+                  <div class="col-sm-9 form-group">
+                    <label>Domicilio</label>
+                    <input type="text" class="form-control"/>
+                  </div>
+                  <div class="col-sm-3 form-group">
+                    <label>Teléfono</label>
+                    <input type="text" class="form-control"/>
+                  </div>
                 </div>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <small>Recibí los materiales descritos en el manifiesto para su transporte:</small>
+                  </div>
+                  <div class="col-sm-8 form-group">
+                    <label>Nombre:</label>
+                    <input type="text" class="form-control"/>
+                  </div>
+                  <div class="col-sm-4 form-group">
+                    <label>Cargo:</label>
+                    <input type="text" class="form-control"/>
+                  </div>
+                  <div class="col-sm-4 form-group">
+                    <label>Fecha:</label>
+                    <input type="text" class="form-control"/>
+                  </div>
+                  <div class="col-sm-8 form-group">
+                    <label>Ruta desde la empresa generadora hasta su entrega:</label>
+                    <input type="text" class="form-control"/>
+                  </div>
+                  <div class="col-sm-8 form-group">
+                    <label>Tipo de Vehículo:</label>
+                    <input type="text" class="form-control"/>
+                  </div>
+                  <div class="col-sm-4 form-group">
+                    <label>Placas:</label>
+                    <input type="text" class="form-control"/>
+                  </div>
+                </div>
+            </section>
+            <h3>Destinatario</h3>
+            <section>
+              <div class="row">
+                <div class="col-sm-8 form-group">
+                  <label>Nombre de la empresa</label>
+                  <input type="text" class="form-control"/>
+                </div>
+                <div class="col-sm-4 form-group">
+                  <label>Registro de I.N.E.</label>
+                  <input type="text" class="form-control"/>
+                </div>
+                <div class="col-sm-8 form-group">
+                  <label>Domicilio</label>
+                  <input type="text" class="form-control"/>
+                </div>
+                <div class="col-sm-4 form-group">
+                  <label>Teléfono</label>
+                  <input type="text" class="form-control"/>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <small>Recibí los residuos descritos en el manifiesto</small>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12 form-group">
+                  <label>Observaciones</label>
+                  <textarea class="form-control" rows="3"></textarea>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-8 form-group">
+                  <label>Nombre</label>
+                  <input type="text" class="form-control">
+                </div>
+                <div class="col-sm-4 form-group">
+                  <label>Cargo</label>
+                  <input type="text" class="form-control">
+                </div>
+                <div class="col-sm-4 form-group">
+                  <label>Fecha de recepción</label>
+                  <input type="text" class="form-control">
+                </div>
+                <div class="col-sm-8 form-group">
+                  <label>Firma</label>
+                  <input type="text" class="form-control">
+                </div>
+              </div>
             </section>
         </div>
       </div>
@@ -77,6 +235,44 @@ $("#example-basic").steps({
   headerTag: "h3",
   bodyTag: "section",
   transitionEffect: "slideLeft",
-  autoFocus: true
+  autoFocus: true,
+  onInit:function (event, currentIndex, priorIndex) {
+                  adjustStepHeight();
+                },
+  onStepChanged:function (event, currentIndex, priorIndex) {
+                  adjustStepHeight();
+                }
 });
-</script
+
+$(window).on('resize',function(){
+  adjustStepHeight();
+})
+
+function adjustStepHeight(){
+  sum = 0;
+  //get the current step number
+  stepNumber = $("#example-basic").steps("getCurrentIndex");
+
+  //get the combined height of all child elements in the step
+  $("#example-basic-p-"+stepNumber).children().each(function(){
+       sum += ($(this).height()+
+                     parseInt($(this).css("margin-top"))+
+                     parseInt($(this).css("margin-bottom"))
+  )});
+
+  //add vertical padding to the sum variable
+  sum += (parseInt($("#example-basic-p-"+stepNumber).css("padding-top")))*2;
+
+  //set height of step to the sum value
+  $(".wizard > .content").css("height",sum);
+}
+
+$("#example-basic").on('keyup','#test',function(){
+  var results = addManifest.searchValue(this.value);
+  results.then(function(results){
+
+    $("#test").typeahead({source: results});
+
+  })
+})
+</script>

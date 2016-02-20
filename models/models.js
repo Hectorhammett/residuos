@@ -8,7 +8,14 @@ var User = Bookshelf.Model.extend({
   hasTimestamps: true
 });
 
+var Generador = Bookshelf.Model.extend({
+  tableName: 'generador',
+  idAttribute: 'id',
+  hasTimestamps: false
+});
+
 models["User"] = User;
+models["Generador"] = Generador;
 
 module.exports = function(model){
   return models[model];

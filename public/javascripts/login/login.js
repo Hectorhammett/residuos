@@ -9,6 +9,10 @@ new User().count().then(function(total){
     document.location.href = global.views + "firstSignIn.html";
   }
 })
+.catch(function(error){
+  alert("Hubo un error al conectarse a la base de datos. Favor de revisar de que el equipo en el cual se encuentra la base de datos se encuentre disponible y abra de nuevo la aplicación");
+  win.close(true);
+})
 
 if(global.successMessage != undefined){
   loadErrors({successMessage: global.successMessage});
