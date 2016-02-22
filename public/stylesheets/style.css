@@ -1,3 +1,17 @@
 .zero-margin{
-  margin-top: -10px!important; 
+  margin-top: -10px!important;
+}
+
+.wizard .typeahead.dropdown-menu{
+  visibility: visible!important;
+  opacity:1;
+  list-style:none!important;
+  border-radius: 3px;
+}
+
+.wizard .typeahead.dropdown-menu li a{
+  border-radius: 3px;
+}
+.wizard .typeahead.dropdown-menu li.active a{
+  background: #447DF7!important;
 }

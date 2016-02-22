@@ -13,7 +13,6 @@
 
     <!-- Bootstrap core CSS     -->
     <link href="{{public}}assets/css/bootstrap.min.css" rel="stylesheet" />
-		<link href="{{public}}stylesheets/style.css" rel="stylesheet" />
 
     <!-- Animation library for notifications   -->
     <link href="{{public}}assets/css/animate.min.css" rel="stylesheet"/>
@@ -33,6 +32,11 @@
 
 		<!-- Steps Css -->
 		<link href="{{public}}stylesheets/jquery.steps.css" rel="stylesheet"/>
+		<link href="{{public}}assets/select2/select2.css" rel="stylesheet"/>
+
+		<!-- Custom css -->
+		<link href="{{public}}stylesheets/style.css" rel="stylesheet" />
+		<link href="{{public}}stylesheets/typeahead.css" rel="stylesheet" />
 
 </head>
 <body>
@@ -236,6 +240,9 @@
 
     <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
 	<script src="{{public}}assets/js/light-bootstrap-dashboard.js"></script>
+
+	<!--  Notifications Plugin    -->
+	<script src="{{public}}assets/select2/select2.js"></script>
 
 	<!-- Wizard Plugin -->
 	<script src="{{public}}assets/jquery-steps/jquery.steps.js"></script>

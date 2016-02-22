@@ -7,6 +7,7 @@ var nwDir = path.dirname(nwPath);
 global.public = nwDir+"/public/";
 global.views = nwDir+"/views/";
 global.models = nwDir+"/models/models";
+global.db = nwDir+"/models/db";
 
 win.on('loaded',function(){
   this.maximize();

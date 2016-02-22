@@ -170,7 +170,7 @@
     padding: 2.5%;
 }
 
-.wizard > .content > .body ul
+.wizard > .content > .body ul:not(.typeahead)
 {
     list-style: disc !important;
 }

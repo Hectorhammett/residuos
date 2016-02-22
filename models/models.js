@@ -14,8 +14,15 @@ var Generador = Bookshelf.Model.extend({
   hasTimestamps: false
 });
 
+var Residuo = Bookshelf.Model.extend({
+  tableName: 'tiporesiduo',
+  idAttribute: 'id',
+  hasTimestamps: false
+});
+
 models["User"] = User;
 models["Generador"] = Generador;
+models['Residuo'] = Residuo;
 
 module.exports = function(model){
   return models[model];
