@@ -15,3 +15,7 @@
 .wizard .typeahead.dropdown-menu li.active a{
   background: #447DF7!important;
 }
+
+.res-check{
+  padding-left: 25px!important;
+}
