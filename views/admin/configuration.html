@@ -26,8 +26,60 @@
     </div>
   </div>
 </div>
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="header">
+        <h4 class="title">Rango de manifiestos</h4>
+        <p class="category">Capturar el rango del manifiesto</p>
+      </div>
+      <div class="content">
+        <div class="row">
+          <div class="col-sm-12">
+            <form data-namespace="configuration" data-function="updateManifestRange">
+              <div class="form-group">
+                <label>Inicio del rango</label>
+                <input type="number" class="form-control" name="manifestStart"/>
+              </div>
+              <div class="form-group">
+                <label>Fin del rango</label>
+                <input type="number" class="form-control" name="manifestEnd"/>
+              </div>
+              <div class="form-group">
+                <button class="btn btn-primary">Actualizar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="header">
+        <h4 class="title">Inicio del número local</h4>
+        <p class="category">Capturar desde qué número se va a asignar para la identificación locar de los manifiestos</p>
+      </div>
+      <div class="content">
+        <div class="row">
+          <div class="col-sm-12">
+            <form data-namespace="configuration" data-function="updateLocalNumber">
+              <div class="form-group">
+                <label>Número</label>
+                <input type="number" class="form-control" name="localStart"/>
+              </div>
+              <div class="form-group">
+                <input type="submit" class="btn btn-primary"/>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <script>
   $(document).ready(function(){
-    configuration.fillTable("table-residuos");
+    configuration.initPage();
   })
 </script>

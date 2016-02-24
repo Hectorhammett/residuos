@@ -14,6 +14,15 @@ var Generador = Bookshelf.Model.extend({
   hasTimestamps: false
 });
 
+var Unidad = Bookshelf.Model.extend({
+  tableName: 'unidad',
+  idAttribute: 'id',
+  hasTimestamps: false,
+  residuos: function(){
+    return this.belongsToMany(Residuo,'residuo_has_unidades','idUnidad','idResiduo');
+  }
+});
+
 var Residuo = Bookshelf.Model.extend({
   tableName: 'tiporesiduo',
   idAttribute: 'id',
@@ -23,18 +32,17 @@ var Residuo = Bookshelf.Model.extend({
   }
 });
 
-var Unidad = Bookshelf.Model.extend({
-  tableName: '',
+var Meta = Bookshelf.Model.extend({
+  tableName: 'meta_data',
   idAttribute: 'id',
-  hasTimestamps: false,
-  unidades: function(){
-    return this.belongsToMany(Residuo,'residuo_has_unidades','idUnidad','idResiduo');
-  }
+  hasTimestamps: false
 });
 
 models["User"] = User;
 models["Generador"] = Generador;
 models['Residuo'] = Residuo;
+models['Unidad'] = Unidad;
+models['Meta'] = Meta;
 
 module.exports = function(model){
   return models[model];

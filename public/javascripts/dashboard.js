@@ -23,3 +23,12 @@ $.fn.serializeObject = function(){
 
     return obj;
 };
+
+function notify(icon,text,type){
+  $.notify({
+    icon: icon,
+    message: text
+  },{
+    type: type
+  });
+}
