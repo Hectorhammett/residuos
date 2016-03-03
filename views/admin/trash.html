@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="header">
+        <h4 class="title">Tipos de residuos permitidos</h4>
+        <p class="category">Capturar/Borrar los tipos de residuo que se utilizarán en el sistema</p>
+      </div>
+      <div class="content">
+        <div class="row">
+          <div class="col-sm-12 form-group">
+            <button class="btn btn-primary" id="residuo-new">Agregar nuevo tipo de Residuo</button>
+            <button class="btn btn-primary pull-right" id="residuo-save">Actualizar residuos</button>
+          </div>
+        </div>
+        <table class="table" id="table-residuos">
+          <thead>
+            <th>Nombre de tipo de residuo</th>
+            <th>Unidad de medida permitida</th>
+            <th>Eliminar</th>
+          </thead>
+          <tbody>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $(document).ready(function(){
+    trash.initPage();
+  })
+</script>

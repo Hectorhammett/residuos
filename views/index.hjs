@@ -68,7 +68,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{views}}manifest/newManifest.html">
+                    <a href="{{views}}manifest/newManifest.html" id="capturar-manifiesto">
                         <i class="pe-7s-plus"></i>
                         <p>Capturar Manifiesto</p>
                     </a>
@@ -102,6 +102,26 @@
 										<div class="collapse tablesExamples zero-margin">
 												<ul class="nav">
 														<li><a href="{{views}}admin/addUser.html">Agregar Usuario</a></li>
+												</ul>
+										</div>
+										<div class="collapse tablesExamples zero-margin">
+												<ul class="nav">
+														<li><a href="{{views}}admin/generators.html">Generadores</a></li>
+												</ul>
+										</div>
+										<div class="collapse tablesExamples zero-margin">
+												<ul class="nav">
+														<li><a href="{{views}}admin/trash.html">Tipos de residuos</a></li>
+												</ul>
+										</div>
+										<div class="collapse tablesExamples zero-margin">
+												<ul class="nav">
+														<li><a href="{{views}}admin/transporters.html">Transportistas</a></li>
+												</ul>
+										</div>
+										<div class="collapse tablesExamples zero-margin">
+												<ul class="nav">
+														<li><a href="{{views}}admin/destination.html">Destinatarios</a></li>
 												</ul>
 										</div>
 										<div class="collapse tablesExamples zero-margin">
@@ -271,7 +291,11 @@
 	<script src="{{public}}javascripts/users/edit.js"></script>
 	<script src="{{public}}javascripts/admin/newUser.js"></script>
 	<script src="{{public}}javascripts/manifest/addManifest.js"></script>
+	<script src="{{public}}javascripts/admin/trash.js"></script>
 	<script src="{{public}}javascripts/admin/configuration.js"></script>
+	<script src="{{public}}javascripts/admin/generators.js"></script>
+	<script src="{{public}}javascripts/admin/transporters.js"></script>
+	<script src="{{public}}javascripts/admin/destination.js"></script>
 
 	<!-- Namespaces function -->
 	<script src="{{public}}javascripts/dashboard.js"></script>

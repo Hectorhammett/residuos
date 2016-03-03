@@ -142,6 +142,7 @@
     background: #fff;
     display: block;
     margin: 0.5em;
+    padding:0px!important;
     min-height: 0;
     overflow: hidden;
     position: relative;
@@ -165,9 +166,9 @@
 {
     float: left;
     position: absolute;
-    width: 95%;
+    width: 100%;
     height: auto;
-    padding: 2.5%;
+    padding: 1.5%;
 }
 
 .wizard > .content > .body ul:not(.typeahead)

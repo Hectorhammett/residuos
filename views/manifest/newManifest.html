@@ -6,61 +6,70 @@
         <p class="category">Captura de nuevo manifiesto</p>
       </div>
       <div class="content">
-        <div id="example-basic">
+        <form id="example-basic">
             <h3>Generador</h3>
             <section>
-              <div class="row">
-                <div class="form-group col-sm-4">
-                  <label>Identificación</label>
-                  <input type="text" class="form-control" name="identificacion"/>
+                <div class="row">
+                  <div class="col-sm-4">
+                    <label>Identificación</label>
+                    <input type="text" class="form-control" name="identificacion" readonly="true"/>
+                  </div>
+                  <div class="col-sm-4">
+                    <label>Número de Registro de I.N.E/Edo BC</label>
+                    <input type="text" class="form-control" name="noRegister"/>
+                  </div>
+                  <div class="col-sm-2">
+                    <label>No. Manifiesto</label>
+                    <input type="text" class="form-control" name="noManifest" readonly="true"/>
+                  </div>
+                  <div class="col-sm-2">
+                    <label>Página</label>
+                    <input type="text" class="form-control" name="noPage"/>
+                  </div>
                 </div>
-                <div class="form-group col-sm-4">
-                  <label>Número de Registro de I.N.E/Edo BC</label>
-                  <input type="text" class="form-control" name="noRegister"/>
+
+                <div class="row">
+                  <div class="col-sm-12">
+                    <label>Razón Social de la Empresa</label>
+                    <select class="form-control" name="razonSocial" id="razon-social"></select>
+                  </div>
                 </div>
-                <div class="form-group col-sm-2">
-                  <label>No. Manifiesto</label>
-                  <input type="text" class="form-control" name="noManifest"/>
+
+                <div class="row">
+                  <div class="col-sm-12">
+                    <label>Domicilio y C.P</label>
+                    <input type="text" class="form-control" name="domicilio" readonly="true">
+                  </div>
                 </div>
-                <div class="form-group col-sm-2">
-                  <label>Página</label>
-                  <input type="text" class="form-control" name="noPage"/>
+
+                <div class="row">
+                  <div class="col-sm-8">
+                    <label>Municipio</label>
+                    <input type="text" class="form-control" name="municipio" readonly="true">
+                  </div>
+                  <div class="col-sm-4">
+                    <label>Estado</label>
+                    <input type="text" class="form-control" name="estado" readonly="true">
+                  </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="form-group col-sm-12">
-                  <label>Razón Social de la Empresa</label>
-                  <input type="text" class="form-control" name="name" id="razon-social"/>
+
+                <div class="row">
+                  <div class="col-sm-4">
+                    <label>Teléfono</label>
+                    <input type="text" class="form-control" name="telefono" readonly="true">
+                  </div>
+                  <div class="col-sm-8">
+                    <label>N.R.A.</label>
+                    <input type="text" class="form-control" name="nra" readonly="true">
+                  </div>
                 </div>
-                <div class="form-group col-sm-12">
-                  <label>Domicilio y C.P</label>
-                  <input type="text" class="form-control" name="domicilio">
-                </div>
-                <div class="form-group col-sm-8">
-                  <label>Municipio</label>
-                  <input type="text" class="form-control" name="municipio">
-                </div>
-                <div class="form-group col-sm-4">
-                  <label>Estado</label>
-                  <input type="text" class="form-control" name="estado">
-                </div>
-              </div>
-              <div class="row">
-                <div class="form-group col-sm-4">
-                  <label>Teléfono</label>
-                  <input type="text" class="form-control" name="telefono">
-                </div>
-                <div class="form-group col-sm-8">
-                  <label>N.R.A.</label>
-                  <input type="text" class="form-control" name="nra">
-                </div>
-              </div>
+
             </section>
             <h3>Residuos</h3>
             <section>
               <div class="row">
                 <div class="col-sm-12">
-                  <table class="table table-bordered">
+                  <table class="table table-bordered" id="table-residuos">
                     <thead>
                       <th>Descripción</th>
                       <th>Cantidad</th>
@@ -71,31 +80,31 @@
                     <tbody>
                       <tr>
                         <td><select class="form-control residuo-tipo" name="tipo"></select></td>
-                        <td><input type="number" class="form-control"/></td>
-                        <td><input type="text" class="form-control"/></td>
-                        <td><input type="text" class="form-control"/></td>
-                        <td><input type="text" class="form-control"/></td>
+                        <td><input type="number" name="cantidad" class="form-control"/></td>
+                        <td><input type="text" name="contenedor" class="form-control"/></td>
+                        <td><input type="text" name="residuoTotal" class="form-control"/></td>
+                        <td><input type="text" name="residuoUnidad" class="form-control"  readonly="true"/></td>
                       </tr>
                       <tr>
                         <td><select class="form-control residuo-tipo" name="tipo" ></select></td>
-                        <td><input type="number" class="form-control"/></td>
-                        <td><input type="text" class="form-control"/></td>
-                        <td><input type="text" class="form-control"/></td>
-                        <td><input type="text" class="form-control"/></td>
+                        <td><input type="number" name="cantidad" class="form-control"/></td>
+                        <td><input type="text" name="contenedor" class="form-control"/></td>
+                        <td><input type="text" name="residuoTotal" class="form-control"/></td>
+                        <td><input type="text" name="residuoUnidad" class="form-control" readonly="true"/></td>
                       </tr>
                       <tr>
                         <td><select class="form-control residuo-tipo" name="tipo" ></select></td>
-                        <td><input type="number" class="form-control"/></td>
-                        <td><input type="text" class="form-control"/></td>
-                        <td><input type="text" class="form-control"/></td>
-                        <td><input type="text" class="form-control"/></td>
+                        <td><input type="number" name="cantidad" class="form-control"/></td>
+                        <td><input type="text" name="contenedor" class="form-control"/></td>
+                        <td><input type="text" name="residuoTotal" class="form-control"/></td>
+                        <td><input type="text" name="residuoUnidad" class="form-control" readonly="true"/></td>
                       </tr>
                       <tr>
                         <td><select class="form-control residuo-tipo" name="tipo" ></select></td>
-                        <td><input type="number" class="form-control"/></td>
-                        <td><input type="text" class="form-control"/></td>
-                        <td><input type="text" class="form-control"/></td>
-                        <td><input type="text" class="form-control"/></td>
+                        <td><input type="number" name="cantidad" class="form-control"/></td>
+                        <td><input type="text" name="contenedor" class="form-control"/></td>
+                        <td><input type="text" name="residuoTotal" class="form-control"/></td>
+                        <td><input type="text" name="residuoUnidad" class="form-control" readonly="true"/></td>
                       </tr>
                     </tbody>
                   </table>
@@ -105,194 +114,154 @@
                 <div class="col-sm-12">
                   <div class="form-group">
                     <label>Nombre del Responsable</label>
-                    <input type="text" class="form-control"/>
+                    <input type="text" class="form-control" name="nombreResponsable"/>
                   </div>
                 </div>
+              </div>
+              <div class="row">
                 <div class="col-sm-12">
                   <div class="form-group">
                     <label>Instrucciones especiales e información adicional para el manejo seguro de los residuos</label>
-                    <textarea class="form-control" row="3"></textarea>
+                    <textarea class="form-control" row="3" name="instruccionesEspeciales"></textarea>
                   </div>
                 </div>
               </div>
             </section>
             <h3>Transportista</h3>
             <section>
-                <div class="row">
-                  <div class="col-sm-8 form-group">
-                    <label>Nombre de la empresa Transportadora</label>
-                    <input type="text" class="form-control"/>
+
+                  <div class="row">
+                    <div class="col-sm-8">
+                      <label>Nombre de la empresa Transportadora</label>
+                      <select class="form-control" name="idTransportadora" id="nombreTransportista"></select>
+                    </div>
+                    <div class="col-sm-4">
+                      <label>Número del registro S.C.T.</label>
+                      <input type="text" name="transportistaSct" class="form-control" readonly="true"/>
+                    </div>
                   </div>
-                  <div class="col-sm-4 form-group">
-                    <label>Número del registro S.C.T.</label>
-                    <input type="text" class="form-control"/>
+
+                  <div class="row">
+                    <div class="col-sm-9">
+                      <label>Domicilio</label>
+                      <input type="text" name="transportistaDomicilio" class="form-control" readonly="true"/>
+                    </div>
+                    <div class="col-sm-3">
+                      <label>Teléfono</label>
+                      <input type="text" name="transportistaTelefono" class="form-control" readonly="true"/>
+                    </div>
                   </div>
-                  <div class="col-sm-9 form-group">
-                    <label>Domicilio</label>
-                    <input type="text" class="form-control"/>
+
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <small>Recibí los materiales descritos en el manifiesto para su transporte:</small>
+                    </div>
                   </div>
-                  <div class="col-sm-3 form-group">
-                    <label>Teléfono</label>
-                    <input type="text" class="form-control"/>
+
+                  <div class="row">
+                    <div class="col-sm-8">
+                      <label>Nombre:</label>
+                      <input type="text" class="form-control" name="transportistaNombre"/>
+                    </div>
+                    <div class="col-sm-4">
+                      <label>Cargo:</label>
+                      <input type="text" class="form-control" name="transportistaCargo"/>
+                    </div>
                   </div>
-                  <div class="col-sm-9 form-group">
-                    <label>Domicilio</label>
-                    <input type="text" class="form-control"/>
+
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <label>Fecha:</label>
+                      <input type="text" class="form-control" name="transportistaFecha"/>
+                    </div>
+                    <div class="col-sm-8">
+                      <label>Ruta desde la empresa generadora hasta su entrega:</label>
+                      <input type="text" class="form-control" name="transportistaRuta"/>
+                    </div>
                   </div>
-                  <div class="col-sm-3 form-group">
-                    <label>Teléfono</label>
-                    <input type="text" class="form-control"/>
+
+                  <div class="row">
+                    <div class="col-sm-8">
+                      <label>Tipo de Vehículo:</label>
+                      <input type="text" class="form-control" name="transportistaVehiculo"/>
+                    </div>
+                    <div class="col-sm-4">
+                      <label>Placas:</label>
+                      <input type="text" class="form-control" name="transportistaPlacas"/>
+                    </div>
                   </div>
-                </div>
-                <div class="row">
-                  <div class="col-sm-12">
-                    <small>Recibí los materiales descritos en el manifiesto para su transporte:</small>
-                  </div>
-                  <div class="col-sm-8 form-group">
-                    <label>Nombre:</label>
-                    <input type="text" class="form-control"/>
-                  </div>
-                  <div class="col-sm-4 form-group">
-                    <label>Cargo:</label>
-                    <input type="text" class="form-control"/>
-                  </div>
-                  <div class="col-sm-4 form-group">
-                    <label>Fecha:</label>
-                    <input type="text" class="form-control"/>
-                  </div>
-                  <div class="col-sm-8 form-group">
-                    <label>Ruta desde la empresa generadora hasta su entrega:</label>
-                    <input type="text" class="form-control"/>
-                  </div>
-                  <div class="col-sm-8 form-group">
-                    <label>Tipo de Vehículo:</label>
-                    <input type="text" class="form-control"/>
-                  </div>
-                  <div class="col-sm-4 form-group">
-                    <label>Placas:</label>
-                    <input type="text" class="form-control"/>
-                  </div>
-                </div>
+
+
             </section>
             <h3>Destinatario</h3>
             <section>
-              <div class="row">
-                <div class="col-sm-8 form-group">
-                  <label>Nombre de la empresa</label>
-                  <input type="text" class="form-control"/>
+
+                <div class="row">
+                  <div class="col-sm-8">
+                    <label>Nombre de la empresa</label>
+                    <select name="idDestinatario" class="form-control" id="destinatario-nombre" ></select>
+                  </div>
+                  <div class="col-sm-4">
+                    <label>Registro de I.N.E.</label>
+                    <input type="text" name="destinatarioIne" class="form-control" readonly="true"/>
+                  </div>
                 </div>
-                <div class="col-sm-4 form-group">
-                  <label>Registro de I.N.E.</label>
-                  <input type="text" class="form-control"/>
+
+                <div class="row">
+                  <div class="col-sm-8">
+                    <label>Domicilio</label>
+                    <input type="text" name="destinatarioDomicilio" class="form-control" readonly="true"/>
+                  </div>
+                  <div class="col-sm-4">
+                    <label>Teléfono</label>
+                    <input type="text" name="destinatarioTelefono" class="form-control" readonly="true"/>
+                  </div>
                 </div>
-                <div class="col-sm-8 form-group">
-                  <label>Domicilio</label>
-                  <input type="text" class="form-control"/>
+
+                <div class="row">
+                  <div class="col-sm-12">
+                    <small>Recibí los residuos descritos en el manifiesto</small>
+                  </div>
                 </div>
-                <div class="col-sm-4 form-group">
-                  <label>Teléfono</label>
-                  <input type="text" class="form-control"/>
+
+                <div class="row">
+                  <div class="col-sm-12">
+                    <label>Observaciones</label>
+                    <textarea class="form-control" rows="3" name="destinatarioObservaciones"></textarea>
+                  </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-12">
-                  <small>Recibí los residuos descritos en el manifiesto</small>
+
+                <div class="row">
+                  <div class="col-sm-8">
+                    <label>Nombre</label>
+                    <input type="text" class="form-control" name="destinatarioNombre">
+                  </div>
+                  <div class="col-sm-4">
+                    <label>Cargo</label>
+                    <input type="text" class="form-control" name="destinatarioCargo">
+                  </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-12 form-group">
-                  <label>Observaciones</label>
-                  <textarea class="form-control" rows="3"></textarea>
+
+                <div class="row">
+                  <div class="col-sm-4">
+                    <label>Fecha de recepción</label>
+                    <input type="text" class="form-control" name="destinatarioRecepcion">
+                  </div>
+                  <div class="col-sm-8">
+                    <label>Firma</label>
+                    <input type="text" class="form-control" name="">
+                  </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-8 form-group">
-                  <label>Nombre</label>
-                  <input type="text" class="form-control">
-                </div>
-                <div class="col-sm-4 form-group">
-                  <label>Cargo</label>
-                  <input type="text" class="form-control">
-                </div>
-                <div class="col-sm-4 form-group">
-                  <label>Fecha de recepción</label>
-                  <input type="text" class="form-control">
-                </div>
-                <div class="col-sm-8 form-group">
-                  <label>Firma</label>
-                  <input type="text" class="form-control">
-                </div>
-              </div>
+
             </section>
-        </div>
+        </form>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-$("#example-basic").steps({
-  headerTag: "h3",
-  bodyTag: "section",
-  transitionEffect: "slideLeft",
-  autoFocus: true,
-  onInit:function (event, currentIndex, priorIndex) {
-    $("#razon-social").typeahead({
-      afterSelect: function(selection){
-        document.getElementsByName("domicilio")[0].value = selection.domicilio;
-        document.getElementsByName("municipio")[0].value = selection.municipio;
-        document.getElementsByName("estado")[0].value = selection.estado;
-        document.getElementsByName("telefono")[0].value = selection.telefono;
-        document.getElementsByName("nra")[0].value = selection.nra;
-      }
-    });
-    adjustStepHeight();
-  },
-  onStepChanged:function (event, currentIndex, priorIndex) {
-    adjustStepHeight();
-  }
-});
-
-$(window).on('resize',function(){
-  adjustStepHeight();
-})
-
-function adjustStepHeight(){
-  sum = 0;
-  //get the current step number
-  stepNumber = $("#example-basic").steps("getCurrentIndex");
-
-  //get the combined height of all child elements in the step
-  $("#example-basic-p-"+stepNumber).children().each(function(){
-       sum += ($(this).height()+
-                     parseInt($(this).css("margin-top"))+
-                     parseInt($(this).css("margin-bottom"))
-  )});
-
-  //add vertical padding to the sum variable
-  sum += (parseInt($("#example-basic-p-"+stepNumber).css("padding-top")))*2;
-
-  //set height of step to the sum value
-  $(".wizard > .content").css("height",sum);
-}
-
-$("#example-basic").on('keyup','#razon-social',function(){
-  var results = addManifest.searchValue(this.value);
-  results.then(function(results){
-    $("#razon-social").data('typeahead').source = results;
-  })
-})
-
 $(document).ready(function(){
-  addManifest.getNextIndex().then(function(index){
-    document.getElementsByName("identificacion")[0].value = index;
-  })
-  addManifest.getTrashType().then(function(residuos){
-    $('.residuo-tipo').select2({
-      placeholder: "Tipo de Residuo",
-      allowClear: true,
-      data: residuos
-    })
-  });
-});
+  addManifest.initializePage();
+})
 </script>
