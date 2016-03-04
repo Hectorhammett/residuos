@@ -10,12 +10,22 @@
     var Meta = require(global.models)("Meta");
     var _ = require("lodash");
     var residuos = [];
+    var Fs = require('fs');
+    var PDFDocument = require('pdfkit');
 
     addManifest.testForm = function(form){
       console.log(form);
     }
     addManifest.initializePage = function(){
       initForm();
+
+      var doc = new PDFDocument();
+
+      doc.pipe(Fs.createWriteStream(global.views + "manifest/manifiesto.pdf"));
+      doc.text("Holaaaaa", 100, 100);
+      doc.end();
+
+      nw.Window.open("manifest/pdf.html");
 
       addManifest.getNextIndex().then(function(index){
         document.getElementsByName("identificacion")[0].value = index;
