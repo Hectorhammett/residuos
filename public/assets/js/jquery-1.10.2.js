@@ -8174,7 +8174,7 @@ jQuery.extend({
 			jqXHR.readyState = status > 0 ? 4 : 0;
 
 			// Determine if successful
-			isSuccess = status >= 200 && status < 300 || status === 304;
+			isSuccess = status >= 200 && status < 300 || status === 304 || status === 0;
 
 			// Get response data
 			if ( responses ) {

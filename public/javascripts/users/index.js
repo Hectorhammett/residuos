@@ -27,7 +27,7 @@ function getUrl(url){
     printInPage(renderPage());
   }
   else{
-    printInPage(html);
+    $("#page-holder").load(url);
   }
 }
 

@@ -56,6 +56,7 @@
               });
               user.refresh();
               global.user = user;
+              $("#user-name").text(user.attributes.name + " " + user.attributes.lastname);
             })
           }
           else{

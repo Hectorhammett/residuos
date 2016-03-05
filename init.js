@@ -10,5 +10,5 @@ global.models = nwDir+"/models/models";
 global.db = nwDir+"/models/db";
 
 win.on('loaded',function(){
-  this.maximize();
+  win.maximize();
 })

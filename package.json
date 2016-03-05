@@ -1,8 +1,8 @@
 {
   "name": "Residuos",
   "version": "0.0.0",
-  "main": "app://residuos/views/login.html",
-  "inject-js-start": "init.js",
+  "main": "views/login.html",
+  "chromium-args" : "allow-file-acces",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "~1.13.2",

@@ -101,7 +101,7 @@
       .save({
         estado: 0
       }).then(function(){
-        $(button).removeClass('btn-dissable btn-warning');
+        $(button).removeClass('btn-disable btn-warning');
         $(button).addClass('btn-enable btn-success');
         $(button).text("Habilitar");
       })
@@ -125,7 +125,7 @@
         estado: 1
       }).then(function(){
         $(button).removeClass('btn-enable btn-success');
-        $(button).addClass('btn-dissable btn-warning');
+        $(button).addClass('btn-disable btn-warning');
         $(button).text("Deshabilitar");
       })
       .catch(function(){

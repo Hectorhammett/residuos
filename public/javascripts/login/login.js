@@ -47,7 +47,9 @@ function login(form){
       }
       else{
         global.user = model;
-        document.location.href = global.views + "index.html";
+        $("html").load(global.views+"index.html",function(){
+          console.log("1st redy")
+        });
       }
     }
   });
@@ -61,3 +63,15 @@ function loadErrors(messages){
   var page = template.render(data);
   $("#error-holder").html(page);
 }
+
+$(document).on('click','a',function(e){
+  if($(this).attr('href') != "#" && $(this).attr('href') != global.views + "logout.html"){
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    if($(this).parent('li').parent('ul').hasClass('nav')){
+      $('.active').removeClass('active');
+      $(this).parent('li').addClass('active');
+    }
+    $('#page-holder').load($(this).attr('href'));
+  }
+})
