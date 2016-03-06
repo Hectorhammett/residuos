@@ -1,0 +1,109 @@
+<script>
+var Manifiesto = require(global.models)('Manifiesto');
+var moment = require('moment');
+var Fs = require('fs');
+var PDFDocument = require('pdfkit');
+
+new Manifiesto({
+  identificador: 6
+}).fetch({withRelated:['generador','transportista','residuos','destinatario']}).then(function(manifiesto){
+  createPdf(manifiesto.toJSON());
+}).catch(function(err){
+  alert(error);
+  console.error(err);
+})
+
+function createPdf(manifiesto){
+  var generador = manifiesto.generador;
+  var residuos = manifiesto.residuos;
+  var transportista = manifiesto.transportista;
+  var destinatario = manifiesto.destinatario;
+  var writeStream = Fs.createWriteStream(global.views + "manifest/manifiesto.pdf");
+  var doc = new PDFDocument();
+
+  writeStream.on('finish', function () {
+    nw.Window.open(global.views + "manifest/manifiesto.pdf",function(window){
+      window.maximize();
+    });
+  });
+
+  doc.pipe(writeStream);
+
+  //Plantilla
+  doc.image(global.views + 'manifest/plantilla.jpg',0,0,{
+    width:615,
+  });
+
+  //identificador del manifiesto
+  doc.text(manifiesto.identificador, 30, 105);
+
+  doc.fontSize(9);
+
+  //Datos del generador
+  doc.text(generador.nra,45,140);
+  doc.text(manifiesto.noManifiesto,430,140);
+  doc.text(manifiesto.pagina,525,140);
+  doc.text(generador.razonSocial,255,157);
+  doc.text(generador.domicilio,100,171);
+  doc.text(generador.codigoPostal,400,171);
+  doc.text(generador.municipio,165,185);
+  doc.text(generador.estado,400,185);
+  doc.text(generador.telefono,70,200);
+
+  //residuos
+  for(var i = 0; i < residuos.length; i++){
+    doc.text(residuos[i].name,55,242 + (10*i));
+    doc.text(residuos[i]._pivot_cantidadContenedor,320,242 + (10*i));
+    doc.text(residuos[i]._pivot_tipoContenedor,380,242 + (10*i));
+    doc.text(residuos[i]._pivot_cantidadUnidad,450,242 + (10*i));
+    doc.text(residuos[i]._pivot_unidad,520,242 + (10*i),{
+      width:300
+    });
+  }
+
+  doc.text(manifiesto.instruccionesEspeciales,55,320);
+  doc.text(manifiesto.nombreResponsableGenerador,205,400);
+
+  //empresa transportadora
+  doc.text(transportista.nombre,240,420);
+  if(transportista.domicilio.length > 65)
+  doc.fontSize(7);
+  doc.text(transportista.domicilio,100,435);
+  doc.fontSize(9);
+  doc.text(transportista.telefono,445,435);
+  doc.text(transportista.autorizacionSemarnat,192,450);
+  doc.text(transportista.sct,515,450,{
+    width:300
+  });
+  doc.text(manifiesto.nombreTransportista,100,488);
+  doc.text(manifiesto.cargoTransportista,100,501);
+  doc.text(moment(manifiesto.fechaEmbarque).format('D/MM/YYYY'),510,501,{
+    width:300
+  });
+  if(manifiesto.ruta.length > 90)
+  doc.fontSize(7);
+  doc.text(manifiesto.ruta,50,540);
+  doc.fontSize(9);
+  doc.text(manifiesto.tipoVehiculo,152,559);
+  doc.text(manifiesto.placa,442,559);
+
+  //Destinatario
+  doc.text(destinatario.nombre,235,582);
+  doc.text(destinatario.ine,240,596);
+  if(destinatario.domicilio.length > 65)
+  doc.fontSize(7);
+  doc.text(destinatario.domicilio,95,610);
+  doc.fontSize(9);
+  doc.text(destinatario.telefono,400,610);
+  if(manifiesto.observaciones.length > 65)
+  doc.fontSize(7);
+  doc.text(manifiesto.observaciones,129,645);
+  doc.fontSize(9);
+  doc.text(manifiesto.nombreDestinatario,100,678);
+  doc.text(manifiesto.cargoDestinatario,100,693);
+  doc.text(moment(manifiesto.fechaRecepcion).format('D/MM/YYYY'),510,693,{
+    width:300
+  });
+  doc.end();
+}
+</script>

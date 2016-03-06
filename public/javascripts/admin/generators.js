@@ -9,14 +9,21 @@
     generators.storeGenerator = function(form){
       console.log(form);
       var names = {
-        name: "Razón Social de la Empresa"
+        razonSocial: "Razón Social",
+        domicilio: "Domicilio",
+        cp:"Código Postal",
+        municipio: "Municipio",
+        estado: "Estado",
+        telefono: "Teléfono",
+        nra:"Número de Registro Ambiental"
       }
       var rules = {
-        name: "required|min:5",
+        razonSocial: "required|min:5",
         domicilio: "required|min:5",
+        cp:"required",
         municipio: "required|min:5",
         estado: "required|min:5",
-        telefono: "required|numeric",
+        telefono: "required|min:10",
         nra:"required"
       }
       var validator = new Validator(form,rules);
@@ -31,14 +38,16 @@
       }
       else{
         new Generador({
-          razonSocial: form.name,
+          razonSocial: form.razonSocial,
           domicilio: form.domicilio,
           municipio: form.municipio,
+          codigoPostal: form.cp,
           estado: form.estado,
           telefono: form.telefono,
           nra: form.nra
         }).save().then(function(model){
           notify("pe-7s-check","El generador se ha guardado correctamente.","success");
+          $("form")[0].reset();
         }).catch(function(err){
           console.log(err.message);
           notify("pe-7s-circle-close","Hubo un error con la base de datos. Favor de revisar que el servidor se encuentre encendido.","danger")

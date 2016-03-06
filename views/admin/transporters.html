@@ -8,23 +8,31 @@
       <div class="content">
         <form data-namespace="transporters" data-function="saveTransporter">
           <div class="row">
-            <div class="col-sm-8 form-group">
+            <div class="col-sm-12">
               <label>Nombre de la empresa Transportadora</label>
-              <input type="text" name="nombre" class="form-control"/>
-            </div>
-            <div class="col-sm-4 form-group">
-              <label>Número del registro S.C.T.</label>
-              <input type="text" name="sct" class="form-control"/>
+              <input type="text" class="form-control" name="nombre" />
             </div>
           </div>
+
           <div class="row">
-            <div class="col-sm-9 form-group">
-              <label>Domicilio</label>
-              <input type="text" name="domicilio" class="form-control"/>
+            <div class="col-sm-6">
+              <label>Número del registro S.C.T.</label>
+              <input type="text" name="sct" class="form-control" />
             </div>
-            <div class="col-sm-3 form-group">
+            <div class="col-sm-6">
+              <label>Autorización de la SEMARNAT</label>
+              <input type="text" name="transportistaAutorizacion" class="form-control" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-9">
+              <label>Domicilio</label>
+              <input type="text" name="domicilio" class="form-control" />
+            </div>
+            <div class="col-sm-3">
               <label>Teléfono</label>
-              <input type="text" name="telefono" class="form-control"/>
+              <input type="text" name="telefono" class="form-control" />
             </div>
           </div>
           <div class="row">

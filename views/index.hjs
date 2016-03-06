@@ -39,6 +39,7 @@
 		<!-- Custom css -->
 		<link href="{{public}}stylesheets/style.css" rel="stylesheet" />
 		<link href="{{public}}stylesheets/typeahead.css" rel="stylesheet" />
+		<link href="{{public}}assets/datepicker/dist/css/bootstrap-datepicker.css" rel="stylesheet" />
 
 </head>
 <body>
@@ -161,7 +162,7 @@
                                     <span class="notification">5</span>
                               </a>
                               <ul class="dropdown-menu">
-                                <li><a href="#">Notification 1</a></li>
+                                <li><a href="{{views}}testpdf.html">testpdf</a></li>
                                 <li><a href="#">Notification 2</a></li>
                                 <li><a href="#">Notification 3</a></li>
                                 <li><a href="#">Notification 4</a></li>
@@ -282,6 +283,9 @@
 
 	<!-- Datatables js -->
 	<script src="{{public}}assets/datatables/datatables.min.js"></script>
+
+	<!-- Datepicker js -->
+	<script src="{{public}}assets/datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 
   <!-- This is to make it more like an app, it makes all the a tags function as buttons -->
   <script src="{{public}}javascripts/users/index.js"></script>

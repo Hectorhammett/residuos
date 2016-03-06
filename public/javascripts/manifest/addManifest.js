@@ -9,6 +9,7 @@
     var Knex = require(global.db).knex;
     var Meta = require(global.models)("Meta");
     var _ = require("lodash");
+    var moment = require("moment");
     var residuos = [];
     var Fs = require('fs');
     var PDFDocument = require('pdfkit');
@@ -18,25 +19,22 @@
     }
     addManifest.initializePage = function(){
       initForm();
-
-      var doc = new PDFDocument();
-
-      doc.pipe(Fs.createWriteStream(global.views + "manifest/manifiesto.pdf"));
-      doc.text("Holaaaaa", 100, 100);
-      doc.end();
-
-      nw.Window.open("manifest/pdf.html");
+      initDatepickers();
 
       addManifest.getNextIndex().then(function(index){
         document.getElementsByName("identificacion")[0].value = index;
       })
 
       addManifest.getTrashType().then(function(residuos){
-        $('.residuo-tipo').select2({
-          placeholder: "Tipo de Residuo",
-          allowClear: true,
-          data: residuos
-        })
+        if(residuos.length == 1){
+          alert("No existen tipos de residuos registrados en el sistema. Favor de solicitar al administrador del sistema de agregar los posibles tipos de residuo que se pueden utilizar dentro de los manifiestos.")
+        }else{
+          $('.residuo-tipo').select2({
+            placeholder: "Tipo de Residuo",
+            allowClear: true,
+            data: residuos
+          })
+        }
       });
 
       addManifest.getCurrentManifest().then(function(data){
@@ -45,29 +43,44 @@
 
       getGenerators().then(function(generadores){
         console.log(generadores);
-        $('#razon-social').select2({
-          placeholder: "Razón Social de la Empresa",
-          allowClear: true,
-          data: generadores
-        })
+        if(generadores.length == 1){
+          alert("No existen Generadores de Residuos registrados en el sistema. Favor de solicitar al administrador del sistema de agregar los posibles Generadores de residuos que se pueden utilizar dentro de los manifiestos.")
+        }
+        else{
+          $('#razon-social').select2({
+            placeholder: "Razón Social de la Empresa",
+            allowClear: true,
+            data: generadores
+          })
+        }
       })
 
       getTransporters().then(function(transporters){
         console.log(transporters);
-        $('#nombreTransportista').select2({
-          placeholder: "Nombre de la Empresa",
-          allowClear: true,
-          data: transporters
-        })
+        if(transporters.length == 1){
+          alert("No existen Transportistas de Residuos registrados en el sistema. Favor de solicitar al administrador del sistema de agregar los posibles Transportistas de residuos que se pueden utilizar dentro de los manifiestos.");
+        }
+        else{
+          $('#nombreTransportista').select2({
+            placeholder: "Nombre de la Empresa",
+            allowClear: true,
+            data: transporters
+          })
+        }
       });
 
       getDestinations().then(function(destinatarios){
         console.log(destinatarios);
-        $('#destinatario-nombre').select2({
-          placeholder: "Nombre de la Empresa",
-          allowClear: true,
-          data: destinatarios
-        })
+        if(destinatarios.length == 1){
+          alert("No existen Destinatarios de Residuos registrados en el sistema. Favor de solicitar al administrador del sistema de agregar los posibles Destinatarios de residuos que se pueden utilizar dentro de los manifiestos.");
+        }
+        else{
+          $('#destinatario-nombre').select2({
+            placeholder: "Nombre de la Empresa",
+            allowClear: true,
+            data: destinatarios
+          })
+        }
       })
     }
 
@@ -129,6 +142,7 @@
         $("input[name='transportistaSct']").val(transportista.sct);
         $("input[name='transportistaTelefono']").val(transportista.telefono);
         $("input[name='transportistaDomicilio']").val(transportista.domicilio);
+        $("input[name='transportistaAutorizacion']").val(transportista.autorizacionSemarnat);
       }).catch(function(err){
         console.error(err);
         notify("pe-7s-close-circle","Hubo un error con la base de datos. Favor de revisar que el servidor se encuentre encendido","danger")
@@ -160,6 +174,28 @@
       $("input[name='destinatarioTelefono']").val("");
     })
 
+    //function to initialize the Datepickers
+    function initDatepickers(){
+      $('.datepicker').datepicker({
+        autoclose:true,
+        todayBtn:true,
+        format:"d/mm/yyyy"
+      })
+      .on('show', function(e) {
+        console.log("Show");
+        $(".datepicker-dropdown").css({
+          visibility: "visible!important",
+          opacity: "1!important"
+        });
+      })
+      .on('hide',function(e){
+        console.log("Hide");
+        $(".datepicker-dropdown").css({
+          visibility: "visible!important",
+          opacity: "1!important"
+        })
+      });
+    }
     //function to ghet the curren manifest nnumber
     addManifest.getCurrentManifest = function(){
       var current = new Meta({
@@ -211,14 +247,12 @@
            }
           if(currentIndex == 0){
             var rules = {
-              noRegister: "required",
               noPage: "required|numeric",
               razonSocial: "required"
             }
             var validation = new Validator(form,rules);
 
             validation.setAttributeNames({
-              noRegister: "Número de Registro de I.N.E./EDO BC",
               noPage: "Página",
               razonSocial: "Razón Social de la Empresa"
             });
@@ -314,7 +348,7 @@
           var form = $(this).serializeObject();
           console.log(form);
           saveManifest(form);
-          //$("#capturar-manifiesto").click();
+          $("#capturar-manifiesto").click();
         },
         onInit:function (event, currentIndex, priorIndex) {
           adjustStepHeight();
@@ -352,6 +386,12 @@
 
     //function to store the manifest in the DB
     function saveManifest(form){
+      if(form.transportistaFecha != ""){
+        form.transportistaFecha = moment(form.transportistaFecha, "D/MM/YYYY").format('YYYY-MM-DD');
+      }
+      if(form.destinatarioRecepcion != ""){
+        form.destinatarioRecepcion = moment(form.destinatarioRecepcion,"D/MM/YYYY").format('YYYY-MM-DD');
+      }
       var attributes = {
         registroBC: form.noRegister,
         noManifiesto: form.noManifest,
@@ -371,7 +411,7 @@
         nombreDestinatario: form.destinatarioNombre,
         cargoDestinatario: form.destinatarioCargo,
         fechaRecepcion: form.destinatarioRecepcion,
-        created_by:global.user.attributes.id,
+        created_by:global.user.attributes.id
       }
 
       new Manifiesto(attributes).save().then(function(manifiesto){
@@ -391,6 +431,7 @@
         console.log(final,manifiesto.identificador)
         Knex('manifiesto_has_residuos').insert(final).then(function(){
           notify("pe-7s-check","Se ha guardado el manifiesto correctamente","success");
+          fetchNew(manifiesto.identificador);
           $("#capturar-manifiesto").click();
         }).catch(function(err){
           console.error(err);
@@ -399,6 +440,24 @@
       }).catch(function(err){
         notify("pe-7s-close-circle","Hubo un error guardando el manifiesto. Favor de revisar que el servidor se encuentre disponible","danger");
       });
+    }
+
+    //function to create the pdf with the manifest
+    function createPDF(manifest){
+      var writeStream = Fs.createWriteStream(global.views + "manifest/manifiesto.pdf");
+      var doc = new PDFDocument();
+
+      writeStream.on('finish', function () {
+        nw.Window.open(global.views + "manifest/manifiesto.pdf",function(window){
+          window.maximize();
+        });
+      });
+
+      doc.pipe(writeStream);
+      doc.image(global.views + 'manifest/plantilla.jpg',0,0,{
+        width:615,
+      });
+      doc.end();
     }
 
     //Function to get the next local  manifest number
@@ -425,6 +484,112 @@
         });
       })
       return residuos;
+    }
+
+    function createPdf(manifiesto){
+      var generador = manifiesto.generador;
+      var residuos = manifiesto.residuos;
+      var transportista = manifiesto.transportista;
+      var destinatario = manifiesto.destinatario;
+      var writeStream = Fs.createWriteStream(global.views + "manifest/manifiesto.pdf");
+      var doc = new PDFDocument();
+
+      writeStream.on('finish', function () {
+        nw.Window.open(global.views + "manifest/manifiesto.pdf",function(window){
+          window.maximize();
+        });
+      });
+
+      doc.pipe(writeStream);
+
+      //Plantilla
+      doc.image(global.views + 'manifest/plantilla.jpg',0,0,{
+        width:615,
+      });
+
+      //identificador del manifiesto
+      doc.text(manifiesto.identificador, 30, 105);
+
+      doc.fontSize(9);
+
+      //Datos del generador
+      doc.text(generador.nra,45,140);
+      doc.text(manifiesto.noManifiesto,430,140);
+      doc.text(manifiesto.pagina,525,140);
+      doc.text(generador.razonSocial,255,157);
+      doc.text(generador.domicilio,100,171);
+      doc.text(generador.codigoPostal,400,171);
+      doc.text(generador.municipio,165,185);
+      doc.text(generador.estado,400,185);
+      doc.text(generador.telefono,70,200);
+
+      //residuos
+      for(var i = 0; i < residuos.length; i++){
+        doc.text(residuos[i].name,55,242 + (10*i));
+        doc.text(residuos[i]._pivot_cantidadContenedor,320,242 + (10*i));
+        doc.text(residuos[i]._pivot_tipoContenedor,380,242 + (10*i));
+        doc.text(residuos[i]._pivot_cantidadUnidad,450,242 + (10*i));
+        doc.text(residuos[i]._pivot_unidad,520,242 + (10*i),{
+          width:300
+        });
+      }
+
+      doc.text(manifiesto.instruccionesEspeciales,55,320);
+      doc.text(manifiesto.nombreResponsableGenerador,205,400);
+
+      //empresa transportadora
+      doc.text(transportista.nombre,240,420);
+      if(transportista.domicilio.length > 65)
+      doc.fontSize(7);
+      doc.text(transportista.domicilio,100,435);
+      doc.fontSize(9);
+      doc.text(transportista.telefono,445,435);
+      doc.text(transportista.autorizacionSemarnat,192,450);
+      doc.text(transportista.sct,515,450,{
+        width:300
+      });
+      doc.text(manifiesto.nombreTransportista,100,488);
+      doc.text(manifiesto.cargoTransportista,100,501);
+      doc.text(moment(manifiesto.fechaEmbarque).format('D/MM/YYYY'),510,501,{
+        width:300
+      });
+      if(manifiesto.ruta.length > 90)
+      doc.fontSize(7);
+      doc.text(manifiesto.ruta,50,540);
+      doc.fontSize(9);
+      doc.text(manifiesto.tipoVehiculo,152,559);
+      doc.text(manifiesto.placa,442,559);
+
+      //Destinatario
+      doc.text(destinatario.nombre,235,582);
+      doc.text(destinatario.ine,240,596);
+      if(destinatario.domicilio.length > 65)
+      doc.fontSize(7);
+      doc.text(destinatario.domicilio,95,610);
+      doc.fontSize(9);
+      doc.text(destinatario.telefono,400,610);
+      if(manifiesto.observaciones.length > 65)
+      doc.fontSize(7);
+      doc.text(manifiesto.observaciones,129,645);
+      doc.fontSize(9);
+      doc.text(manifiesto.nombreDestinatario,100,678);
+      doc.text(manifiesto.cargoDestinatario,100,693);
+      doc.text(moment(manifiesto.fechaRecepcion).format('D/MM/YYYY'),510,693,{
+        width:300
+      });
+      doc.end();
+    }
+
+    //finction to fetch the recent manifest
+    function fetchNew(newManifest){
+      new Manifiesto({
+        identificador: newManifest
+      }).fetch({withRelated:['generador','transportista','residuos','destinatario']}).then(function(manifiesto){
+        createPdf(manifiesto.toJSON());
+      }).catch(function(err){
+        alert(error);
+        console.error(err);
+      })
     }
 
     //function to get all the generators in the DB

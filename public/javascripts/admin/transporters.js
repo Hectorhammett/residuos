@@ -9,6 +9,7 @@
       var rules = {
         nombre: "required|min:5",
         sct: "required",
+        transportistaAutorizacion: "required",
         domicilio: "required|min:5",
         telefono: "required|numeric"
       }
@@ -17,7 +18,10 @@
 
       validator.setAttributeNames({
         nombre: "Nombre de la Empresa Transportadora",
-        sct: "Número de Registro S.C.T."
+        sct: "Número del Registro S.C.T.",
+        transportistaAutorizacion: "Autorización de la SEMARNAT",
+        domicilio: "Domicilio",
+        telefono: "Teléfono"
       })
 
       if(validator.fails()){
@@ -33,7 +37,8 @@
           nombre: form.nombre,
           sct: form.sct,
           domicilio: form.domicilio,
-          telefono: form.telefono
+          telefono: form.telefono,
+          autorizacionSemarnat: form.transportistaAutorizacion
         }).save().then(function(){
           notify("pe-7s-check","El transportista se ha guardado correctamente","success");
           $("form")[0].reset();

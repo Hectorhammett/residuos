@@ -17,7 +17,9 @@
 
       validator.setAttributeNames({
         nombre: "Nombre de la Empresa",
-        ine: "Registro de I.N.E."
+        ine: "Número de la Autorización de la SEMARNAT",
+        domicilio: "Domicilio",
+        telefono: "Teléfono"
       })
 
       if(validator.fails()){

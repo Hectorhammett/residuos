@@ -7,42 +7,50 @@
       </div>
       <div class="content">
         <form data-namespace="generators" data-function="storeGenerator">
-          <textarea class="form-control" row="3" name="instruccionesEspeciales"></textarea>
-          <div class="row">
-            <div class="form-group col-sm-12">
-              <label>Razón Social de la Empresa</label>
-              <input type="text" class="form-control" name="name" id="razon-social" autocomplete="off"/>
-            </div>
-          </div>
-          <div class="row">
-            <div class="form-group col-sm-12">
-              <label>Domicilio y C.P</label>
-              <input type="text" class="form-control" name="domicilio">
-            </div>
-          </div>
-          <div class="row">
-            <div class="form-group col-sm-8">
-              <label>Municipio</label>
-              <input type="text" class="form-control" name="municipio">
-            </div>
-            <div class="form-group col-sm-4">
-              <label>Estado</label>
-              <input type="text" class="form-control" name="estado">
-            </div>
-          </div>
-          <div class="row">
-            <div class="form-group col-sm-4">
-              <label>Teléfono</label>
-              <input type="text" class="form-control" name="telefono">
-            </div>
-            <div class="form-group col-sm-8">
-              <label>N.R.A.</label>
-              <input type="text" class="form-control" name="nra">
-            </div>
-          </div>
+
           <div class="row">
             <div class="col-sm-12">
-              <input type="submit" value="Guardar Generador" class="btn btn-primary"/>
+              <label>Razón Social de la Empresa</label>
+              <input type="text" name="razonSocial" class="form-control"/>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-8">
+              <label>Domicilio</label>
+              <input type="text" class="form-control" name="domicilio" />
+            </div>
+            <div class="col-sm-4">
+              <label>C.P.</label>
+              <input type="text" class="form-control" name="cp" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-8">
+              <label>Municipio</label>
+              <input type="text" class="form-control" name="municipio" />
+            </div>
+            <div class="col-sm-4">
+              <label>Estado</label>
+              <input type="text" class="form-control" name="estado" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-4">
+              <label>Teléfono</label>
+              <input type="text" class="form-control" name="telefono" />
+            </div>
+            <div class="col-sm-8">
+              <label>Número de Registro Ambiental</label>
+              <input type="text" class="form-control" name="nra" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-12">
+              <input type="submit" class="btn btn-primary" value="Guardar Generador"/>
             </div>
           </div>
         </form>

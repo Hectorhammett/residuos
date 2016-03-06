@@ -11,18 +11,14 @@
             <section>
                 <div class="row">
                   <div class="col-sm-4">
-                    <label>Identificación</label>
+                    <label>Número de Control Interno</label>
                     <input type="text" class="form-control" name="identificacion" readonly="true"/>
                   </div>
                   <div class="col-sm-4">
-                    <label>Número de Registro de I.N.E/Edo BC</label>
-                    <input type="text" class="form-control" name="noRegister"/>
-                  </div>
-                  <div class="col-sm-2">
                     <label>No. Manifiesto</label>
                     <input type="text" class="form-control" name="noManifest" readonly="true"/>
                   </div>
-                  <div class="col-sm-2">
+                  <div class="col-sm-4">
                     <label>Página</label>
                     <input type="text" class="form-control" name="noPage"/>
                   </div>
@@ -36,8 +32,12 @@
                 </div>
 
                 <div class="row">
-                  <div class="col-sm-12">
-                    <label>Domicilio y C.P</label>
+                  <div class="col-sm-8">
+                    <label>Domicilio</label>
+                    <input type="text" class="form-control" name="domicilio" readonly="true">
+                  </div>
+                  <div class="col-sm-4">
+                    <label>C.P.</label>
                     <input type="text" class="form-control" name="domicilio" readonly="true">
                   </div>
                 </div>
@@ -59,7 +59,7 @@
                     <input type="text" class="form-control" name="telefono" readonly="true">
                   </div>
                   <div class="col-sm-8">
-                    <label>N.R.A.</label>
+                    <label>Número de Registro Ambiental</label>
                     <input type="text" class="form-control" name="nra" readonly="true">
                   </div>
                 </div>
@@ -79,31 +79,45 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <td><select class="form-control residuo-tipo" name="tipo"></select></td>
+                        <td><select class="form-control residuo-tipo" name="tipo" style:"width:100%;"></select></td>
                         <td><input type="number" name="cantidad" class="form-control"/></td>
                         <td><input type="text" name="contenedor" class="form-control"/></td>
-                        <td><input type="text" name="residuoTotal" class="form-control"/></td>
+                        <td><input type="number" name="residuoTotal" class="form-control"/></td>
                         <td><input type="text" name="residuoUnidad" class="form-control"  readonly="true"/></td>
                       </tr>
                       <tr>
-                        <td><select class="form-control residuo-tipo" name="tipo" ></select></td>
+                        <td><select class="form-control residuo-tipo" name="tipo" style:"width:100%;"></select></td>
                         <td><input type="number" name="cantidad" class="form-control"/></td>
                         <td><input type="text" name="contenedor" class="form-control"/></td>
-                        <td><input type="text" name="residuoTotal" class="form-control"/></td>
+                        <td><input type="number" name="residuoTotal" class="form-control"/></td>
                         <td><input type="text" name="residuoUnidad" class="form-control" readonly="true"/></td>
                       </tr>
                       <tr>
-                        <td><select class="form-control residuo-tipo" name="tipo" ></select></td>
+                        <td><select class="form-control residuo-tipo" name="tipo" style:"width:100%;"></select></td>
                         <td><input type="number" name="cantidad" class="form-control"/></td>
                         <td><input type="text" name="contenedor" class="form-control"/></td>
-                        <td><input type="text" name="residuoTotal" class="form-control"/></td>
+                        <td><input type="number" name="residuoTotal" class="form-control"/></td>
                         <td><input type="text" name="residuoUnidad" class="form-control" readonly="true"/></td>
                       </tr>
                       <tr>
-                        <td><select class="form-control residuo-tipo" name="tipo" ></select></td>
+                        <td><select class="form-control residuo-tipo" name="tipo" style:"width:100%;"></select></td>
                         <td><input type="number" name="cantidad" class="form-control"/></td>
                         <td><input type="text" name="contenedor" class="form-control"/></td>
-                        <td><input type="text" name="residuoTotal" class="form-control"/></td>
+                        <td><input type="number" name="residuoTotal" class="form-control"/></td>
+                        <td><input type="text" name="residuoUnidad" class="form-control" readonly="true"/></td>
+                      </tr>
+                      <tr>
+                        <td><select class="form-control residuo-tipo" name="tipo" style:"width:100%;"></select></td>
+                        <td><input type="number" name="cantidad" class="form-control"/></td>
+                        <td><input type="text" name="contenedor" class="form-control"/></td>
+                        <td><input type="number" name="residuoTotal" class="form-control"/></td>
+                        <td><input type="text" name="residuoUnidad" class="form-control" readonly="true"/></td>
+                      </tr>
+                      <tr>
+                        <td><select class="form-control residuo-tipo" name="tipo" style:"width:100%;"></select></td>
+                        <td><input type="number" name="cantidad" class="form-control"/></td>
+                        <td><input type="text" name="contenedor" class="form-control"/></td>
+                        <td><input type="number" name="residuoTotal" class="form-control"/></td>
                         <td><input type="text" name="residuoUnidad" class="form-control" readonly="true"/></td>
                       </tr>
                     </tbody>
@@ -131,13 +145,20 @@
             <section>
 
                   <div class="row">
-                    <div class="col-sm-8">
+                    <div class="col-sm-12">
                       <label>Nombre de la empresa Transportadora</label>
-                      <select class="form-control" name="idTransportadora" id="nombreTransportista"></select>
+                      <select class="form-control" name="idTransportadora" id="nombreTransportista" style="width: 100%"></select>
                     </div>
-                    <div class="col-sm-4">
+                  </div>
+
+                  <div class="row">
+                    <div class="col-sm-6">
                       <label>Número del registro S.C.T.</label>
                       <input type="text" name="transportistaSct" class="form-control" readonly="true"/>
+                    </div>
+                    <div class="col-sm-6">
+                      <label>Autorización de la SEMARNAT</label>
+                      <input type="text" name="transportistaAutorizacion" class="form-control" readonly="true"/>
                     </div>
                   </div>
 
@@ -172,7 +193,7 @@
                   <div class="row">
                     <div class="col-sm-4">
                       <label>Fecha:</label>
-                      <input type="text" class="form-control" name="transportistaFecha"/>
+                      <input type="text" class="form-control datepicker" name="transportistaFecha"/>
                     </div>
                     <div class="col-sm-8">
                       <label>Ruta desde la empresa generadora hasta su entrega:</label>
@@ -199,10 +220,10 @@
                 <div class="row">
                   <div class="col-sm-8">
                     <label>Nombre de la empresa</label>
-                    <select name="idDestinatario" class="form-control" id="destinatario-nombre" ></select>
+                    <select name="idDestinatario" class="form-control" id="destinatario-nombre" style="width:100%;"></select>
                   </div>
                   <div class="col-sm-4">
-                    <label>Registro de I.N.E.</label>
+                    <label>Número de autorización de la SEMARNAT</label>
                     <input type="text" name="destinatarioIne" class="form-control" readonly="true"/>
                   </div>
                 </div>
@@ -245,7 +266,7 @@
                 <div class="row">
                   <div class="col-sm-4">
                     <label>Fecha de recepción</label>
-                    <input type="text" class="form-control" name="destinatarioRecepcion">
+                    <input type="text" class="form-control datepicker" name="destinatarioRecepcion">
                   </div>
                   <div class="col-sm-8">
                     <label>Firma</label>
