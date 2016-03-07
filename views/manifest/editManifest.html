@@ -1,0 +1,286 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="header">
+        <h4 class="title">Nuevo Manifiesto</h4>
+        <p class="category">Captura de nuevo manifiesto</p>
+      </div>
+      <div class="content">
+        <form id="example-basic">
+            <h3>Generador</h3>
+            <section>
+                <div class="row">
+                  <div class="col-sm-4">
+                    <label>Número de Control Interno</label>
+                    <input type="text" class="form-control" name="identificacion" readonly="true"/>
+                  </div>
+                  <div class="col-sm-4">
+                    <label>No. Manifiesto</label>
+                    <input type="text" class="form-control" name="noManifest" readonly="true"/>
+                  </div>
+                  <div class="col-sm-4">
+                    <label>Página</label>
+                    <input type="text" class="form-control" name="noPage"/>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-12">
+                    <label>Razón Social de la Empresa</label>
+                    <select class="form-control" name="razonSocial" id="razon-social"></select>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-8">
+                    <label>Domicilio</label>
+                    <input type="text" class="form-control" name="domicilio" readonly="true">
+                  </div>
+                  <div class="col-sm-4">
+                    <label>C.P.</label>
+                    <input type="text" class="form-control" name="domicilio" readonly="true">
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-8">
+                    <label>Municipio</label>
+                    <input type="text" class="form-control" name="municipio" readonly="true">
+                  </div>
+                  <div class="col-sm-4">
+                    <label>Estado</label>
+                    <input type="text" class="form-control" name="estado" readonly="true">
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-4">
+                    <label>Teléfono</label>
+                    <input type="text" class="form-control" name="telefono" readonly="true">
+                  </div>
+                  <div class="col-sm-8">
+                    <label>Número de Registro Ambiental</label>
+                    <input type="text" class="form-control" name="nra" readonly="true">
+                  </div>
+                </div>
+
+            </section>
+            <h3>Residuos</h3>
+            <section>
+              <div class="row">
+                <div class="col-sm-12">
+                  <table class="table table-bordered" id="table-residuos">
+                    <thead>
+                      <th>Descripción</th>
+                      <th>Cantidad</th>
+                      <th>Tipo de contenedor</th>
+                      <th>Cantidad total de residuo</th>
+                      <th>Unidad Vol/Pes</th>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><select class="form-control residuo-tipo" name="tipo" style:"width:100%;"></select></td>
+                        <td><input type="number" name="cantidad" class="form-control"/></td>
+                        <td><input type="text" name="contenedor" class="form-control"/></td>
+                        <td><input type="number" name="residuoTotal" class="form-control"/></td>
+                        <td><input type="text" name="residuoUnidad" class="form-control"  readonly="true"/></td>
+                      </tr>
+                      <tr>
+                        <td><select class="form-control residuo-tipo" name="tipo" style:"width:100%;"></select></td>
+                        <td><input type="number" name="cantidad" class="form-control"/></td>
+                        <td><input type="text" name="contenedor" class="form-control"/></td>
+                        <td><input type="number" name="residuoTotal" class="form-control"/></td>
+                        <td><input type="text" name="residuoUnidad" class="form-control" readonly="true"/></td>
+                      </tr>
+                      <tr>
+                        <td><select class="form-control residuo-tipo" name="tipo" style:"width:100%;"></select></td>
+                        <td><input type="number" name="cantidad" class="form-control"/></td>
+                        <td><input type="text" name="contenedor" class="form-control"/></td>
+                        <td><input type="number" name="residuoTotal" class="form-control"/></td>
+                        <td><input type="text" name="residuoUnidad" class="form-control" readonly="true"/></td>
+                      </tr>
+                      <tr>
+                        <td><select class="form-control residuo-tipo" name="tipo" style:"width:100%;"></select></td>
+                        <td><input type="number" name="cantidad" class="form-control"/></td>
+                        <td><input type="text" name="contenedor" class="form-control"/></td>
+                        <td><input type="number" name="residuoTotal" class="form-control"/></td>
+                        <td><input type="text" name="residuoUnidad" class="form-control" readonly="true"/></td>
+                      </tr>
+                      <tr>
+                        <td><select class="form-control residuo-tipo" name="tipo" style:"width:100%;"></select></td>
+                        <td><input type="number" name="cantidad" class="form-control"/></td>
+                        <td><input type="text" name="contenedor" class="form-control"/></td>
+                        <td><input type="number" name="residuoTotal" class="form-control"/></td>
+                        <td><input type="text" name="residuoUnidad" class="form-control" readonly="true"/></td>
+                      </tr>
+                      <tr>
+                        <td><select class="form-control residuo-tipo" name="tipo" style:"width:100%;"></select></td>
+                        <td><input type="number" name="cantidad" class="form-control"/></td>
+                        <td><input type="text" name="contenedor" class="form-control"/></td>
+                        <td><input type="number" name="residuoTotal" class="form-control"/></td>
+                        <td><input type="text" name="residuoUnidad" class="form-control" readonly="true"/></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label>Nombre del Responsable</label>
+                    <input type="text" class="form-control" name="nombreResponsable"/>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label>Instrucciones especiales e información adicional para el manejo seguro de los residuos</label>
+                    <textarea class="form-control" row="3" name="instruccionesEspeciales"></textarea>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <h3>Transportista</h3>
+            <section>
+
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <label>Nombre de la empresa Transportadora</label>
+                      <select class="form-control" name="idTransportadora" id="nombreTransportista" style="width: 100%"></select>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <label>Número del registro S.C.T.</label>
+                      <input type="text" name="transportistaSct" class="form-control" readonly="true"/>
+                    </div>
+                    <div class="col-sm-6">
+                      <label>Autorización de la SEMARNAT</label>
+                      <input type="text" name="transportistaAutorizacion" class="form-control" readonly="true"/>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-sm-9">
+                      <label>Domicilio</label>
+                      <input type="text" name="transportistaDomicilio" class="form-control" readonly="true"/>
+                    </div>
+                    <div class="col-sm-3">
+                      <label>Teléfono</label>
+                      <input type="text" name="transportistaTelefono" class="form-control" readonly="true"/>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <small>Recibí los materiales descritos en el manifiesto para su transporte:</small>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-sm-8">
+                      <label>Nombre:</label>
+                      <input type="text" class="form-control" name="transportistaNombre"/>
+                    </div>
+                    <div class="col-sm-4">
+                      <label>Cargo:</label>
+                      <input type="text" class="form-control" name="transportistaCargo"/>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <label>Fecha:</label>
+                      <input type="text" class="form-control datepicker" name="transportistaFecha"/>
+                    </div>
+                    <div class="col-sm-8">
+                      <label>Ruta desde la empresa generadora hasta su entrega:</label>
+                      <input type="text" class="form-control" name="transportistaRuta"/>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-sm-8">
+                      <label>Tipo de Vehículo:</label>
+                      <input type="text" class="form-control" name="transportistaVehiculo"/>
+                    </div>
+                    <div class="col-sm-4">
+                      <label>Placas:</label>
+                      <input type="text" class="form-control" name="transportistaPlacas"/>
+                    </div>
+                  </div>
+
+
+            </section>
+            <h3>Destinatario</h3>
+            <section>
+
+                <div class="row">
+                  <div class="col-sm-8">
+                    <label>Nombre de la empresa</label>
+                    <select name="idDestinatario" class="form-control" id="destinatario-nombre" style="width:100%;"></select>
+                  </div>
+                  <div class="col-sm-4">
+                    <label>Número de autorización de la SEMARNAT</label>
+                    <input type="text" name="destinatarioIne" class="form-control" readonly="true"/>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-8">
+                    <label>Domicilio</label>
+                    <input type="text" name="destinatarioDomicilio" class="form-control" readonly="true"/>
+                  </div>
+                  <div class="col-sm-4">
+                    <label>Teléfono</label>
+                    <input type="text" name="destinatarioTelefono" class="form-control" readonly="true"/>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-12">
+                    <small>Recibí los residuos descritos en el manifiesto</small>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-12">
+                    <label>Observaciones</label>
+                    <textarea class="form-control" rows="3" name="destinatarioObservaciones"></textarea>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-8">
+                    <label>Nombre</label>
+                    <input type="text" class="form-control" name="destinatarioNombre">
+                  </div>
+                  <div class="col-sm-4">
+                    <label>Cargo</label>
+                    <input type="text" class="form-control" name="destinatarioCargo">
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-4">
+                    <label>Fecha de recepción</label>
+                    <input type="text" class="form-control datepicker" name="destinatarioRecepcion">
+                  </div>
+                  <div class="col-sm-8">
+                    <label>Firma</label>
+                    <input type="text" class="form-control" name="">
+                  </div>
+                </div>
+
+            </section>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  editManifest.initializePage();
+</script>

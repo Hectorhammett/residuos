@@ -75,7 +75,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="table.html">
+                    <a href="{{views}}manifest/searchManifest.html" id="consultar-manifiesto">
                         <i class="pe-7s-note2"></i>
                         <p>Consultar Manifiesto</p>
                     </a>
@@ -286,6 +286,7 @@
 
 	<!-- Datepicker js -->
 	<script src="{{public}}assets/datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+	<script src="{{public}}assets/datepicker/js/locales/bootstrap-datepicker.es.js"></script>
 
   <!-- This is to make it more like an app, it makes all the a tags function as buttons -->
   <script src="{{public}}javascripts/users/index.js"></script>
@@ -300,6 +301,8 @@
 	<script src="{{public}}javascripts/admin/generators.js"></script>
 	<script src="{{public}}javascripts/admin/transporters.js"></script>
 	<script src="{{public}}javascripts/admin/destination.js"></script>
+	<script src="{{public}}javascripts/manifest/searchManifest.js"></script>
+	<script src="{{public}}javascripts/manifest/editManifest.js"></script>
 
 	<!-- Namespaces function -->
 	<script src="{{public}}javascripts/dashboard.js"></script>

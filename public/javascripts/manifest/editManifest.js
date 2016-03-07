@@ -1,4 +1,4 @@
-(function( addManifest, $, undefined ) {
+(function( editManifest, $, undefined ) {
     //Private Property
     var Validator = require("validatorjs");
     var Generador = require(global.models)("Generador");
@@ -13,17 +13,16 @@
     var residuos = [];
     var Fs = require('fs');
     var PDFDocument = require('pdfkit');
+    var loadedManifest;
 
-    addManifest.testForm = function(form){
+    editManifest.testForm = function(form){
       console.log(form);
     }
-    addManifest.initializePage = function(){
+    editManifest.initializePage = function(){
+      var idManifest = global.editManifestId;
+      loadManifest(idManifest);
       initForm();
       initDatepickers();
-
-      addManifest.getNextIndex().then(function(index){
-        document.getElementsByName("identificacion")[0].value = index;
-      })
 
       addManifest.getTrashType().then(function(residuos){
         if(residuos.length == 1){
@@ -36,10 +35,6 @@
           })
         }
       });
-
-      addManifest.getCurrentManifest().then(function(data){
-        $("input[name='noManifest']").val(data.value);
-      })
 
       getGenerators().then(function(generadores){
         console.log(generadores);
@@ -149,11 +144,11 @@
       })
     })
 
-      $(document).on("select2:unselect","#nombreTransportista",function(){
-        $("input[name='transportistaSct']").val("");
-        $("input[name='transportistaTelefono']").val("");
-        $("input[name='transportistaDomicilio']").val("");
-      })
+    $(document).on("select2:unselect","#nombreTransportista",function(){
+      $("input[name='transportistaSct']").val("");
+      $("input[name='transportistaTelefono']").val("");
+      $("input[name='transportistaDomicilio']").val("");
+    })
 
     //function to handle for selection on the destination on the form
     $(document).on("select2:select","#destinatario-nombre",function(){
@@ -173,6 +168,54 @@
       $("input[name='destinatarioIne']").val("");
       $("input[name='destinatarioTelefono']").val("");
     })
+
+    function loadManifest(idManifest){
+      new Manifiesto({
+        identificador: idManifest
+      }).fetch({withRelated:["residuos"]}).then(function(manifiesto){
+        manifiesto = manifiesto.toJSON();
+        var residuos = manifiesto.residuos;
+
+        $("input[name='identificacion']").val(manifiesto.identificador);
+        $("input[name='noManifest']").val(manifiesto.noManifiesto);
+        $("input[name='noPage']").val(manifiesto.pagina);
+        $("input[name='nombreResponsable']").val(manifiesto.nombreResponsableGenerador);
+        $("textarea[name='instruccionesEspeciales']").val(manifiesto.instruccionesEspeciales);
+        $("input[name='nombreResponsable']").val(manifiesto.nombreResponsableGenerador);
+
+        //values of transporter
+        $("input[name='transportistaNombre']").val(manifiesto.nombreTransportista);
+        $("input[name='transportistaCargo']").val(manifiesto.cargoTransportista);
+        $("input[name='transportistaFecha']").val(moment(manifiesto.fechaEmbarque).format('D/MM/YYYY'));
+        $("input[name='transportistaRuta']").val(manifiesto.ruta);
+        $("input[name='transportistaVehiculo']").val(manifiesto.tipoVehiculo);
+        $("input[name='transportistaPlacas']").val(manifiesto.placa);
+
+        //Values of Destination
+        $("textarea[name='destinatarioObservaciones']").val(manifiesto.observaciones);
+        $("input[name='destinatarioNombre']").val(manifiesto.nombreDestinatario);
+        $("input[name='destinatarioCargo']").val(manifiesto.cargoDestinatario);
+        $("input[name='destinatarioRecepcion']").val(moment(manifiesto.fechaRecepcion).format("D/MM/YYYY"));
+
+        //All select inputs
+        $("select[name='razonSocial']").val(manifiesto.idGenerador).trigger("change").trigger("select2:select");
+        $("select[name='idTransportadora']").val(manifiesto.idTransportista).trigger("change").trigger("select2:select");
+        $("select[name='idDestinatario']").val(manifiesto.idDestinatario).trigger("change").trigger("select2:select");
+
+        for(var i = 0; i < residuos.length; i++){
+          var residuo = residuos[i];
+          var row = $("#table-residuos tbody tr:nth-child(" + (i+1) + ")");
+          $("select[name='tipo']",row).val(residuo._pivot_idResiduo).trigger("change").trigger("select2:select");
+          $("input[name='cantidad']",row).val(residuo._pivot_cantidadContenedor);
+          $("input[name='contenedor']",row).val(residuo._pivot_tipoContenedor);
+          $("input[name='residuoTotal']",row).val(residuo._pivot_cantidadUnidad);
+          $("input[name='residuoUnidad']",row).val(residuo._pivot_unidad);
+        }
+      }).catch(function(err){
+        console.error(err);
+        notify("pe-7s-circle-close","Hubo un error con la base de datos. Favor de revisar que el servidor se encuentre disponible","danger");
+      });
+    }
 
     //function to initialize the Datepickers
     function initDatepickers(){
@@ -197,19 +240,6 @@
         })
       });
     }
-    //function to ghet the curren manifest nnumber
-    addManifest.getCurrentManifest = function(){
-      var current = new Meta({
-        id:3
-      }).fetch().then(function(current){
-        current = current.toJSON();
-        return current;
-      }).catch(function(err){
-        console.error(err);
-        notify('pe-7s-circle-close',"Error comunicándose con la base de datos.","danger");
-      })
-      return current;
-    }
 
     //Function to start the steps wizard
     function initForm(){
@@ -218,6 +248,7 @@
         bodyTag: "section",
         transitionEffect: "slideLeft",
         autoFocus: true,
+        enableAllSteps: true,
         labels: {
             cancel: "Cancelar",
             current: "Pazo Actual:",
@@ -348,7 +379,7 @@
         onFinished: function(){
           var form = $(this).serializeObject();
           console.log(form);
-          saveManifest(form);
+          updateManifest(form);
           $("#capturar-manifiesto").click();
         },
         onInit:function (event, currentIndex, priorIndex) {
@@ -385,8 +416,8 @@
       $(".wizard > .content").css("height",sum);
     }
 
-    //function to store the manifest in the DB
-    function saveManifest(form){
+    //function to update the manifest in the DB
+    function updateManifest(form){
       if(form.transportistaFecha != ""){
         form.transportistaFecha = moment(form.transportistaFecha, "D/MM/YYYY").format('YYYY-MM-DD');
       }
@@ -415,7 +446,11 @@
         created_by:global.user.attributes.id
       }
 
-      new Manifiesto(attributes).save().then(function(manifiesto){
+      new Manifiesto({
+        identificador: form.identificacion
+      }).save(attributes,{
+        patch: true
+      }).then(function(manifiesto){
         var manifiesto = manifiesto.toJSON();
         console.log(manifiesto);
         var final = [];
@@ -430,13 +465,17 @@
           final.push(manipulated);
         }
         console.log(final,manifiesto.identificador)
-        Knex('manifiesto_has_residuos').insert(final).then(function(){
-          notify("pe-7s-check","Se ha guardado el manifiesto correctamente","success");
-          fetchNew(manifiesto.identificador);
-          $("#capturar-manifiesto").click();
+        Knex("manifiesto_has_residuos").where('idManifiesto',manifiesto.identificador).del().then(function(){
+          Knex('manifiesto_has_residuos').insert(final).then(function(){
+            notify("pe-7s-check","El manifiesto se ha actualizador correctamente","success");
+            fetchNew(manifiesto.identificador);
+            $("#consultar-manifiesto").click();
+          }).catch(function(err){
+            console.error(err);
+            notify("pe-7s-close-circle","Hubo un error guardando los residuos","danger");
+          });
         }).catch(function(err){
-          console.error(err);
-          notify("pe-7s-close-circle","Hubo un error guardando los residuos","danger");
+          console.error("pe-7s-circle-close","Hubo un error con la base de datos. Favor de revisar que el servidor se encuentre encendido","danger");
         });
       }).catch(function(err){
         notify("pe-7s-close-circle","Hubo un error guardando el manifiesto. Favor de revisar que el servidor se encuentre disponible","danger");
@@ -461,16 +500,8 @@
       doc.end();
     }
 
-    //Function to get the next local  manifest number
-    addManifest.getNextIndex = function(){
-      var index = Knex.raw("SELECT `AUTO_INCREMENT` as 'index' FROM  INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'residuos' AND TABLE_NAME = 'manifiesto'").then(function(data){
-        return data[0][0].index;
-      });
-      return index;
-    }
-
     //function to get all the trash types in the database
-    addManifest.getTrashType = function(){
+    editManifest.getTrashType = function(){
       var residuos = new Residuo().where('estado',1).fetchAll().then(function(residuos){
         console.log(residuos);
         return modifySelect2(residuos.toJSON(),"id","name");
@@ -648,4 +679,4 @@
       return manipulated;
     }
 
-}( window.addManifest = window.addManifest || {}, jQuery ));
+}( window.editManifest = window.editManifest || {}, jQuery ));
