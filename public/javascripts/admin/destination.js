@@ -38,7 +38,7 @@
           telefono: form.telefono
         }).save().then(function(){
           notify("pe-7s-check","El destinatario se ha guardado correctamente","success");
-          $("form")[0].reset();
+          $("form").not("#form-upload-pdf")[0].reset();
         }).catch(function(err){
           console.error(err);
           notify("pe-7s-close-circle","Hubo un error con la base de datos. Favor de revisar que el servidor se encuentre encendido.","danger");

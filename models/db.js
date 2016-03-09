@@ -6,6 +6,10 @@ var knex = require('knex')({
     password : '',
     database : 'residuos',
     charset  : 'UTF8_GENERAL_CI'
+  },
+  pool: {
+    min: 0,
+    max: 7
   }
 });
 

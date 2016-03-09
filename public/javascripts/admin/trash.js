@@ -61,7 +61,7 @@
       var types = document.createElement("td");
       //var containers = document.createElement("td");
       $(name).html('<input type="text" value="" class="form-control" placeholder="Nombre de residuo" name="name"/>');
-      $(types).html('<div class="col-sm-6">'+
+      $(types).html('<form><div class="col-sm-6">'+
         '<label class="radio res-check">'+
             '<span class="icons"><span class="first-icon fa fa-circle-o"></span><span class="second-icon fa fa-dot-circle-o"></span></span><input type="radio" data-toggle="radio" name="unidad" value="2" >Kilogramos'+
         '</label>'+
@@ -70,7 +70,7 @@
       '<label class="radio res-check">'+
           '<span class="icons"><span class="first-icon fa fa-circle-o"></span><span class="second-icon fa fa-dot-circle-o"></span></span><input type="radio" data-toggle="radio" name="unidad" value="1">Litros'+
       '</label>'+
-  '  </div>');
+  '  </div></form>');
       //$(containers).html('<input type="text" value="" name="containers" class="form-control" />');
       $(row).append(name);
       $(row).append(types);
@@ -171,8 +171,6 @@
           .save()
           .then(function(model){
             model.unidad().attach(values.unidad).then(function(){
-              $("#table-residuos").empty();
-              trash.fillTable("table-residuos");
               $.notify({
                 icon:"pe-7s-check",
                 message:"Se han guardado los tipos de residuo correctamente."
@@ -193,5 +191,6 @@
           })
         }
       });
+      $("#add-trash").click();
     })
 }( window.trash = window.trash || {}, jQuery ));

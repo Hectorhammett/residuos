@@ -2,11 +2,13 @@
     //Private Property
     var Manifiesto = require(global.models)("Manifiesto");
     var Validator = require("validatorjs");
+    var Archivo = require(global.models)("Archivo");
     Validator.useLang('es');
     var _ = require('lodash');
     var Knex = require(global.db).knex;
     var moment = require('moment');
     var PDFDocument = require('pdfkit');
+    var Fs = require("fs");
 
     //This is called from the view
     searchManifest.initalizePage = function(){
@@ -16,7 +18,7 @@
         $("#manifests").DataTable({
           data: manifiestos,
           "columnDefs": [
-            { "width": "20%", "targets": 8 },
+            { "width": "25%", "targets": 8 },
           ],
           "columns": [
             { "data": "identificador" },
@@ -67,6 +69,74 @@
     $(document).on('click','.btn-consult',function(){
       showManifest(this.id);
     })
+
+    //handler for the btn upload to upload a file
+    $(document).on('click','.btn-upload',function(){
+      $("#upload-manifest-id").val(this.id);
+      $("#modal-upload-scan").modal('show');
+      $("#form-upload-pdf").dropzone({
+        addRemoveLinks: true,
+        acceptedFiles: 'application/pdf',
+        autoProcessQueue: false,
+        parallelUploads:1,
+        uploadMultiple:false,
+        maxFiles:1,
+        init: function() {
+          var dropzone = this;
+          $(document).on('click','#btn-upload-manifest',function(){
+            uploadManifest(dropzone,$("#upload-manifest-id").val());
+          })
+          this.on("maxfilesexceeded", function(file) {
+            this.removeAllFiles();
+            this.addFile(file);
+          });
+          this.on("dragenter", function(file) {
+            $("#form-upload-pdf").removeClass("not-hovered");
+            $("#form-upload-pdf").addClass("hovered");
+          });
+          this.on("dragleave", function(file) {
+            $("#form-upload-pdf").removeClass("hovered");
+            $("#form-upload-pdf").addClass("not-hovered");
+          });
+          this.on("addedfile", function(file) {
+            $("#form-upload-pdf").removeClass("not-hovered");
+            $("#form-upload-pdf").addClass("hovered");
+          });
+          this.on("removedfile", function(file) {
+            $("#form-upload-pdf").removeClass("hovered");
+            $("#form-upload-pdf").addClass("not-hovered");
+          });
+          this.on("removedfile", function(file) {
+            $("#form-upload-pdf").removeClass("hovered");
+            $("#form-upload-pdf").addClass("not-hovered");
+          });
+        }
+      });
+    });
+
+    //function to upload the manifest as a blob
+    function uploadManifest(dropzone,idManifest){
+      console.log(idManifest);
+      var files = dropzone.getAcceptedFiles()
+      var path = files[0].path;
+      Fs.readFile(path, function(err, buffer) {
+        if (err) {
+          console.error(err);
+          return;
+        }
+        console.log("readed the file");
+        Knex('pdf').insert({
+          string: buffer.toString("base64"),
+          fileType: "pdf",
+          idManifiesto: idManifest
+        }).then(function(){
+          notify("pe-7s-check","Se ha guardado el manifiesto correctamente","success");
+        }).catch(function(err){
+          console.error(err);
+          notify("pe-7s-close-circle","Hubo un error con la base de datos. Favor de revisar que el servidor se encuentre encendido.","danger");
+        });
+      });
+    }
 
     //function to open the manifest when the consult button is clicked
     function showManifest(searchId){
@@ -194,10 +264,13 @@
           editedManifest.updated_at = moment(manifiesto.updated_at).format("D/MM/YYYY");
           editedManifest.buttons = '<div class="btn-group btn-group-justified" role="group" aria-label="...">'+
             '<div class="btn-group" role="group">'+
-              '<button type="button" class="btn btn-link btn-consult" id="' + manifiesto.identificador + '"">Consultar</button>'+
+              '<button type="button" class="btn btn-sm btn-simple btn-consult" id="' + manifiesto.identificador + '"">Consultar</button>'+
             '</div>'+
             '<div class="btn-group" role="group">'+
-              '<button type="button" class="btn btn-link btn-edit" id="' + manifiesto.identificador + '"">Editar</button>'+
+              '<button type="button" class="btn btn-sm btn-simple btn-edit" id="' + manifiesto.identificador + '"">Editar</button>'+
+            '</div>'+
+            '<div class="btn-group" role="group">'+
+              '<button type="button" class="btn btn-sm btn-simple btn-upload" id="' + manifiesto.identificador + '"">Subir archivo</button>'+
             '</div>'+
           '</div>';
           editedManifest.userfullname = manifiesto.user.name + " " + manifiesto.user.lastname;

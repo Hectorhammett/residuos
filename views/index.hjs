@@ -40,10 +40,30 @@
 		<link href="{{public}}stylesheets/style.css" rel="stylesheet" />
 		<link href="{{public}}stylesheets/typeahead.css" rel="stylesheet" />
 		<link href="{{public}}assets/datepicker/dist/css/bootstrap-datepicker.css" rel="stylesheet" />
+		<link href="{{public}}stylesheets/dropzones.css" rel="stylesheet" />
 
 </head>
 <body>
-
+	<div class="modal fade" id="modal-upload-scan" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="myModalLabel">Subir Manifiesto</h4>
+	      </div>
+	      <div class="modal-body">
+					<form action="/file-upload" class="dropzone" id="form-upload-pdf">
+						<div class="dz-default dz-message"><span>Click o arrastrar el archivo a esta sección</span></div>
+						<input type="hidden" id="upload-manifest-id"/>
+					</form>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+	        <button type="button" class="btn btn-primary" id="btn-upload-manifest">Subir Manifiesto</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 <div class="wrapper">
     <div class="sidebar" data-color="orange">
 
@@ -112,7 +132,7 @@
 										</div>
 										<div class="collapse tablesExamples zero-margin">
 												<ul class="nav">
-														<li><a href="{{views}}admin/trash.html">Tipos de residuos</a></li>
+														<li><a href="{{views}}admin/trash.html" id="add-trash">Tipos de residuos</a></li>
 												</ul>
 										</div>
 										<div class="collapse tablesExamples zero-margin">
@@ -287,6 +307,9 @@
 	<!-- Datepicker js -->
 	<script src="{{public}}assets/datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 	<script src="{{public}}assets/datepicker/js/locales/bootstrap-datepicker.es.js"></script>
+
+	<!-- Dropzones JS -->
+	<script src="{{public}}assets/dropzones/dropzones.js"></script>
 
   <!-- This is to make it more like an app, it makes all the a tags function as buttons -->
   <script src="{{public}}javascripts/users/index.js"></script>

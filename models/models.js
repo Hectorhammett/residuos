@@ -65,6 +65,9 @@ var Manifiesto = Bookshelf.Model.extend({
   },
   destinatario: function(){
     return this.belongsTo(Destinatario,'idDestinatario');
+  },
+  archivo: function(){
+    return this.hasOne(Archivo,'idManifiesto');
   }
 });
 
@@ -86,6 +89,15 @@ var Destinatario = Bookshelf.Model.extend({
   }
 });
 
+var Archivo = Bookshelf.Model.extend({
+  tableName: 'pdf',
+  idAttribute: 'id',
+  hasTimestamps: false,
+  manifiesto: function(){
+    return this.belongsTo(Manifiesto,'idManifiesto');
+  }
+});
+
 models["User"] = User;
 models["Generador"] = Generador;
 models['Residuo'] = Residuo;
@@ -94,6 +106,7 @@ models['Meta'] = Meta;
 models['Transportista'] = Transportista;
 models['Destinatario'] = Destinatario;
 models['Manifiesto'] = Manifiesto;
+models['Archivo'] = Archivo;
 
 module.exports = function(model){
   return models[model];

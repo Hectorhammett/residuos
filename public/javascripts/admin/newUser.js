@@ -70,7 +70,7 @@
               },{
                 type:"success"
               });
-              $('form').reset();
+              $("form").not("#form-upload-pdf")[0].reset();;
             });
           }
         }

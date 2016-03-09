@@ -47,7 +47,7 @@
           nra: form.nra
         }).save().then(function(model){
           notify("pe-7s-check","El generador se ha guardado correctamente.","success");
-          $("form")[0].reset();
+          $("form").not("#form-upload-pdf")[0].reset();
         }).catch(function(err){
           console.log(err.message);
           notify("pe-7s-circle-close","Hubo un error con la base de datos. Favor de revisar que el servidor se encuentre encendido.","danger")

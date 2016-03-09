@@ -1,0 +1,27 @@
+#form-upload-pdf{
+  min-height: 150px;
+  border-style: dashed;
+  text-align: center;
+  padding-top: 55px;
+  transition:padding-top 0.25s ease;
+}
+
+#form-upload-pdf:hover{
+  padding-top: 10px;
+}
+
+.hovered{
+  padding-top: 10px!important;
+}
+
+.not-hovered{
+  padding-top: 55px!important;
+}
+
+.dz-success-mark{
+  display:none;
+}
+
+.dz-error-mark{
+  display:none;
+}
