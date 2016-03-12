@@ -19,3 +19,8 @@
 .res-check{
   padding-left: 25px!important;
 }
+
+.popover{
+    width:450px!important; /* Max Width of the popover (depending on the container!) */
+    max-width: none!important;
+}

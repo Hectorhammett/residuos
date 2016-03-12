@@ -9,7 +9,8 @@ var knex = require('knex')({
   },
   pool: {
     min: 0,
-    max: 7
+    max: 7,
+    requestTimeout: 5000,
   }
 });
 

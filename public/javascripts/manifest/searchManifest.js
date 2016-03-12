@@ -8,6 +8,7 @@
     var Knex = require(global.db).knex;
     var moment = require('moment');
     var PDFDocument = require('pdfkit');
+    var Archivo = require(global.models)("Archivo")
     var Fs = require("fs");
 
     //This is called from the view
@@ -17,9 +18,7 @@
         console.log(manifiestos.length);
         $("#manifests").DataTable({
           data: manifiestos,
-          "columnDefs": [
-            { "width": "25%", "targets": 8 },
-          ],
+          deferred: true,
           "columns": [
             { "data": "identificador" },
             { "data": "noManifiesto" },
@@ -70,6 +69,65 @@
       showManifest(this.id);
     })
 
+    $(document).on('click','.btn-download',function(){
+      var value = this.id;
+      new Manifiesto({
+        identificador: value
+      }).fetch({withRelated:['archivo']}).then(function(manifiesto){
+        var manifiesto = manifiesto.toJSON();
+        var archivo = manifiesto.archivo;
+        if(archivo.id != undefined){
+          var buffer = new Buffer(archivo.string,'base64');
+          Fs.writeFile(global.views + "manifest/" + manifiesto.noManifiesto + '.pdf',buffer,function(){
+            chrome.downloads.download({
+              url: global.views + "manifest/" + manifiesto.noManifiesto + '.pdf',
+            });
+          })
+        }
+        else{
+          notify('pe-7s-close-circle',"Este manifiesto no cuenta con un PDF escaneado.",'danger');
+        }
+      }).catch(function(err){
+        console.log(err);
+        notify('pe-7s-close-circle','Hubo un error con la base de datos. Favor de revisar que el servidor se encuentre encendido.','danger');
+      })
+    })
+
+    //Handler for the options button
+    $(document).on('click','.btn-options',function(){
+      var $this = $(this);
+      if (!$this.data("bs.popover")) {
+        var options = {
+          placement: "left",
+          content: '<div class="popover-content"><div class="btn-group btn-group-justified" role="group" aria-label="...">'+
+            '<div class="btn-group" role="group">'+
+              '<button type="button" class="btn btn-sm btn-simple btn-consult" id="' + this.id + '"">Consultar</button>'+
+            '</div>'+
+            '<div class="btn-group" role="group">'+
+              '<button type="button" class="btn btn-sm btn-simple btn-edit" id="' + this.id + '"">Editar</button>'+
+            '</div>'+
+            '<div class="btn-group" role="group">'+
+              '<button type="button" class="btn btn-sm btn-simple btn-upload" id="' + this.id + '"">Subir PDF</button>'+
+            '</div>'+
+            '<div class="btn-group" role="group">'+
+              '<button type="button" class="btn btn-sm btn-simple btn-download" id="' + this.id + '"">Descargar PDF</button>'+
+            '</div>'+
+          '</div></div>',
+          html: true,
+          trigger: "click"
+        }
+        $this.popover(options);
+        $this.click();
+      }
+    })
+
+    $('html').on('click', function(e) {
+        if (typeof $(e.target).data('original-title') == 'undefined' &&
+           !$(e.target).parents().is('.popover.in')) {
+          $('[data-original-title]').popover('destroy');
+        }
+      });
+
     //handler for the btn upload to upload a file
     $(document).on('click','.btn-upload',function(){
       $("#upload-manifest-id").val(this.id);
@@ -86,6 +144,9 @@
           $(document).on('click','#btn-upload-manifest',function(){
             uploadManifest(dropzone,$("#upload-manifest-id").val());
           })
+          $(document).on('dropReset',"#form-upload-pdf",function(){
+            dropzone.removeAllFiles();
+          });
           this.on("maxfilesexceeded", function(file) {
             this.removeAllFiles();
             this.addFile(file);
@@ -125,16 +186,23 @@
           return;
         }
         console.log("readed the file");
-        Knex('pdf').insert({
-          string: buffer.toString("base64"),
-          fileType: "pdf",
-          idManifiesto: idManifest
-        }).then(function(){
-          notify("pe-7s-check","Se ha guardado el manifiesto correctamente","success");
+        Knex('pdf').where('idManifiesto',idManifest).del().then(function(){
+          Knex('pdf').insert({
+            string: buffer.toString("base64"),
+            fileType: "pdf",
+            idManifiesto: idManifest
+          }).then(function(){
+            $("#modal-upload-scan").modal('hide');
+            $("#form-upload-pdf").trigger("dropReset");
+            notify("pe-7s-check","Se ha guardado el manifiesto correctamente","success");
+          }).catch(function(err){
+            console.error(err);
+            notify("pe-7s-close-circle","Hubo un error con la base de datos. Favor de revisar que el servidor se encuentre encendido.","danger");
+          });
         }).catch(function(err){
-          console.error(err);
+          console.log(err);
           notify("pe-7s-close-circle","Hubo un error con la base de datos. Favor de revisar que el servidor se encuentre encendido.","danger");
-        });
+        })
       });
     }
 
@@ -255,24 +323,16 @@
 
     //function to alter the manifests to show them in the table
     function getRows(){
-      var manifiestos = new Manifiesto().fetchAll({withRelated:["user","generador","transportista","residuos","destinatario"]}).then(function(manifiestos){
+      var manifiestos = new Manifiesto().fetchAll({withRelated:["user","generador","transportista","residuos","destinatario",'archivo']}).then(function(manifiestos){
         manifiestos = manifiestos.toJSON();
         var edited = [];
         _.forEachRight(manifiestos,function(manifiesto){
           var editedManifest = manifiesto;
           editedManifest.created_at = moment(manifiesto.created_at).format("D/MM/YYYY");
           editedManifest.updated_at = moment(manifiesto.updated_at).format("D/MM/YYYY");
-          editedManifest.buttons = '<div class="btn-group btn-group-justified" role="group" aria-label="...">'+
-            '<div class="btn-group" role="group">'+
-              '<button type="button" class="btn btn-sm btn-simple btn-consult" id="' + manifiesto.identificador + '"">Consultar</button>'+
-            '</div>'+
-            '<div class="btn-group" role="group">'+
-              '<button type="button" class="btn btn-sm btn-simple btn-edit" id="' + manifiesto.identificador + '"">Editar</button>'+
-            '</div>'+
-            '<div class="btn-group" role="group">'+
-              '<button type="button" class="btn btn-sm btn-simple btn-upload" id="' + manifiesto.identificador + '"">Subir archivo</button>'+
-            '</div>'+
-          '</div>';
+          editedManifest.buttons = '<button type="button" class="btn btn-link btn-sm btn-simple btn-options" id="' + manifiesto.identificador + '">'+
+            'Opciones'+
+          '</button>';
           editedManifest.userfullname = manifiesto.user.name + " " + manifiesto.user.lastname;
           edited.push(editedManifest);
         })
