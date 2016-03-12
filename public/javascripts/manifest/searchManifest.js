@@ -28,6 +28,7 @@
             { "data": "created_at" },
             { "data": "updated_at" },
             { "data": "userfullname" },
+            { "data": "pdf" },
             { "data": "buttons" }
           ],
           language:{
@@ -334,6 +335,7 @@
             'Opciones'+
           '</button>';
           editedManifest.userfullname = manifiesto.user.name + " " + manifiesto.user.lastname;
+          editedManifest.pdf = (manifiesto.archivo.id != undefined)? '<span class="label label-primary" style="font-size:100%">Adjuntado</span>' : '<span class="label label-danger" style="font-size:100%">Sin Adjuntar</span>';
           edited.push(editedManifest);
         })
         return edited;
