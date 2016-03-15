@@ -139,6 +139,11 @@
 														<li><a href="{{views}}admin/destination.html">Destinatarios</a></li>
 												</ul>
 										</div>
+                                        <div class="collapse tablesExamples zero-margin">
+												<ul class="nav">
+														<li><a href="{{views}}admin/downloadFiles.html">Descargar Manifiestos</a></li>
+												</ul>
+										</div>
 										<div class="collapse tablesExamples zero-margin">
 												<ul class="nav">
 														<li><a href="{{views}}admin/configuration.html">Configuración del sistema</a></li>
@@ -298,6 +303,7 @@
 	<script src="{{public}}javascripts/admin/generators.js"></script>
 	<script src="{{public}}javascripts/admin/transporters.js"></script>
 	<script src="{{public}}javascripts/admin/destination.js"></script>
+	<script src="{{public}}javascripts/admin/downloadFiles.js"></script>
 	<script src="{{public}}javascripts/manifest/searchManifest.js"></script>
 	<script src="{{public}}javascripts/manifest/editManifest.js"></script>
 	<script src="{{public}}javascripts/reports/report.js"></script>

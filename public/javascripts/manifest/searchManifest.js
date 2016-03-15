@@ -196,6 +196,7 @@
             $("#modal-upload-scan").modal('hide');
             $("#form-upload-pdf").trigger("dropReset");
             notify("pe-7s-check","Se ha guardado el manifiesto correctamente","success");
+            $("#consultar-manifiesto").click();
           }).catch(function(err){
             console.error(err);
             notify("pe-7s-close-circle","Hubo un error con la base de datos. Favor de revisar que el servidor se encuentre encendido.","danger");
