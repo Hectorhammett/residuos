@@ -144,6 +144,9 @@
     })
 
     $(document).on('click','#residuo-save',function(){
+      var residuos = [];
+      var unidades = [];
+      var check = false;
       $(".new-row").each(function(i,row){
         var values = new Array();
         values["name"] = $("input[name='name']",row).val();
@@ -162,35 +165,43 @@
             string += messages[x];
           }
           notify("pe-7s-close-circle",string,"danger");
+          check = true;
         }
         else{
-          new Residuo({
+          residuo = new Residuo({
             name:values.name,
             estado:1
+          }).save().then(function(model){
+            return model;
           })
-          .save()
-          .then(function(model){
-            model.unidad().attach(values.unidad).then(function(){
-              $.notify({
-                icon:"pe-7s-check",
-                message:"Se han guardado los tipos de residuo correctamente."
-              },{
-                type:"success"
-              })
-            });
-          })
-          .catch(function(err){
-            console.log(err);
-            console.error(err.message);
-            $.notify({
-              icon:'pe-7s-close-circle',
-              message: "Hubo un error conectándose a la base de datos, favor de revisar que el servidor esté funcionando"
-            },{
-              type:"danger"
-            })
-          })
+          unidades.push(values.unidad);
+          residuos.push(residuo);
         }
       });
-      $("#add-trash").click();
+      if(check == false){
+       Promise.all(residuos).then(function(results){
+           var promises = [];
+           for(var i = 0; i < results.length; i++){
+               var promise = results[i].unidad().attach(unidades[i]).then(function(model){
+                   return model;
+               })
+               promises.push(promise);
+           }
+           attachUnits(promises);
+       }).catch(function(err){
+           console.log(err);
+           notify("pe-7s-close-circle","Hubo un error con la base de datos. Favor de revisar que el servidor se encuentre encendido.","danger");
+       })
+      }
     })
+    
+    function attachUnits(promises){
+        Promise.all(promises).then(function(values){
+            notify("pe-7s-check","Se han guardado los residuos correctamente.","success");
+            $("#add-trash").click();
+        }).catch(function(err){
+            console.log(err);
+            notify("pe-7s-close-circle","Hubo un error con la base de datos. Favor de revisar que el servidor se encuentre encendido.","danger")
+        })
+    }
 }( window.trash = window.trash || {}, jQuery ));

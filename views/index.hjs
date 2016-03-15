@@ -101,12 +101,6 @@
                     </a>
                 </li>
                 <li>
-                    <a href="typography.html">
-                        <i class="pe-7s-id"></i>
-                        <p>Registros</p>
-                    </a>
-                </li>
-                <li>
                     <a href="{{views}}reports/report.html">
                         <i class="pe-7s-news-paper"></i>
                         <p>Reportes</p>
