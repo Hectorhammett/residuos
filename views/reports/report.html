@@ -1,0 +1,59 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="header">
+        <h4 class="title">Reportes</h4>
+        <p class="category">Generar reportes para clientes</p>
+      </div>
+      <div class="content">
+        <form data-namespace="report" data-function="generate">
+          <div class="row form-group">
+            <div class="col-md-4">
+              <label>Generadores</label>
+              <select class="form-control select2" name="generators" id="generadores" multiple="multiple"></select>
+            </div>
+            <div class="col-md-4">
+              <label>transportistas</label>
+              <select class="form-control select2" name="transporters" id="transportistas" multiple="multiple"></select>
+            </div>
+            <div class="col-md-4">
+              <label>Destinatarios</label>
+              <select class="form-control select2" name="destinations" id="destinatarios" multiple="multiple"></select>
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="col-sm-12">
+              <label>Tipos de residuos</label>
+              <select class="form-control select2" name="trash" id="residuos" multiple="multiple"></select>
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="col-lg-3 col-md-6">
+              <label>De la fecha:</label>
+              <input type="text" class="form-control datepicker" name="from">
+            </div>
+            <div class="col-lg-3 col-md-6">
+              <label>Hasta la fecha:</label>
+              <input type="text" class="form-control datepicker" name="to">
+            </div>
+            <div class="col-lg-3 col-md-6">
+              <label>Estado del manifiesto</label>
+              <select class="form-control" name="state">
+                <option value="all">Cualquiera</option>
+                <option value="Liberado">Liberado</option>
+                <option value="Pendiente">Pendiente</option>
+              </select>
+            </div>
+            <div class="col-lg-3 col-md-6">
+              <label></label>
+              <input type="submit" value="Generar Reporte" class="btn btn-primary btn-block" style="margin-top:4px"/>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  report.initializePage();
+</script>

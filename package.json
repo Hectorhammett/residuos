@@ -2,7 +2,7 @@
   "name": "Residuos",
   "version": "0.0.0",
   "main": "views/login.html",
-  "chromium-args" : "allow-file-acces",
+  "chromium-args": "allow-file-acces",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "~1.13.2",
@@ -24,6 +24,7 @@
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "pdfkit": "^0.7.2",
+    "pdfmake": "^0.1.18",
     "serve-favicon": "~2.3.0",
     "validatorjs": "^2.0.3"
   }
