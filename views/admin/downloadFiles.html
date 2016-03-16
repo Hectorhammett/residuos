@@ -2,18 +2,41 @@
   <div class="col-sm-12">
     <div class="card">
       <div class="header">
-        <h4 class="title">Registro de generadores</h4>
-        <p class="category">Capturar los generadores de residuos</p>
+        <h4 class="title">Descarga masiva de PDF's</h4>
+        <p class="category">Filtro para descargar PDF's de manifiestos</p>
       </div>
       <div class="content">
-          <div class="row">
-            <div class="col-sm-12">
-              <form data-namespace="downloadFiles" data-function="downloadFiles">
-                <button class="btn btn-primary">Download</button>
-              </form>
+        <form data-namespace="downloadFiles" data-function="downloadFiles">
+          <div class="row form-group">
+            <div class="col-md-4">
+              <label>Generadores</label>
+              <select class="form-control select2" name="generators" id="generadores" multiple="multiple"></select>
+            </div>
+            <div class="col-md-4">
+              <label>transportistas</label>
+              <select class="form-control select2" name="transporters" id="transportistas" multiple="multiple"></select>
+            </div>
+            <div class="col-md-4">
+              <label>Destinatarios</label>
+              <select class="form-control select2" name="destinations" id="destinatarios" multiple="multiple"></select>
             </div>
           </div>
+          <div class="row form-group">
+            <div class="col-sm-12">
+              <label>Tipos de residuos</label>
+              <select class="form-control select2" name="trash" id="residuos" multiple="multiple"></select>
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="col-lg-12 col-md-6">
+              <input type="submit" value="Descargar PDF's" class="btn btn-primary btn-block"/>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   </div>
 </div>
+<script>
+  downloadFiles.initializePage();
+</script>

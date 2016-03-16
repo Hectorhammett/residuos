@@ -62,7 +62,7 @@
     //handler for the Editar button
     $(document).on('click','.btn-edit',function(){
       global.editManifestId = this.id;
-      $("#page-holder").load( global.views + "manifest/editManifest.html");
+      $("#page-holder").load( global.hviews + "manifest/editManifest.html");
     })
 
     //handler for the Consultar button
