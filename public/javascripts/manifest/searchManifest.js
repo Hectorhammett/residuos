@@ -238,7 +238,7 @@
       var doc = new PDFDocument();
 
       writeStream.on('finish', function () {
-        nw.Window.open(global.views + "manifest/manifiesto.pdf",function(window){
+        nw.Window.open(global.hviews + "manifest/manifiesto.pdf",function(window){
           window.maximize();
         });
       });

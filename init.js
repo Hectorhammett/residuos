@@ -4,6 +4,9 @@ var path = require('path');
 var nwPath = process.execPath;
 var nwDir = path.dirname(nwPath);
 
+global.hviews = "../views/";
+global.hpublic = "../public/";
+global.nwDir = nwDir;
 global.public = nwDir+"/public/";
 global.views = nwDir+"/views/";
 global.models = nwDir+"/models/models";

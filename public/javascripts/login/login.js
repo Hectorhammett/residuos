@@ -47,7 +47,7 @@ function login(form){
       }
       else{
         global.user = model;
-        $("html").load(global.views+"index.html",function(){
+        $("html").load(global.hviews+"index.html",function(){
           console.log("1st redy")
         });
       }

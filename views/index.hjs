@@ -89,19 +89,19 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{views}}manifest/newManifest.html" id="capturar-manifiesto">
+                    <a href="manifest/newManifest.html" id="capturar-manifiesto">
                         <i class="pe-7s-plus"></i>
                         <p>Capturar Manifiesto</p>
                     </a>
                 </li>
                 <li>
-                    <a href="{{views}}manifest/searchManifest.html" id="consultar-manifiesto">
+                    <a href="manifest/searchManifest.html" id="consultar-manifiesto">
                         <i class="pe-7s-note2"></i>
                         <p>Consultar Manifiesto</p>
                     </a>
                 </li>
                 <li>
-                    <a href="{{views}}reports/report.html">
+                    <a href="reports/report.html">
                         <i class="pe-7s-news-paper"></i>
                         <p>Reportes</p>
                     </a>
@@ -116,37 +116,37 @@
 										</a>
 										<div class="collapse tablesExamples zero-margin">
 												<ul class="nav">
-														<li><a href="{{views}}admin/addUser.html">Agregar Usuario</a></li>
+														<li><a href="admin/addUser.html">Agregar Usuario</a></li>
 												</ul>
 										</div>
 										<div class="collapse tablesExamples zero-margin">
 												<ul class="nav">
-														<li><a href="{{views}}admin/generators.html">Generadores</a></li>
+														<li><a href="admin/generators.html">Generadores</a></li>
 												</ul>
 										</div>
 										<div class="collapse tablesExamples zero-margin">
 												<ul class="nav">
-														<li><a href="{{views}}admin/trash.html" id="add-trash">Tipos de residuos</a></li>
+														<li><a href="admin/trash.html" id="add-trash">Tipos de residuos</a></li>
 												</ul>
 										</div>
 										<div class="collapse tablesExamples zero-margin">
 												<ul class="nav">
-														<li><a href="{{views}}admin/transporters.html">Transportistas</a></li>
+														<li><a href="admin/transporters.html">Transportistas</a></li>
 												</ul>
 										</div>
 										<div class="collapse tablesExamples zero-margin">
 												<ul class="nav">
-														<li><a href="{{views}}admin/destination.html">Destinatarios</a></li>
+														<li><a href="admin/destination.html">Destinatarios</a></li>
 												</ul>
 										</div>
                                         <div class="collapse tablesExamples zero-margin">
 												<ul class="nav">
-														<li><a href="{{views}}admin/downloadFiles.html">Descargar Manifiestos</a></li>
+														<li><a href="admin/downloadFiles.html">Descargar Manifiestos</a></li>
 												</ul>
 										</div>
 										<div class="collapse tablesExamples zero-margin">
 												<ul class="nav">
-														<li><a href="{{views}}admin/configuration.html">Configuración del sistema</a></li>
+														<li><a href="admin/configuration.html">Configuración del sistema</a></li>
 												</ul>
 										</div>
 									</li>
@@ -181,7 +181,7 @@
                                     <span class="notification">5</span>
                               </a>
                               <ul class="dropdown-menu">
-                                <li><a href="{{views}}testpdf.html">testpdf</a></li>
+                                <li><a href="testpdf.html">testpdf</a></li>
                                 <li><a href="#">Notification 2</a></li>
                                 <li><a href="#">Notification 3</a></li>
                                 <li><a href="#">Notification 4</a></li>
@@ -197,7 +197,7 @@
 
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                           <a href="{{views}}/account/account.js">
+                           <a href="/account/account.js">
                                Cuenta de Usuario
                             </a>
                         </li>
@@ -217,7 +217,7 @@
                               </ul>
                         </li> -->
                         <li>
-                            <a href="{{views}}logout.html">
+                            <a href="logout.html">
                                 Cerrar Sesión
                             </a>
                         </li>

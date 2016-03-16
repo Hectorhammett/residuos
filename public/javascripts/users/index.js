@@ -7,7 +7,7 @@ $(document).ready(function(){
 //handlers----------------------------------------------------------------------
 
 $(document).on('click','a',function(e){
-  if($(this).attr('href') != "#" && $(this).attr('href') != global.views + "logout.html"){
+  if($(this).attr('href') != "#" && $(this).attr('href') != global.hviews + "logout.html"){
     e.preventDefault();
     e.stopImmediatePropagation();
     if($(this).parent('li').parent('ul').hasClass('nav')){
@@ -20,14 +20,14 @@ $(document).on('click','a',function(e){
 
 //functions---------------------------------------------------------------------
 function getUrl(url){
-  var html = Fs.readFileSync(url,'utf8');
+  var html = Fs.readFileSync(global.views + url,'utf8');
   var extension = url.split('.')[1];
   if(extension != "html"){
     win.eval(null,html);
     printInPage(renderPage());
   }
   else{
-    $("#page-holder").load(url);
+    $("#page-holder").load(global.hviews + url);
   }
 }
 
