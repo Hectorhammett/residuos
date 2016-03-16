@@ -482,24 +482,6 @@
       });
     }
 
-    //function to create the pdf with the manifest
-    function createPDF(manifest){
-      var writeStream = Fs.createWriteStream(global.views + "manifest/manifiesto.pdf");
-      var doc = new PDFDocument();
-
-      writeStream.on('finish', function () {
-        nw.Window.open(global.views + "manifest/manifiesto.pdf",function(window){
-          window.maximize();
-        });
-      });
-
-      doc.pipe(writeStream);
-      doc.image(global.views + 'manifest/plantilla.jpg',0,0,{
-        width:615,
-      });
-      doc.end();
-    }
-
     //function to get all the trash types in the database
     editManifest.getTrashType = function(){
       var residuos = new Residuo().where('estado',1).fetchAll().then(function(residuos){
@@ -527,7 +509,7 @@
       var doc = new PDFDocument();
 
       writeStream.on('finish', function () {
-        nw.Window.open(global.views + "manifest/manifiesto.pdf",function(window){
+        nw.Window.open(global.hviews + "manifest/manifiesto.pdf",function(window){
           window.maximize();
         });
       });

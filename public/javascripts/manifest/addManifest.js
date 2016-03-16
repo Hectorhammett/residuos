@@ -443,24 +443,6 @@
       });
     }
 
-    //function to create the pdf with the manifest
-    function createPDF(manifest){
-      var writeStream = Fs.createWriteStream(global.views + "manifest/manifiesto.pdf");
-      var doc = new PDFDocument();
-
-      writeStream.on('finish', function () {
-        nw.Window.open(global.views + "manifest/manifiesto.pdf",function(window){
-          window.maximize();
-        });
-      });
-
-      doc.pipe(writeStream);
-      doc.image(global.views + 'manifest/plantilla.jpg',0,0,{
-        width:615,
-      });
-      doc.end();
-    }
-
     //Function to get the next local  manifest number
     addManifest.getNextIndex = function(){
       var index = Knex.raw("SELECT `AUTO_INCREMENT` as 'index' FROM  INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'residuos' AND TABLE_NAME = 'manifiesto'").then(function(data){
@@ -496,7 +478,7 @@
       var doc = new PDFDocument();
 
       writeStream.on('finish', function () {
-        nw.Window.open(global.views + "manifest/manifiesto.pdf",function(window){
+        nw.Window.open(global.hviews + "manifest/manifiesto.pdf",function(window){
           window.maximize();
         });
       });
