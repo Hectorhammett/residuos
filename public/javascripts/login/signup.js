@@ -11,7 +11,8 @@ $('form').submit(function(e){
 })
 
 function signUp(form){
-  var User = require('../models/models.js')('User');
+  console.log("waa!");
+  var User = require(global.models)('User');
   new User({username:form.username}).fetch().then(function(model){
     if(model){
       $.notify({
@@ -50,7 +51,7 @@ function signUp(form){
         var errors = validator.errors.all();
         var string = "";
         for(x in errors){
-          string += errors[x] + "<br/>";
+          string += errors[x] + "\n";
         }
         $.notify({
           icon: 'pe-7s-close-circle',
@@ -58,6 +59,7 @@ function signUp(form){
         },{
           type:"danger"
         })
+        alert(string);
       }
       else{
         var password = form.password;
@@ -71,11 +73,13 @@ function signUp(form){
         });
         user.save().then(function(model){
           var flashed = {};
-          global.successMessage = "El usuario ha sido creado correctamente"
-          document.location.href = global.views + "login.html";
+          alert("El administrador se ha creado correctamente!");
+          win.reloadIgnoringCache();
         });
       }
     }
+  }).catch(function(err){
+    console.log(err);
   });
 }
 

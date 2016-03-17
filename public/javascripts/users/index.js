@@ -7,7 +7,7 @@ $(document).ready(function(){
 //handlers----------------------------------------------------------------------
 
 $(document).on('click','a',function(e){
-  if($(this).attr('href') != "#" && $(this).attr('href') != global.hviews + "logout.html"){
+  if($(this).attr('href') != "#" && $(this).attr('href') != "logout.html"){
     e.preventDefault();
     e.stopImmediatePropagation();
     if($(this).parent('li').parent('ul').hasClass('nav')){
@@ -15,6 +15,9 @@ $(document).on('click','a',function(e){
       $(this).parent('li').addClass('active');
     }
     getUrl($(this).attr('href'));
+  }
+  if($(this).attr('href') == "logout.html"){
+    win.reloadIgnoringCache();
   }
 })
 

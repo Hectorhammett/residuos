@@ -14,7 +14,7 @@ else{
 new User().count().then(function(total){
   if(total == 0){
     alert("Es la primera vez que se inicia el sistema, favor de registrar un Administrador para éste");
-    document.location.href = global.views + "firstSignIn.html";
+    $("html").load(global.hviews + "firstSignIn.html");
   }
 })
 .catch(function(error){
