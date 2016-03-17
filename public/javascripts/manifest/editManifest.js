@@ -248,7 +248,6 @@
         bodyTag: "section",
         transitionEffect: "slideLeft",
         autoFocus: true,
-        enableAllSteps: true,
         labels: {
             cancel: "Cancelar",
             current: "Pazo Actual:",
@@ -302,7 +301,7 @@
           }
           if(currentIndex == 1){
             var completed = [];
-            for(var i = 0; i < 4; i++){
+            for(var i = 0; i < 6; i++){
               var object = {};
               object.tipo = form.tipo[i];
               object.cantidad = form.cantidad[i];
