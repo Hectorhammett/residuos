@@ -3,7 +3,9 @@ var win = nw.Window.get();
 var path = require('path');
 var nwPath = process.execPath;
 var nwDir = path.dirname(nwPath);
+var config = require('config');
 
+global.config = nwDir+"/config/";
 global.hviews = "../views/";
 global.hpublic = "../public/";
 global.nwDir = nwDir;

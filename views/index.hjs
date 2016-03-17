@@ -41,6 +41,7 @@
 		<link href="{{public}}stylesheets/typeahead.css" rel="stylesheet" />
 		<link href="{{public}}assets/datepicker/dist/css/bootstrap-datepicker.css" rel="stylesheet" />
 		<link href="{{public}}stylesheets/dropzones.css" rel="stylesheet" />
+		<link href="{{public}}stylesheets/loading.css" rel="stylesheet" />
 
 </head>
 <body>
@@ -229,7 +230,6 @@
 
         <div class="content">
             <div class="container-fluid" id="page-holder">
-
             </div>
         </div>
 

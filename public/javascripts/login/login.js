@@ -1,7 +1,15 @@
 var Fs = require('fs');
 var Hogan = require('hjs');
-var User = require(global.models)('User');
+
 var Bcrypt = require('bcrypt-nodejs');
+
+if(!config.has('db.host')){
+  alert("Es la primera ves que el sistema es iniciado. Se abrirá la sección de configuración del sistema.");
+  $("html").load( global.hviews + "config.html");
+}
+else{
+  var User = require(global.models)('User');
+}
 
 new User().count().then(function(total){
   if(total == 0){

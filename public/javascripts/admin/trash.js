@@ -19,6 +19,7 @@
           withRelated:['unidad']
         })
         .then(function(residuos){
+          $("tbody",$table).empty();
           var residuos = residuos.toJSON();
           for(x in residuos){
             var row = document.createElement("tr");
@@ -194,7 +195,7 @@
        })
       }
     })
-    
+
     function attachUnits(promises){
         Promise.all(promises).then(function(values){
             notify("pe-7s-check","Se han guardado los residuos correctamente.","success");

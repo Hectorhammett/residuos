@@ -1,11 +1,13 @@
+var config = require('config');
+var db = config.get("db");
 var knex = require('knex')({
   client: 'mysql',
   debug: true,
   connection: {
-    host     : '127.0.0.1',
-    user     : 'root',
-    password : '',
-    database : 'residuos',
+    host     : db.host,
+    user     : db.username,
+    password : db.password,
+    database : db.dbname,
     charset  : 'UTF8_GENERAL_CI'
   },
   pool: {
