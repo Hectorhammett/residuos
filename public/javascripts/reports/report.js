@@ -225,7 +225,7 @@
         var residuos = _.keyBy(manifiestos[i].residuos,'name');
         var manifiesto = manifiestos[i];
         var row = [];
-        row.push(manifiesto.identificador+"",manifiesto.noManifiesto+"",,manifiesto.generador.razonSocial,(manifiesto.archivo.id != undefined)? "Liberado" : "Pendiente");
+        row.push(manifiesto.identificador+"",manifiesto.noManifiesto+"",moment(manifiesto.created_at).format("D/MM/YYYY"),manifiesto.generador.razonSocial,(manifiesto.archivo.id != undefined)? "Liberado" : "Pendiente");
         for(var j = 0; j < keys.length; j++){
           var total = (residuos[keys[j]] != undefined)? residuos[keys[j]]._pivot_cantidadUnidad+"" : "";
           row.push(total);

@@ -333,13 +333,29 @@
           }
           if(currentIndex == 2){
             var rules = {
-              idTransportadora: "required"
+              idTransportadora: "required",
+              transportistaVehiculo: "required",
+              transportistaPlacas: "required"
             }
 
-            var validation = new Validator(form,rules);
+            var messages = {
+              "required.idTransportadora": "Es necesario seleccionar una empresa transportadora"
+            }
+
+            var validation = new Validator(form,rules,messages);
+
+            validation.setAttributeNames({
+              transportistaVehiculo: "Tipo de Vehículo",
+              transportistaPlacas: "Placas"
+            });
 
             if(validation.fails()){
-              notify("pe-7s-close-circle","Es necesario seleccionar una empresa transportadora","danger");
+              var errors = validation.errors.all();
+              var message = "";
+              for(x in errors){
+                message += errors[x] + "<br/>";
+              }
+              notify("pe-7s-close-circle",message,"danger");
               return false;
             }
             return true;
