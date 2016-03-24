@@ -99,8 +99,10 @@
     }
 
     function initDates(){
-      $(".datepicker").val(moment().format("D/MM/YYYY"));
+      $("input[name='from']").val(moment().startOf("year").format("D/MM/YYYY"));
+      $("input[name='to']").val(moment().endOf("year").format("D/MM/YYYY"));
       $(".datepicker").datepicker({
+        language:"es",
         todayBtn: "linked",
         format: "d/mm/yyyy",
         clearBtn: true,
@@ -149,13 +151,16 @@
             query +="inner join pdf p on m.identificador = p.idManifiesto ";
             break;
           case "Pendiente":
-          query +="inner join pdf p on m.identificador != p.idManifiesto ";
+            query +="left join pdf p on m.identificador = p.idManifiesto ";
           break;
         }
       }
 
       query += "WHERE 1=1 ";
 
+      if(form.state == "Pendiente"){
+        query += "AND p.id IS NULL ";
+      }
       if(form.trash != "all"){
         query += "AND tr.id in (" + _.toString(form.trash) + ") "
       }
@@ -173,14 +178,14 @@
       var promise = Knex.raw(query);
       promise.then(function(result){
         var mapped = _.map(result[0],'identificador');
-        var manifiestos = new Manifiesto().query("whereIn",'identificador',mapped).query("whereBetween",'created_at',[moment(form.from,"D/MM/YYYY").toISOString(),moment(form.to,"D/MM/YYYY").toISOString()]).fetchAll({withRelated:["generador","transportista","destinatario","residuos"]}).then(function(manifiestos){
+        var manifiestos = new Manifiesto().query("whereIn",'identificador',mapped).query("whereBetween",'created_at',[moment(form.from,"D/MM/YYYY").toISOString(),moment(form.to,"D/MM/YYYY").toISOString()]).fetchAll({withRelated:["generador","transportista","destinatario","residuos",{archivo: function(query){query.select('id','idManifiesto');}}]}).then(function(manifiestos){
           return manifiestos.toJSON();
         });
         var residuos = new Residuo();
         if(form.trash != "all"){
           residuos = residuos.query("whereIn",'id',form.trash);
         }
-        var residuos = residuos.fetchAll().then(function(residuos){
+        var residuos = residuos.fetchAll({withRelated:["unidad"]}).then(function(residuos){
           return residuos.toJSON();
         });
 
@@ -207,10 +212,10 @@
       var rows = [];
       var headers = [];
       var widths = [];
-      headers.push("No. Interno","No. Manifiesto","Fecha","Empresa");
+      headers.push("No. Interno","No. Manifiesto","Fecha","Empresa","Estado");
       for(var i = 0; i < residuosRegistrados.length; i++){
         keys.push(residuosRegistrados[i].name);
-        headers.push(residuosRegistrados[i].name);
+        headers.push(residuosRegistrados[i].name + "(" + residuosRegistrados[i].unidad[0].nombre + ")");
       }
       rows.push(headers);
       for(var i = 0; i < headers.length; i++){
@@ -220,7 +225,7 @@
         var residuos = _.keyBy(manifiestos[i].residuos,'name');
         var manifiesto = manifiestos[i];
         var row = [];
-        row.push(manifiesto.identificador+"",manifiesto.noManifiesto+"",moment(manifiesto.created_at).format("D/MM/YYYY"),manifiesto.generador.razonSocial);
+        row.push(manifiesto.identificador+"",manifiesto.noManifiesto+"",,manifiesto.generador.razonSocial,(manifiesto.archivo.id != undefined)? "Liberado" : "Pendiente");
         for(var j = 0; j < keys.length; j++){
           var total = (residuos[keys[j]] != undefined)? residuos[keys[j]]._pivot_cantidadUnidad+"" : "";
           row.push(total);
@@ -232,6 +237,7 @@
         pageOrientation: 'landscape',
         content: [
           {
+            fontSize: 8,
             alignment: "center",
             table: {
               // headers are automatically repeated if the table spans over multiple pages

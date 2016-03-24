@@ -11,8 +11,8 @@ var knex = require('knex')({
     charset  : 'UTF8_GENERAL_CI'
   },
   pool: {
-    min: 0,
-    max: 7,
+    min: 2,
+    max: 10,
     requestTimeout: 5000,
   }
 });
