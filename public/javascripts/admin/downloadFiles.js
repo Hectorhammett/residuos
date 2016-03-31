@@ -234,7 +234,7 @@
       var opt = {
         type: "progress",
         title: "Progreso de descarga",
-        message: "Descargando manifiestos  (" + total + " de " + current + ")",
+        message: "Descargando manifiestos  (" + current + " de " + total + ")",
         iconUrl: "../public/images/download.png",
         progress: value
       }
