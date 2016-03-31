@@ -24,3 +24,7 @@
     width:450px!important; /* Max Width of the popover (depending on the container!) */
     max-width: none!important;
 }
+
+.table-responsive{
+  overflow-x: auto!important;
+}

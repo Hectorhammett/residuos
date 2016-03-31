@@ -173,12 +173,12 @@
       var promises = [];
       var pdfTotal = ids.length;
       var pdfCounter = 0;
-      var output = fs.createWriteStream(global.views + "reports/download/manifiestos.zip");
+      var output = fs.createWriteStream(nw.App.dataPath + "/manifiestos.zip");
       var zipArchive = archiver('zip');
 
       output.on('close', function() {
         chrome.downloads.download({
-          url: global.views + "reports/download/manifiestos.zip",
+          url: nw.App.dataPath + "/manifiestos.zip",
         }, function (){
           notify("pe-7s-check","Se ha guardado el archivo correctamente.","success");
         });
