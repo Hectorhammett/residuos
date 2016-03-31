@@ -1,5 +1,6 @@
 locales
 node_modules
+config/default.json
 node_modules/*
 *.zip
 nwjs-v0.12.3-win-x64
