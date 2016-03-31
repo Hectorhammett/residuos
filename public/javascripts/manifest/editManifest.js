@@ -186,7 +186,7 @@
         //values of transporter
         $("input[name='transportistaNombre']").val(manifiesto.nombreTransportista);
         $("input[name='transportistaCargo']").val(manifiesto.cargoTransportista);
-        $("input[name='transportistaFecha']").val(moment(manifiesto.fechaEmbarque).format('D/MM/YYYY'));
+        $("input[name='transportistaFecha']").val((moment(manifiesto.fechaEmbarque).isValid())? moment(manifiesto.fechaEmbarque).format('D/MM/YYYY'):"");
         $("input[name='transportistaRuta']").val(manifiesto.ruta);
         $("input[name='transportistaVehiculo']").val(manifiesto.tipoVehiculo);
         $("input[name='transportistaPlacas']").val(manifiesto.placa);
@@ -195,7 +195,7 @@
         $("textarea[name='destinatarioObservaciones']").val(manifiesto.observaciones);
         $("input[name='destinatarioNombre']").val(manifiesto.nombreDestinatario);
         $("input[name='destinatarioCargo']").val(manifiesto.cargoDestinatario);
-        $("input[name='destinatarioRecepcion']").val(moment(manifiesto.fechaRecepcion).format("D/MM/YYYY"));
+        $("input[name='destinatarioRecepcion']").val((moment(manifiesto.fechaRecepcion).isValid())?moment(manifiesto.fechaRecepcion).format("D/MM/YYYY"):"");
 
         //All select inputs
         $("select[name='razonSocial']").val(manifiesto.idGenerador).trigger("change").trigger("select2:select");
@@ -563,7 +563,8 @@
       });
       doc.text(manifiesto.nombreTransportista,100,488);
       doc.text(manifiesto.cargoTransportista,100,501);
-      doc.text(moment(manifiesto.fechaEmbarque).format('D/MM/YYYY'),510,501,{
+      var date =(moment(manifiesto.fechaEmbarque).isValid())? moment(manifiesto.fechaEmbarque).format('D/MM/YYYY'):"";
+      doc.text(date,510,501,{
         width:300
       });
       if(manifiesto.ruta.length > 90)
@@ -587,7 +588,8 @@
       doc.fontSize(9);
       doc.text(manifiesto.nombreDestinatario,100,678);
       doc.text(manifiesto.cargoDestinatario,100,693);
-      doc.text(moment(manifiesto.fechaRecepcion).format('D/MM/YYYY'),510,693,{
+      date =(moment(manifiesto.fechaRecepcion).isValid())? moment(manifiesto.fechaRecepcion).format('D/MM/YYYY'):"";
+      doc.text(date,510,693,{
         width:300
       });
       doc.end();

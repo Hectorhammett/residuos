@@ -11,6 +11,7 @@
     var moment = require("moment");
     var Knex = require(global.db).knex;
     var fs = require("fs");
+    var archiver = require('archiver');
     moment.locale('es');
 
     downloadFiles.initializePage = function(){
@@ -170,10 +171,29 @@
 
     function getPdf(ids){
       var promises = [];
+      var pdfTotal = ids.length;
+      var pdfCounter = 0;
+      var output = fs.createWriteStream(global.views + "reports/download/manifiestos.zip");
+      var zipArchive = archiver('zip');
+
+      output.on('close', function() {
+        chrome.downloads.download({
+          url: global.views + "reports/download/manifiestos.zip",
+        }, function (){
+          notify("pe-7s-check","Se ha guardado el archivo correctamente.","success");
+        });
+      });
+
+      zipArchive.pipe(output);
+
+      createNotification(pdfTotal);
+
       _.each(ids,function(value){
         var promise = new Archivo({
           id: value
         }).fetch({withRelated:["manifiesto"]}).then(function(file){
+          pdfCounter++;
+          updateNotification(pdfTotal,pdfCounter,parseInt((pdfCounter * 100)/pdfTotal));
           return file.toJSON();
         });
         promises.push(promise);
@@ -182,15 +202,43 @@
       Promise.all(promises).then(function(results){
         _.each(results,function(file){
           var buffer = new Buffer(file.string,'base64');
-          fs.writeFile(global.views + "reports/download/"+ file.manifiesto.identificador +".pdf",buffer,function(){
-
-          })
+          zipArchive.append(buffer, { name:"manifiesto_" + file.idManifiesto +".pdf"  });
         })
-        notify("pe-7s-check","Se han descargado los manifistos correctamente","success");
+        zipArchive.finalize(function(err, bytes) {
+
+            if(err) {
+              throw err;
+            }
+
+            console.log('done:', base, bytes);
+
+        });
       }).catch(function(err){
         console.log(err);
         notify("pe-7s-close-circle","Hubo un error con la base de datos. Favor de revisar que el servidor se encuentre encendido.","danger");
       })
+    }
+
+    function createNotification(total){
+      var opt = {
+        type: "progress",
+        title: "Progreso de descarga",
+        message: "Descargando manifiestos (" + total + " de 0)",
+        iconUrl: "../public/images/download.png",
+        progress: 0
+      }
+      chrome.notifications.create("notificationDownload",opt);
+    }
+
+    function updateNotification(total,current,value){
+      var opt = {
+        type: "progress",
+        title: "Progreso de descarga",
+        message: "Descargando manifiestos  (" + total + " de " + current + ")",
+        iconUrl: "../public/images/download.png",
+        progress: value
+      }
+      chrome.notifications.update("notificationDownload", opt);
     }
 }( window.downloadFiles = window.downloadFiles || {}, jQuery ));
 ``

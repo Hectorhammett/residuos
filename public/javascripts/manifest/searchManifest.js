@@ -293,7 +293,8 @@
       });
       doc.text(manifiesto.nombreTransportista,100,488);
       doc.text(manifiesto.cargoTransportista,100,501);
-      doc.text(moment(manifiesto.fechaEmbarque).format('D/MM/YYYY'),510,501,{
+      var date =(moment(manifiesto.fechaEmbarque).isValid())? moment(manifiesto.fechaEmbarque).format('D/MM/YYYY'):"";
+      doc.text(date,510,501,{
         width:300
       });
       if(manifiesto.ruta.length > 90)
@@ -317,7 +318,8 @@
       doc.fontSize(9);
       doc.text(manifiesto.nombreDestinatario,100,678);
       doc.text(manifiesto.cargoDestinatario,100,693);
-      doc.text(moment(manifiesto.fechaRecepcion).format('D/MM/YYYY'),510,693,{
+      date =(moment(manifiesto.fechaRecepcion).isValid())? moment(manifiesto.fechaRecepcion).format('D/MM/YYYY'):"";
+      doc.text(date,510,693,{
         width:300
       });
       doc.end();

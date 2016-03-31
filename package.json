@@ -4,6 +4,8 @@
   "main": "views/login.html",
   "chromium-args": "allow-file-acces",
   "dependencies": {
+    "adm-zip": "^0.4.7",
+    "archiver": "^0.21.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "~1.13.2",
     "bookshelf": "^0.9.1",
@@ -22,6 +24,7 @@
     "moment": "^2.11.2",
     "morgan": "~1.6.1",
     "mysql": "^2.10.2",
+    "node-zip": "^1.1.1",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "pdfkit": "^0.7.2",
