@@ -177,8 +177,9 @@
       var zipArchive = archiver('zip');
 
       output.on('close', function() {
+        console.log(nw.App.dataPath + "/manifiestos.zip");
         chrome.downloads.download({
-          url: nw.App.dataPath + "/manifiestos.zip",
+          url: "file://" + nw.App.dataPath + "/manifiestos.zip",
         }, function (){
           notify("pe-7s-check","Se ha guardado el archivo correctamente.","success");
         });
