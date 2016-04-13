@@ -516,82 +516,75 @@
       doc.pipe(writeStream);
 
       //Plantilla
-      doc.image(global.views + 'manifest/plantilla.jpg',0,0,{
-        width:615,
+      doc.image(global.views + 'manifest/plantilla-estado.jpg',0,0,{
+        width:650,
       });
-
-      //identificador del manifiesto
-      doc.text(manifiesto.identificador, 30, 105);
 
       doc.fontSize(9);
 
+      //identificador del manifiesto
+      //doc.text(manifiesto.identificador, 430, 113);
+
       //Datos del generador
-      doc.text(generador.nra,45,140);
-      doc.text(manifiesto.noManifiesto,430,140);
-      doc.text(manifiesto.pagina,525,140);
-      doc.text(generador.razonSocial,255,157);
-      doc.text(generador.domicilio,100,171);
-      doc.text(generador.codigoPostal,400,171);
-      doc.text(generador.municipio,165,185);
-      doc.text(generador.estado,400,185);
-      doc.text(generador.telefono,70,200);
+    //  doc.text(generador.nra,45,140);
+      doc.text(manifiesto.noManifiesto,430, 113);
+    //  doc.text(manifiesto.pagina,525,140);
+    var fullAddress = generador.domicilio + ", " + generador.codigoPostal + ", " + generador.municipio;
+      doc.text(generador.razonSocial,155,134);
+      doc.text(fullAddress,120,146);
+    //  doc.text(generador.codigoPostal,400,171);
+      // doc.text(generador.municipio,165,185);
+      // doc.text(generador.estado,400,185);
+      doc.text(generador.telefono,414,146);
 
       //residuos
       for(var i = 0; i < residuos.length; i++){
-        doc.text(residuos[i].name,55,242 + (10*i));
-        doc.text(residuos[i]._pivot_cantidadContenedor,320,242 + (10*i));
-        doc.text(residuos[i]._pivot_tipoContenedor,380,242 + (10*i));
-        doc.text(residuos[i]._pivot_cantidadUnidad,450,242 + (10*i));
-        doc.text(residuos[i]._pivot_unidad,520,242 + (10*i),{
-          width:300
-        });
+        doc.text(residuos[i].name,90,216 + (12*i));
+        doc.text(residuos[i]._pivot_cantidadContenedor,230,216 + (12*i));
+        doc.text(residuos[i]._pivot_tipoContenedor,385,216 + (12*i));
+        var totalRes = residuos[i]._pivot_cantidadUnidad + " " + residuos[i]._pivot_unidad;
+        doc.text(totalRes,310,216 + (12*i));
       }
 
-      doc.text(manifiesto.instruccionesEspeciales,55,320);
-      doc.text(manifiesto.nombreResponsableGenerador,205,400);
+      doc.text(manifiesto.instruccionesEspeciales,90,305);
+      doc.text(manifiesto.nombreResponsableGenerador,90,333);
 
       //empresa transportadora
-      doc.text(transportista.nombre,240,420);
+      doc.text(transportista.nombre,165,377);
       if(transportista.domicilio.length > 65)
       doc.fontSize(7);
-      doc.text(transportista.domicilio,100,435);
+      doc.text(transportista.domicilio,125,389);
       doc.fontSize(9);
-      doc.text(transportista.telefono,445,435);
-      doc.text(transportista.autorizacionSemarnat,192,450);
-      doc.text(transportista.sct,515,450,{
-        width:300
-      });
-      doc.text(manifiesto.nombreTransportista,100,488);
-      doc.text(manifiesto.cargoTransportista,100,501);
+      doc.text(transportista.telefono,420,389);
+      //doc.text(transportista.autorizacionSemarnat,192,450);
+      doc.text(transportista.sct,225,412);
+      doc.text(manifiesto.nombreTransportista,90,448);
+      //doc.text(manifiesto.cargoTransportista,100,501);
       var date =(moment(manifiesto.fechaEmbarque).isValid())? moment(manifiesto.fechaEmbarque).format('D/MM/YYYY'):"";
-      doc.text(date,510,501,{
-        width:300
-      });
+      doc.text(date,155,425);
       if(manifiesto.ruta.length > 90)
       doc.fontSize(7);
-      doc.text(manifiesto.ruta,50,540);
+      doc.text(manifiesto.ruta,90,475);
       doc.fontSize(9);
-      doc.text(manifiesto.tipoVehiculo,152,559);
-      doc.text(manifiesto.placa,442,559);
+      doc.text(manifiesto.tipoVehiculo,415,401);
+      doc.text(manifiesto.placa,195,401);
 
       //Destinatario
-      doc.text(destinatario.nombre,235,582);
-      doc.text(destinatario.ine,240,596);
+      doc.text(destinatario.nombre,153,494);
+      doc.text(destinatario.ine,225,517);
       if(destinatario.domicilio.length > 65)
       doc.fontSize(7);
-      doc.text(destinatario.domicilio,95,610);
+      doc.text(destinatario.domicilio,125,505);
       doc.fontSize(9);
-      doc.text(destinatario.telefono,400,610);
-      if(manifiesto.observaciones.length > 65)
-      doc.fontSize(7);
-      doc.text(manifiesto.observaciones,129,645);
-      doc.fontSize(9);
-      doc.text(manifiesto.nombreDestinatario,100,678);
-      doc.text(manifiesto.cargoDestinatario,100,693);
+      doc.text(destinatario.telefono,420,505);
+      //if(manifiesto.observaciones.length > 65)
+      //doc.fontSize(7);
+      //doc.text(manifiesto.observaciones,129,645);
+      //doc.fontSize(9);
+      doc.text(manifiesto.nombreDestinatario,90,553);
+      //doc.text(manifiesto.cargoDestinatario,100,693);
       date =(moment(manifiesto.fechaRecepcion).isValid())? moment(manifiesto.fechaRecepcion).format('D/MM/YYYY'):"";
-      doc.text(date,510,693,{
-        width:300
-      });
+      doc.text(date,155,530);
       doc.end();
     }
 

@@ -197,8 +197,13 @@
                     </ul> -->
 
                     <ul class="nav navbar-nav navbar-right">
+											<!-- <li>
+												 <a href="test.html">
+														 Test pdf
+													</a>
+											</li> -->
                         <li>
-                           <a href="/account/account.js">
+                           <a href="account/account.js">
                                Cuenta de Usuario
                             </a>
                         </li>

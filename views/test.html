@@ -1,0 +1,116 @@
+<script>
+var Manifiesto = require(global.models)("Manifiesto");
+var Validator = require("validatorjs");
+var Archivo = require(global.models)("Archivo");
+Validator.useLang('es');
+var _ = require('lodash');
+var Knex = require(global.db).knex;
+var moment = require('moment');
+var PDFDocument = require('pdfkit');
+var Archivo = require(global.models)("Archivo")
+var Fs = require("fs");
+new Manifiesto({
+  identificador: 1,
+}).fetch({withRelated:["transportista","residuos","generador","destinatario"]}).then(function(manifiesto){
+  manifiesto = manifiesto.toJSON();
+  console.log(manifiesto);
+  if(!manifiesto){
+    notify("pe-7s-close-circle","No se encontró el manifiesto. Favor de consultar al administrador del sistema","danger");
+  }
+  else{
+    showPdf(manifiesto);
+  }
+}).catch(function(err){
+  console.error(err);
+  notify("pe-7s-close-circle","No se pudo conectar a la base de datos. Favor de revisar que el servidor se encuentre encendido.",'danger');
+})
+
+function showPdf(manifiesto){
+  var generador = manifiesto.generador;
+  var residuos = manifiesto.residuos;
+  var transportista = manifiesto.transportista;
+  var destinatario = manifiesto.destinatario;
+  var writeStream = Fs.createWriteStream(global.views + "manifest/manifiesto.pdf");
+  var doc = new PDFDocument();
+
+  writeStream.on('finish', function () {
+    nw.Window.open(global.hviews + "manifest/manifiesto.pdf",function(window){
+      window.maximize();
+    });
+  });
+
+  doc.pipe(writeStream);
+
+  //Plantilla
+  doc.image(global.views + 'manifest/plantilla-estado.jpg',0,0,{
+    width:650,
+  });
+
+  doc.fontSize(9);
+
+  //identificador del manifiesto
+  //doc.text(manifiesto.identificador, 430, 113);
+
+  //Datos del generador
+//  doc.text(generador.nra,45,140);
+  doc.text(manifiesto.noManifiesto,430, 113);
+//  doc.text(manifiesto.pagina,525,140);
+var fullAddress = generador.domicilio + ", " + generador.codigoPostal + ", " + generador.municipio;
+  doc.text(generador.razonSocial,155,134);
+  doc.text(fullAddress,120,146);
+//  doc.text(generador.codigoPostal,400,171);
+  // doc.text(generador.municipio,165,185);
+  // doc.text(generador.estado,400,185);
+  doc.text(generador.telefono,414,146);
+
+  //residuos
+  for(var i = 0; i < residuos.length; i++){
+    doc.text(residuos[i].name,90,216 + (12*i));
+    doc.text(residuos[i]._pivot_cantidadContenedor,230,216 + (12*i));
+    doc.text(residuos[i]._pivot_tipoContenedor,385,216 + (12*i));
+    var totalRes = residuos[i]._pivot_cantidadUnidad + " " + residuos[i]._pivot_unidad;
+    doc.text(totalRes,310,216 + (12*i));
+  }
+
+  doc.text(manifiesto.instruccionesEspeciales,90,305);
+  doc.text(manifiesto.nombreResponsableGenerador,90,333);
+
+  //empresa transportadora
+  doc.text(transportista.nombre,165,377);
+  if(transportista.domicilio.length > 65)
+  doc.fontSize(7);
+  doc.text(transportista.domicilio,125,389);
+  doc.fontSize(9);
+  doc.text(transportista.telefono,420,389);
+  //doc.text(transportista.autorizacionSemarnat,192,450);
+  doc.text(transportista.sct,225,412);
+  doc.text(manifiesto.nombreTransportista,90,448);
+  //doc.text(manifiesto.cargoTransportista,100,501);
+  var date =(moment(manifiesto.fechaEmbarque).isValid())? moment(manifiesto.fechaEmbarque).format('D/MM/YYYY'):"";
+  doc.text(date,155,425);
+  if(manifiesto.ruta.length > 90)
+  doc.fontSize(7);
+  doc.text(manifiesto.ruta,90,475);
+  doc.fontSize(9);
+  doc.text(manifiesto.tipoVehiculo,415,401);
+  doc.text(manifiesto.placa,195,401);
+
+  //Destinatario
+  doc.text(destinatario.nombre,153,494);
+  doc.text(destinatario.ine,225,517);
+  if(destinatario.domicilio.length > 65)
+  doc.fontSize(7);
+  doc.text(destinatario.domicilio,125,505);
+  doc.fontSize(9);
+  doc.text(destinatario.telefono,420,505);
+  //if(manifiesto.observaciones.length > 65)
+  //doc.fontSize(7);
+  //doc.text(manifiesto.observaciones,129,645);
+  //doc.fontSize(9);
+  doc.text(manifiesto.nombreDestinatario,90,553);
+  //doc.text(manifiesto.cargoDestinatario,100,693);
+  date =(moment(manifiesto.fechaRecepcion).isValid())? moment(manifiesto.fechaRecepcion).format('D/MM/YYYY'):"";
+  doc.text(date,155,530);
+  doc.end();
+}
+</script>

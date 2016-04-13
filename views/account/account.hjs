@@ -20,7 +20,7 @@
                     <p>{{userLevel}}</p>
                   </div>
                   <div class="col-sm-12">
-                    <a href="{{views}}account/editAccount.js" class="btn btn-primary">Editar Usuario</a>
+                    <a href="account/editAccount.js" class="btn btn-primary">Editar Usuario</a>
                   </div>
                 </div>
                 <div class="footer">
