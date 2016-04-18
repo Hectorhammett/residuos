@@ -142,7 +142,7 @@
         $("input[name='transportistaSct']").val(transportista.sct);
         $("input[name='transportistaTelefono']").val(transportista.telefono);
         $("input[name='transportistaDomicilio']").val(transportista.domicilio);
-        $("input[name='transportistaAutorizacion']").val(transportista.autorizacionSemarnat);
+        //$("input[name='transportistaAutorizacion']").val(transportista.autorizacionSemarnat);
       }).catch(function(err){
         console.error(err);
         notify("pe-7s-close-circle","Hubo un error con la base de datos. Favor de revisar que el servidor se encuentre encendido","danger")
