@@ -9,7 +9,7 @@
       var rules = {
         nombre: "required|min:5",
         sct: "required",
-        transportistaAutorizacion: "required",
+        //transportistaAutorizacion: "required",
         domicilio: "required|min:5",
         telefono: "required|numeric"
       }
@@ -18,8 +18,8 @@
 
       validator.setAttributeNames({
         nombre: "Nombre de la Empresa Transportadora",
-        sct: "Número del Registro S.C.T.",
-        transportistaAutorizacion: "Autorización de la SEMARNAT",
+        sct: "Número de registro como prestador de Servicios",
+        // transportistaAutorizacion: "Autorización de la SEMARNAT",
         domicilio: "Domicilio",
         telefono: "Teléfono"
       })

@@ -61,7 +61,7 @@ var Manifiesto = Bookshelf.Model.extend({
     return this.belongsTo(Transportista,'idTransportista');
   },
   residuos: function(){
-    return this.belongsToMany(Residuo,'manifiesto_has_residuos','idManifiesto','idResiduo').withPivot(['cantidadContenedor','tipoContenedor','cantidadUnidad','unidad']);
+    return this.belongsToMany(Residuo,'manifiesto_has_residuos','idManifiesto','idResiduo').withPivot(['cantidadContenedor','tipoContenedor','cantidadUnidad','unidad','destino']);
   },
   destinatario: function(){
     return this.belongsTo(Destinatario,'idDestinatario');

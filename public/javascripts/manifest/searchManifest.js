@@ -274,6 +274,7 @@
         doc.text(residuos[i]._pivot_tipoContenedor,385,216 + (12*i));
         var totalRes = residuos[i]._pivot_cantidadUnidad + " " + residuos[i]._pivot_unidad;
         doc.text(totalRes,310,216 + (12*i));
+        doc.text(residuos[i]._pivot_destino,475,216 + (12*i));
       }
 
       doc.text(manifiesto.instruccionesEspeciales,90,305);

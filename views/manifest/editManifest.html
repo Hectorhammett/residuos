@@ -10,18 +10,18 @@
             <h3>Generador</h3>
             <section>
                 <div class="row">
-                  <div class="col-sm-4">
+                  <div class="col-sm-6">
                     <label>Número de Control Interno</label>
                     <input type="text" class="form-control" name="identificacion" readonly="true"/>
                   </div>
-                  <div class="col-sm-4">
+                  <div class="col-sm-6">
                     <label>No. Manifiesto</label>
                     <input type="text" class="form-control" name="noManifest" readonly="true"/>
                   </div>
-                  <div class="col-sm-4">
+                  <!-- <div class="col-sm-4">
                     <label>Página</label>
                     <input type="text" class="form-control" name="noPage"/>
-                  </div>
+                  </div> -->
                 </div>
 
                 <div class="row">
@@ -59,7 +59,7 @@
                     <input type="text" class="form-control" name="telefono" readonly="true">
                   </div>
                   <div class="col-sm-8">
-                    <label>Número de Registro Ambiental</label>
+                    <label>Número de Registro como Generador</label>
                     <input type="text" class="form-control" name="nra" readonly="true">
                   </div>
                 </div>
@@ -76,6 +76,7 @@
                       <th>Tipo de contenedor</th>
                       <th>Cantidad total de residuo</th>
                       <th>Unidad Vol/Pes</th>
+                      <th>Manejo del Residuo</th>
                     </thead>
                     <tbody>
                       <tr>
@@ -84,6 +85,21 @@
                         <td><input type="text" name="contenedor" class="form-control"/></td>
                         <td><input type="number" name="residuoTotal" class="form-control"/></td>
                         <td><input type="text" name="residuoUnidad" class="form-control"  readonly="true"/></td>
+                        <td>
+                          <select class="form-control" name="residuoDestino" style="width:100%;">
+                            <option value=""></option>
+                            <option value="1">Reutilización</option>
+                            <option value="2">Reciclaje</option>
+                            <option value="3">Co-Procesamiento</option>
+                            <option value="4a">Tratamiento Biológico</option>
+                            <option value="4b">Tratamiento Químico</option>
+                            <option value="4c">Tratamiento Físico</option>
+                            <option value="4d">Tratamiento Térmico</option>
+                            <option value="5">Acopio</option>
+                            <option value="6">Almacenamiento</option>
+                            <option value="7">Disposición Final</option>
+                          </select>
+                        </td>
                       </tr>
                       <tr>
                         <td><select class="form-control residuo-tipo" name="tipo" style:"width:100%;"></select></td>
@@ -91,6 +107,21 @@
                         <td><input type="text" name="contenedor" class="form-control"/></td>
                         <td><input type="number" name="residuoTotal" class="form-control"/></td>
                         <td><input type="text" name="residuoUnidad" class="form-control" readonly="true"/></td>
+                        <td>
+                          <select class="form-control" name="residuoDestino" style="width:100%;">
+                            <option value=""></option>
+                            <option value="1">Reutilización</option>
+                            <option value="2">Reciclaje</option>
+                            <option value="3">Co-Procesamiento</option>
+                            <option value="4a">Tratamiento Biológico</option>
+                            <option value="4b">Tratamiento Químico</option>
+                            <option value="4c">Tratamiento Físico</option>
+                            <option value="4d">Tratamiento Térmico</option>
+                            <option value="5">Acopio</option>
+                            <option value="6">Almacenamiento</option>
+                            <option value="7">Disposición Final</option>
+                          </select>
+                        </td>
                       </tr>
                       <tr>
                         <td><select class="form-control residuo-tipo" name="tipo" style:"width:100%;"></select></td>
@@ -98,6 +129,21 @@
                         <td><input type="text" name="contenedor" class="form-control"/></td>
                         <td><input type="number" name="residuoTotal" class="form-control"/></td>
                         <td><input type="text" name="residuoUnidad" class="form-control" readonly="true"/></td>
+                        <td>
+                          <select class="form-control" name="residuoDestino" style="width:100%;">
+                            <option value=""></option>
+                            <option value="1">Reutilización</option>
+                            <option value="2">Reciclaje</option>
+                            <option value="3">Co-Procesamiento</option>
+                            <option value="4a">Tratamiento Biológico</option>
+                            <option value="4b">Tratamiento Químico</option>
+                            <option value="4c">Tratamiento Físico</option>
+                            <option value="4d">Tratamiento Térmico</option>
+                            <option value="5">Acopio</option>
+                            <option value="6">Almacenamiento</option>
+                            <option value="7">Disposición Final</option>
+                          </select>
+                        </td>
                       </tr>
                       <tr>
                         <td><select class="form-control residuo-tipo" name="tipo" style:"width:100%;"></select></td>
@@ -105,6 +151,21 @@
                         <td><input type="text" name="contenedor" class="form-control"/></td>
                         <td><input type="number" name="residuoTotal" class="form-control"/></td>
                         <td><input type="text" name="residuoUnidad" class="form-control" readonly="true"/></td>
+                        <td>
+                          <select class="form-control" name="residuoDestino" style="width:100%;">
+                            <option value=""></option>
+                            <option value="1">Reutilización</option>
+                            <option value="2">Reciclaje</option>
+                            <option value="3">Co-Procesamiento</option>
+                            <option value="4a">Tratamiento Biológico</option>
+                            <option value="4b">Tratamiento Químico</option>
+                            <option value="4c">Tratamiento Físico</option>
+                            <option value="4d">Tratamiento Térmico</option>
+                            <option value="5">Acopio</option>
+                            <option value="6">Almacenamiento</option>
+                            <option value="7">Disposición Final</option>
+                          </select>
+                        </td>
                       </tr>
                       <tr>
                         <td><select class="form-control residuo-tipo" name="tipo" style:"width:100%;"></select></td>
@@ -112,6 +173,21 @@
                         <td><input type="text" name="contenedor" class="form-control"/></td>
                         <td><input type="number" name="residuoTotal" class="form-control"/></td>
                         <td><input type="text" name="residuoUnidad" class="form-control" readonly="true"/></td>
+                        <td>
+                          <select class="form-control" name="residuoDestino" style="width:100%;">
+                            <option value=""></option>
+                            <option value="1">Reutilización</option>
+                            <option value="2">Reciclaje</option>
+                            <option value="3">Co-Procesamiento</option>
+                            <option value="4a">Tratamiento Biológico</option>
+                            <option value="4b">Tratamiento Químico</option>
+                            <option value="4c">Tratamiento Físico</option>
+                            <option value="4d">Tratamiento Térmico</option>
+                            <option value="5">Acopio</option>
+                            <option value="6">Almacenamiento</option>
+                            <option value="7">Disposición Final</option>
+                          </select>
+                        </td>
                       </tr>
                       <!-- <tr>
                         <td><select class="form-control residuo-tipo" name="tipo" style:"width:100%;"></select></td>
@@ -153,11 +229,11 @@
 
                   <div class="row">
                     <div class="col-sm-12">
-                      <label>Número de registro como prestador de Servicios</label>
+                      <label>Número del registro como Prestador de Servicios</label>
                       <input type="text" name="transportistaSct" class="form-control" readonly="true"/>
                     </div>
                     <!-- <div class="col-sm-6">
-                      <label>Autorización de la SEMARNAT</label>
+                      <label>Autorización de la S.P.A.</label>
                       <input type="text" name="transportistaAutorizacion" class="form-control" readonly="true"/>
                     </div> -->
                   </div>
@@ -246,14 +322,7 @@
                 </div>
 
                 <div class="row">
-                  <div class="col-sm-12">
-                    <label>Observaciones</label>
-                    <textarea class="form-control" rows="3" name="destinatarioObservaciones"></textarea>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-sm-8">
+                  <div class="col-sm-4">
                     <label>Nombre</label>
                     <input type="text" class="form-control" name="destinatarioNombre">
                   </div>
@@ -261,18 +330,19 @@
                     <label>Cargo</label>
                     <input type="text" class="form-control" name="destinatarioCargo">
                   </div>
-                </div>
-
-                <div class="row">
                   <div class="col-sm-4">
                     <label>Fecha de recepción</label>
                     <input type="text" class="form-control datepicker" name="destinatarioRecepcion">
                   </div>
-                  <div class="col-sm-8">
-                    <label>Firma</label>
-                    <input type="text" class="form-control" name="">
-                  </div>
                 </div>
+
+
+                <!-- <div class="row">
+                  <div class="col-sm-12">
+                    <label>Observaciones</label>
+                    <textarea class="form-control" rows="3" name="destinatarioObservaciones"></textarea>
+                  </div>
+                </div> -->
 
             </section>
         </form>

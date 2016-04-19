@@ -77,6 +77,8 @@
           })
         }
       })
+
+      initSelect2("residuoDestino","Destino del Residuo");
     }
 
     //Function to add the handlers to the select2 in the Generador seccion
@@ -210,6 +212,7 @@
           $("input[name='contenedor']",row).val(residuo._pivot_tipoContenedor);
           $("input[name='residuoTotal']",row).val(residuo._pivot_cantidadUnidad);
           $("input[name='residuoUnidad']",row).val(residuo._pivot_unidad);
+          $("select[name='residuoDestino']",row).val(residuo._pivot_destino).trigger("change").trigger("select2:select");;
         }
       }).catch(function(err){
         console.error(err);
@@ -260,12 +263,23 @@
         onFinishing: function(event, currentIndex) {
           var form = $(this).serializeObject();
           var rules = {
-            idDestinatario: "required"
+            idDestinatario: "required",
+            destinatarioRecepcion: "required"
           }
-          var validation = new Validator(form,rules)
+          var validation = new Validator(form,rules);
+
+          validation.setAttributeNames({
+            idDestinatario: "Empresa Receptora",
+            destinatarioRecepcion: "Fecha de Recepción"
+          });
 
           if(validation.fails()){
-            notify("pe-7s-close-circle","Es necesario seleccionar un destinatario.","danger");
+            var errors = validation.errors.all();
+            var string = "";
+            for(x in errors){
+              string += errors[x] + "<br/>";
+            }
+            notify("pe-7s-close-circle",string,"danger");
             return false;
           }
           return true;
@@ -278,14 +292,14 @@
            }
           if(currentIndex == 0){
             var rules = {
-              noPage: "required|numeric",
+              // noPage: "required|numeric",
               razonSocial: "required"
             }
             var validation = new Validator(form,rules);
 
             validation.setAttributeNames({
               noPage: "Página",
-              razonSocial: "Razón Social de la Empresa"
+              razonSocial: "Empresa Generadora"
             });
 
             if(validation.fails()){
@@ -301,20 +315,22 @@
           }
           if(currentIndex == 1){
             var completed = [];
-            for(var i = 0; i < 6; i++){
+            for(var i = 0; i < 5; i++){
               var object = {};
               object.tipo = form.tipo[i];
               object.cantidad = form.cantidad[i];
               object.contenedor = form.contenedor[i];
               object.residuoTotal = form.residuoTotal[i];
               object.residuoUnidad = form.residuoUnidad[i];
+              object.residuoDestino = form.residuoDestino[i];
 
               var rules = {
                 tipo: "required",
                 cantidad: "required|numeric",
                 contenedor: "required",
                 residuoTotal: "required|numeric",
-                residuoUnidad: "required"
+                residuoUnidad: "required",
+                residuoDestino: "required"
               }
 
               var validation = new Validator(object,rules);
@@ -324,7 +340,8 @@
                 cantidad: "Cantidad",
                 contenedor: "Tipo de Contenedor",
                 residuoTotal: "Cantidad Total de Residuo",
-                residuoUnidad: "Unidad VOL/PES"
+                residuoUnidad: "Unidad VOL/PES",
+                residuoDestino: "Manejo del Residuo"
               });
 
               if(validation.passes()){
@@ -363,13 +380,31 @@
           }
           if(currentIndex == 2){
             var rules = {
-              idTransportadora: "required"
+              idTransportadora: "required",
+              transportistaVehiculo: "required",
+              transportistaPlacas: "required",
+              transportistaFecha: "required"
             }
 
-            var validation = new Validator(form,rules);
+            var messages = {
+              "required.idTransportadora": "Es necesario seleccionar una empresa transportadora"
+            }
+
+            var validation = new Validator(form,rules,messages);
+
+            validation.setAttributeNames({
+              transportistaVehiculo: "Tipo de Vehículo",
+              transportistaPlacas: "Placas",
+              transportistaFecha: "Fecha"
+            });
 
             if(validation.fails()){
-              notify("pe-7s-close-circle","Es necesario seleccionar una empresa transportadora","danger");
+              var errors = validation.errors.all();
+              var message = "";
+              for(x in errors){
+                message += errors[x] + "<br/>";
+              }
+              notify("pe-7s-close-circle",message,"danger");
               return false;
             }
             return true;
@@ -438,7 +473,7 @@
         tipoVehiculo: form.transportistaVehiculo,
         placa: form.transportistaPlacas,
         idDestinatario: form.idDestinatario,
-        observaciones: form.destinatarioObservaciones,
+        // observaciones: form.destinatarioObservaciones,
         nombreDestinatario: form.destinatarioNombre,
         cargoDestinatario: form.destinatarioCargo,
         fechaRecepcion: form.destinatarioRecepcion,
@@ -461,6 +496,7 @@
           manipulated.tipoContenedor = residuos[i].contenedor;
           manipulated.cantidadUnidad = residuos[i].residuoTotal;
           manipulated.unidad = residuos[i].residuoUnidad;
+          manipulated.destino = residuos[i].residuoDestino;
           final.push(manipulated);
         }
         console.log(final,manifiesto.identificador)
@@ -544,6 +580,7 @@
         doc.text(residuos[i]._pivot_tipoContenedor,385,216 + (12*i));
         var totalRes = residuos[i]._pivot_cantidadUnidad + " " + residuos[i]._pivot_unidad;
         doc.text(totalRes,310,216 + (12*i));
+        doc.text(residuos[i]._pivot_destino,475,216 + (12*i));
       }
 
       doc.text(manifiesto.instruccionesEspeciales,90,305);
@@ -655,4 +692,11 @@
       return manipulated;
     }
 
+
+    function initSelect2(name, placeholder){
+      $("select[name='" + name + "']").select2({
+        allowClear: true,
+        placeholder: placeholder
+      });
+    }
 }( window.editManifest = window.editManifest || {}, jQuery ));

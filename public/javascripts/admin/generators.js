@@ -15,7 +15,7 @@
         municipio: "Municipio",
         estado: "Estado",
         telefono: "Teléfono",
-        nra:"Número de Registro Ambiental"
+        nra:"Número de Registro como Generador"
       }
       var rules = {
         razonSocial: "required|min:5",

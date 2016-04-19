@@ -16,8 +16,8 @@
       var validator = new Validator(form,rules);
 
       validator.setAttributeNames({
-        nombre: "Nombre de la Empresa",
-        ine: "Número de la Autorización de la SEMARNAT",
+        nombre: "Nombre de la Empresa Receptora",
+        ine: "Número de registro como prestador de Servicios",
         domicilio: "Domicilio",
         telefono: "Teléfono"
       })
