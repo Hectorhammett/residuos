@@ -1,0 +1,80 @@
+[0323/230832:INFO:nw_package.cc(175)] "C:\xampp\htdocs\Residuos\nw.exe"
+[0323/232315:ERROR:process_info.cc(608)] range at 0x3d8318600000000, size 0x216 fully unreadable
+[0323/232315:ERROR:process_info.cc(608)] range at 0x3d831a600000000, size 0x216 fully unreadable
+[0323/232315:ERROR:process_info.cc(608)] range at 0x0, size 0x216 fully unreadable
+[0323/232316:INFO:nw_package.cc(175)] "C:\xampp\htdocs\Residuos\nw.exe"
+[0327/151727:INFO:nw_package.cc(175)] "C:\xampp\htdocs\Residuos\nw.exe"
+[0327/151734:INFO:nw_package.cc(175)] "C:\xampp\htdocs\Residuos\nw.exe"
+[0327/151924:INFO:nw_package.cc(175)] "C:\xampp\htdocs\Residuos\nw.exe"
+[0327/152028:INFO:nw_package.cc(175)] "C:\xampp\htdocs\Residuos\nw.exe"
+[0327/152130:ERROR:image_metadata_extractor.cc(114)] Couldn't load libexif. 126
+[0330/214133:INFO:nw_package.cc(175)] "C:\xampp\htdocs\Residuos\nw.exe"
+[0330/214234:ERROR:image_metadata_extractor.cc(114)] Couldn't load libexif. 126
+[0330/224719:ERROR:process_info.cc(608)] range at 0xe35c1f6e00000000, size 0x153 fully unreadable
+[0330/224719:ERROR:process_info.cc(608)] range at 0xe35c1f8e00000000, size 0x153 fully unreadable
+[0330/224719:ERROR:process_info.cc(608)] range at 0x0, size 0x153 fully unreadable
+[0330/224736:INFO:nw_package.cc(175)] "C:\xampp\htdocs\Residuos\nw.exe"
+[0330/234100:INFO:nw_package.cc(175)] "C:\xampp\htdocs\Residuos\nw.exe"
+[0330/234107:ERROR:process_info.cc(608)] range at 0x3186318200000000, size 0x156 fully unreadable
+[0330/234107:ERROR:process_info.cc(608)] range at 0x318631a200000000, size 0x156 fully unreadable
+[0330/234107:ERROR:process_info.cc(608)] range at 0x0, size 0x156 fully unreadable
+[0331/005549:INFO:nw_package.cc(175)] "C:\xampp\htdocs\Residuos\nw.exe"
+[0331/023651:INFO:nw_package.cc(175)] "C:\xampp\htdocs\Residuos\nw.exe"
+[0331/024041:ERROR:process_info.cc(608)] range at 0xd262318000000000, size 0x1bb fully unreadable
+[0331/024041:ERROR:process_info.cc(608)] range at 0xd26231a000000000, size 0x1bb fully unreadable
+[0331/024041:ERROR:process_info.cc(608)] range at 0x0, size 0x1bb fully unreadable
+[0331/203310:INFO:nw_package.cc(175)] "C:\xampp\htdocs\Residuos\nw.exe"
+[0331/203338:ERROR:process_info.cc(608)] range at 0xf95030ce00000000, size 0x241 fully unreadable
+[0331/203338:ERROR:process_info.cc(608)] range at 0xf95030ee00000000, size 0x241 fully unreadable
+[0331/203338:ERROR:process_info.cc(608)] range at 0x0, size 0x241 fully unreadable
+[0331/203401:INFO:nw_package.cc(175)] "C:\xampp\htdocs\Residuos\nw.exe"
+[0331/203453:ERROR:process_info.cc(608)] range at 0x7a9830d000000000, size 0x19a fully unreadable
+[0331/203453:ERROR:process_info.cc(608)] range at 0x7a9830f000000000, size 0x19a fully unreadable
+[0331/203453:ERROR:process_info.cc(608)] range at 0x0, size 0x19a fully unreadable
+[0331/203455:INFO:nw_package.cc(175)] "C:\xampp\htdocs\Residuos\nw.exe"
+[0331/205714:INFO:nw_package.cc(175)] "C:\xampp\htdocs\Residuos\nw.exe"
+[0412/220210:INFO:nw_package.cc(175)] "C:\xampp\htdocs\Residuos\nw.exe"
+[0412/220311:ERROR:image_metadata_extractor.cc(114)] Couldn't load libexif. 126
+[0412/225618:ERROR:process_info.cc(608)] range at 0x6feb311e00000000, size 0x1e8 fully unreadable
+[0412/225618:ERROR:process_info.cc(608)] range at 0x6feb313e00000000, size 0x1e8 fully unreadable
+[0412/225618:ERROR:process_info.cc(608)] range at 0x0, size 0x1e8 fully unreadable
+[0412/225620:INFO:nw_package.cc(175)] "C:\xampp\htdocs\Residuos\nw.exe"
+[0412/235536:ERROR:process_info.cc(608)] range at 0x4cae318600000000, size 0x2ba fully unreadable
+[0412/235536:ERROR:process_info.cc(608)] range at 0x4cae31a600000000, size 0x2ba fully unreadable
+[0412/235536:ERROR:process_info.cc(608)] range at 0x0, size 0x2ba fully unreadable
+[0413/190544:INFO:nw_package.cc(175)] "C:\xampp\htdocs\Residuos\nw.exe"
+[0413/191112:INFO:nw_package.cc(175)] "C:\xampp\htdocs\Residuos\nw.exe"
+[0413/203345:ERROR:process_info.cc(608)] range at 0x3e2c30c200000000, size 0x1db fully unreadable
+[0413/203346:ERROR:process_info.cc(608)] range at 0x3e2c30e200000000, size 0x1db fully unreadable
+[0413/203346:ERROR:process_info.cc(608)] range at 0x0, size 0x1db fully unreadable
+[0417/215951:INFO:nw_package.cc(175)] "C:\xampp\htdocs\Residuos\nw.exe"
+[0417/220053:ERROR:image_metadata_extractor.cc(114)] Couldn't load libexif. 126
+[0418/222608:INFO:nw_package.cc(175)] "C:\xampp\htdocs\Residuos\nw.exe"
+[0418/222709:ERROR:image_metadata_extractor.cc(114)] Couldn't load libexif. 126
+[0419/000023:INFO:nw_package.cc(175)] "C:\xampp\htdocs\Residuos\nw.exe"
+[0419/003929:ERROR:process_info.cc(608)] range at 0xe9c4311c00000000, size 0x2eb fully unreadable
+[0419/003929:ERROR:process_info.cc(608)] range at 0xe9c4313c00000000, size 0x2eb fully unreadable
+[0419/003929:ERROR:process_info.cc(608)] range at 0x0, size 0x2eb fully unreadable
+[0419/010429:INFO:nw_package.cc(175)] "C:\xampp\htdocs\Residuos\nw.exe"
+[0419/010908:ERROR:process_info.cc(608)] range at 0xede3318200000000, size 0x23b fully unreadable
+[0419/010908:ERROR:process_info.cc(608)] range at 0xede331a200000000, size 0x23b fully unreadable
+[0419/010908:ERROR:process_info.cc(608)] range at 0x0, size 0x23b fully unreadable
+[0419/185846:INFO:nw_package.cc(175)] "C:\xampp\htdocs\Residuos\nw.exe"
+[0419/185929:ERROR:process_info.cc(608)] range at 0x3ec530d200000000, size 0x1b4 fully unreadable
+[0419/185929:ERROR:process_info.cc(608)] range at 0x3ec530f200000000, size 0x1b4 fully unreadable
+[0419/185929:ERROR:process_info.cc(608)] range at 0x0, size 0x1b4 fully unreadable
+[0419/190103:INFO:nw_package.cc(175)] "C:\xampp\htdocs\Residuos\nw.exe"
+[0419/190112:ERROR:process_info.cc(608)] range at 0x123a30d200000000, size 0x2d3 fully unreadable
+[0419/190112:ERROR:process_info.cc(608)] range at 0x123a30f200000000, size 0x2d3 fully unreadable
+[0419/190112:ERROR:process_info.cc(608)] range at 0x0, size 0x2d3 fully unreadable
+[0419/190118:INFO:nw_package.cc(175)] "C:\xampp\htdocs\Residuos\nw.exe"
+[0419/190205:INFO:nw_package.cc(175)] "C:\xampp\htdocs\Residuos\nw.exe"
+[0419/190254:ERROR:process_info.cc(608)] range at 0x690c30be00000000, size 0x196 fully unreadable
+[0419/190254:ERROR:process_info.cc(608)] range at 0x690c30de00000000, size 0x196 fully unreadable
+[0419/190254:ERROR:process_info.cc(608)] range at 0x0, size 0x196 fully unreadable
+[0419/190258:INFO:nw_package.cc(175)] "C:\xampp\htdocs\Residuos\nw.exe"
+[0424/002412:ERROR:process_info.cc(608)] range at 0x71ab30d200000000, size 0x1d0 fully unreadable
+[0424/002412:ERROR:process_info.cc(608)] range at 0x71ab30f200000000, size 0x1d0 fully unreadable
+[0424/002412:ERROR:process_info.cc(608)] range at 0x0, size 0x1d0 fully unreadable
+[0502/220203:INFO:nw_package.cc(175)] "C:\Users\Hector\Documents\laptops files\hector's Laptop\htdocs\Residuos\nw.exe"
+[0502/220243:ERROR:image_metadata_extractor.cc(114)] Couldn't load libexif. 126
