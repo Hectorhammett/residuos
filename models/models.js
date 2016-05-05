@@ -11,6 +11,33 @@ var User = Bookshelf.Model.extend({
   }
 });
 
+var Chofer = Bookshelf.Model.extend({
+  tableName: 'chofer',
+  idAttribute: 'id',
+  hasTimestamps: false,
+  manifiestos:function(){
+    return this.hasMany(Manifiesto,"idChofer");
+  }
+});
+
+var Transporte = Bookshelf.Model.extend({
+  tableName: 'transporte',
+  idAttribute: 'id',
+  hasTimestamps: false,
+  manifiestos:function(){
+    return this.hasMany(Manifiesto,"idTransporte");
+  }
+});
+
+var Ruta = Bookshelf.Model.extend({
+  tableName: 'ruta',
+  idAttribute: 'id',
+  hasTimestamps: false,
+  manifiestos:function(){
+    return this.hasMany(Manifiesto,"idRuta");
+  }
+});
+
 var Generador = Bookshelf.Model.extend({
   tableName: 'generador',
   idAttribute: 'id',
@@ -66,6 +93,15 @@ var Manifiesto = Bookshelf.Model.extend({
   destinatario: function(){
     return this.belongsTo(Destinatario,'idDestinatario');
   },
+  chofer: function(){
+    return this.belongsTo(Chofer,'idChofer');
+  },
+  transporte: function(){
+    return this.belongsTo(Transporte,'idTransporte');
+  },
+  ruta: function(){
+    return this.belongsTo(Ruta,'idRuta');
+  },
   archivo: function(){
     return this.hasOne(Archivo,'idManifiesto');
   }
@@ -107,6 +143,9 @@ models['Transportista'] = Transportista;
 models['Destinatario'] = Destinatario;
 models['Manifiesto'] = Manifiesto;
 models['Archivo'] = Archivo;
+models['Chofer'] = Chofer;
+models['Ruta'] = Ruta;
+models['Transporte'] = Transporte;
 
 module.exports = function(model){
   return models[model];
