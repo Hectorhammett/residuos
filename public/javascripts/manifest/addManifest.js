@@ -6,6 +6,9 @@
     var Transportista = require(global.models)("Transportista");
     var Destinatario = require(global.models)("Destinatario");
     var Manifiesto = require(global.models)("Manifiesto");
+    var Chofer = require(global.models)("Chofer");
+    var Ruta = require(global.models)("Ruta");
+    var Transporte = require(global.models)("Transporte");
     var Knex = require(global.db).knex;
     var Meta = require(global.models)("Meta");
     var _ = require("lodash");
@@ -79,6 +82,48 @@
             placeholder: "Nombre de la Empresa",
             allowClear: true,
             data: destinatarios
+          })
+        }
+      });
+
+      getDrivers().then(function(drivers){
+        console.log(drivers);
+        if(drivers.length == 1){
+          alert("No existen Choferes registrados en el sistema. Favor de solicitar al administrador del sistema de agregar los posibles Destinatarios de residuos que se pueden utilizar dentro de los manifiestos.");
+        }
+        else{
+          $('#transportistaNombre').select2({
+            placeholder: "Nombre del Chofer",
+            allowClear: true,
+            data: drivers
+          })
+        }
+      });
+
+      getRoutes().then(function(routes){
+        console.log(routes);
+        if(routes.length == 1){
+          alert("No existen Rutas registradas en el sistema. Favor de solicitar al administrador del sistema de agregar los posibles Destinatarios de residuos que se pueden utilizar dentro de los manifiestos.");
+        }
+        else{
+          $('#transportistaRuta').select2({
+            placeholder: "Nombre de la Ruta",
+            allowClear: true,
+            data: routes
+          })
+        }
+      });
+
+      getVehicles().then(function(transportes){
+        console.log(transportes);
+        if(transportes.length == 1){
+          alert("No existen Unidades de Transporte registradas en el sistema. Favor de solicitar al administrador del sistema de agregar los posibles Destinatarios de residuos que se pueden utilizar dentro de los manifiestos.");
+        }
+        else{
+          $('#transportistaVehiculo').select2({
+            placeholder: "Tipo de vehículo",
+            allowClear: true,
+            data: transportes
           })
         }
       });
@@ -174,6 +219,23 @@
       $("input[name='destinatarioDomicilio']").val("");
       $("input[name='destinatarioIne']").val("");
       $("input[name='destinatarioTelefono']").val("");
+    })
+
+    //function to handle for selection on the vehicle on the form
+    $(document).on("select2:select","#transportistaVehiculo",function(){
+      var selection = this;
+      new Transporte({
+        id: selection.value
+      }).fetch().then(function(transporte){
+        var transporte = transporte.toJSON();
+        console.log(transporte)
+        $("input[name='transportistaPlacas']").val(transporte.placas);
+      })
+    });
+
+    $(document).on("select2:unselect","#transportistaVehiculo",function(){
+      $("input[name='destinatarioDomicilio']").val("");
+      $("input[name='transportistaPlacas']").val(transporte.placas);
     })
 
     //function to initialize the Datepickers
@@ -643,6 +705,42 @@
       })
 
       return destinatarios;
+    }
+
+    //function to get all drivers from the DB
+    function getDrivers(){
+      var drivers = new Chofer().fetchAll().then(function(drivers){
+        return modifySelect2(drivers.toJSON(),'id','nombre');
+      }).catch(function(err){
+        console.error(err);
+        notify("pe-7s-close-circle","Hubo un error con la base de datos. Favor de revisar que el servidor se encuentre encendido.","danger");
+      })
+
+      return drivers;
+    }
+
+    //function to get all routes from the DB
+    function getRoutes(){
+      var routes = new Ruta().fetchAll().then(function(routes){
+        return modifySelect2(routes.toJSON(),'id','nombre');
+      }).catch(function(err){
+        console.error(err);
+        notify("pe-7s-close-circle","Hubo un error con la base de datos. Favor de revisar que el servidor se encuentre encendido.","danger");
+      })
+
+      return routes;
+    }
+
+    //function to get all vehicles from the DB
+    function getVehicles(){
+      var transportes = new Transporte().fetchAll().then(function(transportes){
+        return modifySelect2(transportes.toJSON(),'id','tipoTransporte');
+      }).catch(function(err){
+        console.error(err);
+        notify("pe-7s-close-circle","Hubo un error con la base de datos. Favor de revisar que el servidor se encuentre encendido.","danger");
+      })
+
+      return transportes;
     }
 
     //Function to modify a collection to meet the requirements for the Select2 js

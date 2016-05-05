@@ -63,7 +63,7 @@
       else{
         new Transporte({
           tipoTransporte: form.unitType,
-          placas: form.unitPLates
+          placas: form.unitPlates
         }).save().then(function(model){
           notify("pe-7s-check","La unidad se ha guardado correctamente","success");
           $("#newUnit")[0].reset();
@@ -95,7 +95,7 @@
       }
       else{
         new Ruta({
-          nombre: form.unitType,
+          nombre: form.routeName,
         }).save().then(function(model){
           notify("pe-7s-check","La Ruta se ha guardado correctamente","success");
           $("#newRoute")[0].reset();
