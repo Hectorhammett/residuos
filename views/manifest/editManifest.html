@@ -2,8 +2,8 @@
   <div class="col-sm-12">
     <div class="card">
       <div class="header">
-        <h4 class="title">Editar Manifiesto</h4>
-        <p class="category">Edición de Manifiesto</p>
+        <h4 class="title">Nuevo Manifiesto</h4>
+        <p class="category">Captura de nuevo manifiesto</p>
       </div>
       <div class="content">
         <form id="example-basic">
@@ -256,14 +256,15 @@
                   </div>
 
                   <div class="row">
-                    <div class="col-sm-8">
+                    <div class="col-sm-12">
                       <label>Nombre:</label>
-                      <input type="text" class="form-control" name="transportistaNombre"/>
+                      <select name="transportistaNombre" class="form-control" style="width:100%" id="transportistaNombre">
+                      </select>
                     </div>
-                    <div class="col-sm-4">
+                    <!-- <div class="col-sm-4">
                       <label>Cargo:</label>
                       <input type="text" class="form-control" name="transportistaCargo"/>
-                    </div>
+                    </div> -->
                   </div>
 
                   <div class="row">
@@ -273,18 +274,18 @@
                     </div>
                     <div class="col-sm-8">
                       <label>Ruta desde la empresa generadora hasta su entrega:</label>
-                      <input type="text" class="form-control" name="transportistaRuta"/>
+                      <select name="transportistaRuta" style="width:100%" id="transportistaRuta"></select>
                     </div>
                   </div>
 
                   <div class="row">
                     <div class="col-sm-8">
                       <label>Tipo de Vehículo:</label>
-                      <input type="text" class="form-control" name="transportistaVehiculo"/>
+                      <select name="transportistaVehiculo" style="width:100%" id="transportistaVehiculo"></select>
                     </div>
                     <div class="col-sm-4">
                       <label>Placas:</label>
-                      <input type="text" class="form-control" name="transportistaPlacas"/>
+                      <input type="text" class="form-control" name="transportistaPlacas" readonly="true"/>
                     </div>
                   </div>
 
@@ -299,7 +300,7 @@
                     <select name="idDestinatario" class="form-control" id="destinatario-nombre" style="width:100%;"></select>
                   </div>
                   <div class="col-sm-4">
-                    <label>Número de autorización de la SEMARNAT</label>
+                    <label>Número como prestador de servicios</label>
                     <input type="text" name="destinatarioIne" class="form-control" readonly="true"/>
                   </div>
                 </div>
@@ -322,13 +323,10 @@
                 </div>
 
                 <div class="row">
-                  <div class="col-sm-4">
+                  <div class="col-sm-8">
                     <label>Nombre</label>
-                    <input type="text" class="form-control" name="destinatarioNombre">
-                  </div>
-                  <div class="col-sm-4">
-                    <label>Cargo</label>
-                    <input type="text" class="form-control" name="destinatarioCargo">
+                    <select class="form-control" name="destinatarioNombre" id="destinatarioNombre" style="width:100%">
+                    </select>
                   </div>
                   <div class="col-sm-4">
                     <label>Fecha de recepción</label>

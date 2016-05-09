@@ -310,13 +310,15 @@
           var form = $(this).serializeObject();
           var rules = {
             idDestinatario: "required",
-            destinatarioRecepcion: "required"
+            destinatarioRecepcion: "required",
+            destinatarioNombre: "required"
           }
           var validation = new Validator(form,rules);
 
           validation.setAttributeNames({
             idDestinatario: "Empresa Receptora",
-            destinatarioRecepcion: "Fecha de Recepción"
+            destinatarioRecepcion: "Fecha de Recepción",
+            destinatarioNombre: "Nombre del Responsable"
           });
 
           if(validation.fails()){
@@ -361,6 +363,7 @@
           }
           if(currentIndex == 1){
             var completed = [];
+            var failed = [];
             for(var i = 0; i < 5; i++){
               var object = {};
               object.tipo = form.tipo[i];
@@ -393,6 +396,10 @@
               if(validation.passes()){
                 completed.push(object);
               }
+              else{
+                if(object.tipo != "" || object.cantidad != "" || object.contenedor != "" || object.residuoTotal != "" || object.residuoUnidad != "" || object.residuoDestino != "")
+                  failed.push(i+1);
+              }
             }
 
             if(completed.length == 0){
@@ -400,6 +407,10 @@
               return false;
             }
             else{
+              if(failed.length > 0){
+                notify("pe-7s-close-circle","Es necesario capturar completo(s) el/los residos " + failed.toString() +".","danger");
+                return false;
+              }
               residuos = completed;
             }
 
@@ -429,7 +440,9 @@
               idTransportadora: "required",
               transportistaVehiculo: "required",
               transportistaPlacas: "required",
-              transportistaFecha: "required"
+              transportistaFecha: "required",
+              transportistaNombre: "required",
+              transportistaRuta: "required"
             }
 
             var messages = {
@@ -441,7 +454,9 @@
             validation.setAttributeNames({
               transportistaVehiculo: "Tipo de Vehículo",
               transportistaPlacas: "Placas",
-              transportistaFecha: "Fecha"
+              transportistaFecha: "Fecha",
+              transportistaNombre: "Nombre del chofer",
+              transportistaRuta: "Ruta"
             });
 
             if(validation.fails()){

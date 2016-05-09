@@ -6,6 +6,10 @@
     var Transportista = require(global.models)("Transportista");
     var Destinatario = require(global.models)("Destinatario");
     var Manifiesto = require(global.models)("Manifiesto");
+    var Chofer = require(global.models)("Chofer");
+    var Ruta = require(global.models)("Ruta");
+    var Transporte = require(global.models)("Transporte");
+    var Responsable = require(global.models)("Responsable");
     var Knex = require(global.db).knex;
     var Meta = require(global.models)("Meta");
     var _ = require("lodash");
@@ -20,7 +24,6 @@
     }
     editManifest.initializePage = function(){
       var idManifest = global.editManifestId;
-      loadManifest(idManifest);
       initForm();
       initDatepickers();
 
@@ -36,7 +39,7 @@
         }
       });
 
-      getGenerators().then(function(generadores){
+      var generators = getGenerators().then(function(generadores){
         console.log(generadores);
         if(generadores.length == 1){
           alert("No existen Generadores de Residuos registrados en el sistema. Favor de solicitar al administrador del sistema de agregar los posibles Generadores de residuos que se pueden utilizar dentro de los manifiestos.")
@@ -50,7 +53,7 @@
         }
       })
 
-      getTransporters().then(function(transporters){
+      var transporters = getTransporters().then(function(transporters){
         console.log(transporters);
         if(transporters.length == 1){
           alert("No existen Transportistas de Residuos registrados en el sistema. Favor de solicitar al administrador del sistema de agregar los posibles Transportistas de residuos que se pueden utilizar dentro de los manifiestos.");
@@ -64,7 +67,7 @@
         }
       });
 
-      getDestinations().then(function(destinatarios){
+      var destinations = getDestinations().then(function(destinatarios){
         console.log(destinatarios);
         if(destinatarios.length == 1){
           alert("No existen Destinatarios de Residuos registrados en el sistema. Favor de solicitar al administrador del sistema de agregar los posibles Destinatarios de residuos que se pueden utilizar dentro de los manifiestos.");
@@ -77,6 +80,75 @@
           })
         }
       })
+
+      var drivers = getDrivers().then(function(drivers){
+        console.log(drivers);
+        if(drivers.length == 1){
+          alert("No existen Choferes registrados en el sistema. Favor de solicitar al administrador del sistema de agregar los posibles Choferes que se pueden utilizar dentro de los manifiestos.");
+        }
+        else{
+          $('#transportistaNombre').select2({
+            placeholder: "Nombre del Chofer",
+            allowClear: true,
+            data: drivers
+          })
+        }
+      });
+
+      var routes = getRoutes().then(function(routes){
+        console.log(routes);
+        if(routes.length == 1){
+          alert("No existen Rutas registradas en el sistema. Favor de solicitar al administrador del sistema de agregar las posibles Rutas que se pueden utilizar dentro de los manifiestos.");
+        }
+        else{
+          $('#transportistaRuta').select2({
+            placeholder: "Nombre de la Ruta",
+            allowClear: true,
+            data: routes
+          })
+        }
+      });
+
+      var vehicles = getVehicles().then(function(transportes){
+        console.log(transportes);
+        if(transportes.length == 1){
+          alert("No existen Unidades de Transporte registradas en el sistema. Favor de solicitar al administrador del sistema de agregar los posibles transpores que se pueden utilizar dentro de los manifiestos.");
+        }
+        else{
+          $('#transportistaVehiculo').select2({
+            placeholder: "Tipo de vehículo",
+            allowClear: true,
+            data: transportes
+          })
+        }
+      });
+
+      var responsables = getResponsables().then(function(responsables){
+        console.log(responsables);
+        if(responsables.length == 1){
+          alert("No existen Responsables registrados en el sistema. Favor de solicitar al administrador del sistema de agregar los posibles Responsables que se pueden utilizar dentro de los manifiestos.");
+        }
+        else{
+          $('#destinatarioNombre').select2({
+            placeholder: "Nombre del Responsable",
+            allowClear: true,
+            data: responsables
+          })
+        }
+      });
+
+      Promise.all([
+        generators,
+        transporters,
+        destinations,
+        drivers,
+        routes,
+        vehicles,
+        responsables
+      ]).then(function(){
+        console.log("Finished all promises");
+        loadManifest(idManifest);
+      });
 
       initSelect2("residuoDestino","Destino del Residuo");
     }
@@ -105,6 +177,10 @@
       $("input[name='estado']").val("");
       $("input[name='telefono']").val("");
       $("input[name='nra']").val("");
+    });
+
+    $(document).on("select2:unselect","#transportistaVehiculo",function(){
+      $("input[name='transportistaPlacas']").val("");
     });
 
 
@@ -203,6 +279,10 @@
         $("select[name='razonSocial']").val(manifiesto.idGenerador).trigger("change").trigger("select2:select");
         $("select[name='idTransportadora']").val(manifiesto.idTransportista).trigger("change").trigger("select2:select");
         $("select[name='idDestinatario']").val(manifiesto.idDestinatario).trigger("change").trigger("select2:select");
+        $("#transportistaNombre").val(manifiesto.idChofer).trigger("change").trigger("select2:select");
+        $("#transportistaRuta").val(manifiesto.idRuta).trigger("change").trigger("select2:select");
+        $("#transportistaVehiculo").val(manifiesto.idTransporte).trigger("change").trigger("select2:select");
+        $("#destinatarioNombre").val(manifiesto.idResponsable).trigger("change").trigger("select2:select");
 
         for(var i = 0; i < residuos.length; i++){
           var residuo = residuos[i];
@@ -264,13 +344,15 @@
           var form = $(this).serializeObject();
           var rules = {
             idDestinatario: "required",
-            destinatarioRecepcion: "required"
+            destinatarioRecepcion: "required",
+            destinatarioNombre: "required"
           }
           var validation = new Validator(form,rules);
 
           validation.setAttributeNames({
             idDestinatario: "Empresa Receptora",
-            destinatarioRecepcion: "Fecha de Recepción"
+            destinatarioRecepcion: "Fecha de Recepción",
+            destinatarioNombre: "Nombre del Responsable"
           });
 
           if(validation.fails()){
@@ -315,6 +397,7 @@
           }
           if(currentIndex == 1){
             var completed = [];
+            var failed = [];
             for(var i = 0; i < 5; i++){
               var object = {};
               object.tipo = form.tipo[i];
@@ -347,6 +430,10 @@
               if(validation.passes()){
                 completed.push(object);
               }
+              else{
+                if(object.tipo != "" || object.cantidad != "" || object.contenedor != "" || object.residuoTotal != "" || object.residuoUnidad != "" || object.residuoDestino != "")
+                  failed.push(i+1);
+              }
             }
 
             if(completed.length == 0){
@@ -354,6 +441,10 @@
               return false;
             }
             else{
+              if(failed.length > 0){
+                notify("pe-7s-close-circle","Es necesario capturar completo(s) el/los residos " + failed.toString() +".","danger");
+                return false;
+              }
               residuos = completed;
             }
 
@@ -413,8 +504,8 @@
         onFinished: function(){
           var form = $(this).serializeObject();
           console.log(form);
-          updateManifest(form);
-          $("#capturar-manifiesto").click();
+          saveManifest(form);
+          $("#consultar-manifiesto").click();
         },
         onInit:function (event, currentIndex, priorIndex) {
           adjustStepHeight();
@@ -448,6 +539,72 @@
 
       //set height of step to the sum value
       $(".wizard > .content").css("height",sum);
+    }
+
+    function saveManifest(form){
+      if(form.transportistaFecha != ""){
+        form.transportistaFecha = moment(form.transportistaFecha, "D/MM/YYYY").format('YYYY-MM-DD');
+      }
+      if(form.destinatarioRecepcion != ""){
+        form.destinatarioRecepcion = moment(form.destinatarioRecepcion,"D/MM/YYYY").format('YYYY-MM-DD');
+      }
+      var attributes = {
+        registroBC: form.noRegister,
+        noManifiesto: form.noManifest,
+        // pagina: form.noPage,
+        idGenerador: form.razonSocial,
+        instruccionesEspeciales: form.instruccionesEspeciales,
+        nombreResponsableGenerador: form.nombreResponsable,
+        idTransportista: form.idTransportadora,
+        idChofer: form.transportistaNombre,
+        // cargoTransportista: form.transportistaCargo,
+        fechaEmbarque: form.transportistaFecha,
+        idRuta: form.transportistaRuta,
+        idTransporte: form.transportistaVehiculo,
+        // placa: form.transportistaPlacas,
+        idDestinatario: form.idDestinatario,
+        // observaciones: form.destinatarioObservaciones,
+        idResponsable: form.destinatarioNombre,
+        // cargoDestinatario: form.destinatarioCargo,
+        fechaRecepcion: form.destinatarioRecepcion,
+        created_by:global.user.attributes.id
+      }
+
+      new Manifiesto({
+        identificador: form.identificacion
+      }).save(attributes,{
+        patch: true
+      }).then(function(manifiesto){
+        var manifiesto = manifiesto.toJSON();
+        console.log(manifiesto);
+        var final = [];
+        for(var i = 0; i < residuos.length; i++){
+          var manipulated = {}
+          manipulated.idManifiesto = manifiesto.identificador;
+          manipulated.idResiduo = residuos[i].tipo;
+          manipulated.cantidadContenedor = residuos[i].cantidad;
+          manipulated.tipoContenedor = residuos[i].contenedor;
+          manipulated.cantidadUnidad = residuos[i].residuoTotal;
+          manipulated.unidad = residuos[i].residuoUnidad;
+          manipulated.destino = residuos[i].residuoDestino;
+          final.push(manipulated);
+        }
+        console.log(final,manifiesto.identificador)
+        Knex("manifiesto_has_residuos").where('idManifiesto',manifiesto.identificador).del().then(function(){
+          Knex('manifiesto_has_residuos').insert(final).then(function(){
+            notify("pe-7s-check","El manifiesto se ha actualizador correctamente","success");
+            fetchNew(manifiesto.identificador);
+            $("#consultar-manifiesto").click();
+          }).catch(function(err){
+            console.error(err);
+            notify("pe-7s-close-circle","Hubo un error guardando los residuos","danger");
+          });
+        }).catch(function(err){
+          console.error("pe-7s-circle-close","Hubo un error con la base de datos. Favor de revisar que el servidor se encuentre encendido","danger");
+        });
+      }).catch(function(err){
+        notify("pe-7s-close-circle","Hubo un error guardando el manifiesto. Favor de revisar que el servidor se encuentre disponible","danger");
+      });
     }
 
     //function to update the manifest in the DB
@@ -535,13 +692,14 @@
       return residuos;
     }
 
+    //function that creates the pdf
     function createPdf(manifiesto){
       var generador = manifiesto.generador;
       var residuos = manifiesto.residuos;
       var transportista = manifiesto.transportista;
       var transporte = manifiesto.transporte;
       var chofer = manifiesto.chofer;
-      var rute = manifiesto.ruta;
+      var ruta = manifiesto.ruta;
       var destinatario = manifiesto.destinatario;
       var responsable = manifiesto.responsable;
       var writeStream = Fs.createWriteStream(global.views + "manifest/manifiesto.pdf");
@@ -608,7 +766,7 @@
       doc.text(ruta.nombre,90,475);
       doc.fontSize(9);
       doc.text(transporte.tipoTransporte,415,401);
-      doc.text(transpore.placas,195,401);
+      doc.text(transporte.placas,195,401);
 
       //Destinatario
       doc.text(destinatario.nombre,153,494);
@@ -633,7 +791,7 @@
     function fetchNew(newManifest){
       new Manifiesto({
         identificador: newManifest
-      }).fetch({withRelated:['generador','transportista','residuos','destinatario']}).then(function(manifiesto){
+      }).fetch({withRelated:["transportista","residuos","generador","destinatario","chofer","transporte","ruta","responsable"]}).then(function(manifiesto){
         createPdf(manifiesto.toJSON());
       }).catch(function(err){
         alert(error);
@@ -678,6 +836,54 @@
       })
 
       return destinatarios;
+    }
+
+    //function to get all drivers from the DB
+    function getDrivers(){
+      var drivers = new Chofer().fetchAll().then(function(drivers){
+        return modifySelect2(drivers.toJSON(),'id','nombre');
+      }).catch(function(err){
+        console.error(err);
+        notify("pe-7s-close-circle","Hubo un error con la base de datos. Favor de revisar que el servidor se encuentre encendido.","danger");
+      })
+
+      return drivers;
+    }
+
+    //function to get all routes from the DB
+    function getRoutes(){
+      var routes = new Ruta().fetchAll().then(function(routes){
+        return modifySelect2(routes.toJSON(),'id','nombre');
+      }).catch(function(err){
+        console.error(err);
+        notify("pe-7s-close-circle","Hubo un error con la base de datos. Favor de revisar que el servidor se encuentre encendido.","danger");
+      })
+
+      return routes;
+    }
+
+    //function to get all vehicles from the DB
+    function getVehicles(){
+      var transportes = new Transporte().fetchAll().then(function(transportes){
+        return modifySelect2(transportes.toJSON(),'id','tipoTransporte');
+      }).catch(function(err){
+        console.error(err);
+        notify("pe-7s-close-circle","Hubo un error con la base de datos. Favor de revisar que el servidor se encuentre encendido.","danger");
+      })
+
+      return transportes;
+    }
+
+    //function to get all the responsibles from the db
+    function getResponsables(){
+      var responsables = new Responsable().fetchAll().then(function(responsables){
+        return modifySelect2(responsables.toJSON(),'id','nombre');
+      }).catch(function(err){
+        console.error(err);
+        notify("pe-7s-circle-close","Hubo un error con la base de datos. Favor de revisar que se encuentr encendido.","danger");
+      })
+
+      return responsables;
     }
 
     //Function to modify a collection to meet the requirements for the Select2 js
