@@ -38,6 +38,15 @@ var Ruta = Bookshelf.Model.extend({
   }
 });
 
+var Responsable = Bookshelf.Model.extend({
+  tableName: 'responsable',
+  idAttribute: 'id',
+  hasTimestamps: false,
+  manifiestos:function(){
+    return this.hasMany(Manifiesto,"idResponsable");
+  }
+});
+
 var Generador = Bookshelf.Model.extend({
   tableName: 'generador',
   idAttribute: 'id',
@@ -102,6 +111,9 @@ var Manifiesto = Bookshelf.Model.extend({
   ruta: function(){
     return this.belongsTo(Ruta,'idRuta');
   },
+  responsable: function(){
+    return this.belongsTo(Responsable,'idResponsable');
+  },
   archivo: function(){
     return this.hasOne(Archivo,'idManifiesto');
   }
@@ -146,6 +158,7 @@ models['Archivo'] = Archivo;
 models['Chofer'] = Chofer;
 models['Ruta'] = Ruta;
 models['Transporte'] = Transporte;
+models['Responsable'] = Responsable;
 
 module.exports = function(model){
   return models[model];

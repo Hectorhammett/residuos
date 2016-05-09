@@ -145,6 +145,11 @@
 														<li><a href="admin/destination.html">Receptores</a></li>
 												</ul>
 										</div>
+										<div class="collapse tablesExamples zero-margin">
+												<ul class="nav">
+														<li><a href="admin/responsables.html">Responsables</a></li>
+												</ul>
+										</div>
                                         <div class="collapse tablesExamples zero-margin">
 												<ul class="nav">
 														<li><a href="admin/downloadFiles.html">Descargar Manifiestos</a></li>
@@ -318,6 +323,7 @@
 	<script src="{{public}}javascripts/manifest/editManifest.js"></script>
 	<script src="{{public}}javascripts/reports/report.js"></script>
 	<script src="{{public}}javascripts/admin/units.js"></script>
+	<script src="{{public}}javascripts/admin/responsables.js"></script>
 
 	<!-- Namespaces function -->
 	<script src="{{public}}javascripts/dashboard.js"></script>

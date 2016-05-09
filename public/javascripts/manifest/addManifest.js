@@ -9,6 +9,7 @@
     var Chofer = require(global.models)("Chofer");
     var Ruta = require(global.models)("Ruta");
     var Transporte = require(global.models)("Transporte");
+    var Responsable = require(global.models)("Responsable");
     var Knex = require(global.db).knex;
     var Meta = require(global.models)("Meta");
     var _ = require("lodash");
@@ -89,7 +90,7 @@
       getDrivers().then(function(drivers){
         console.log(drivers);
         if(drivers.length == 1){
-          alert("No existen Choferes registrados en el sistema. Favor de solicitar al administrador del sistema de agregar los posibles Destinatarios de residuos que se pueden utilizar dentro de los manifiestos.");
+          alert("No existen Choferes registrados en el sistema. Favor de solicitar al administrador del sistema de agregar los posibles Choferes que se pueden utilizar dentro de los manifiestos.");
         }
         else{
           $('#transportistaNombre').select2({
@@ -103,7 +104,7 @@
       getRoutes().then(function(routes){
         console.log(routes);
         if(routes.length == 1){
-          alert("No existen Rutas registradas en el sistema. Favor de solicitar al administrador del sistema de agregar los posibles Destinatarios de residuos que se pueden utilizar dentro de los manifiestos.");
+          alert("No existen Rutas registradas en el sistema. Favor de solicitar al administrador del sistema de agregar las posibles Rutas que se pueden utilizar dentro de los manifiestos.");
         }
         else{
           $('#transportistaRuta').select2({
@@ -117,13 +118,27 @@
       getVehicles().then(function(transportes){
         console.log(transportes);
         if(transportes.length == 1){
-          alert("No existen Unidades de Transporte registradas en el sistema. Favor de solicitar al administrador del sistema de agregar los posibles Destinatarios de residuos que se pueden utilizar dentro de los manifiestos.");
+          alert("No existen Unidades de Transporte registradas en el sistema. Favor de solicitar al administrador del sistema de agregar los posibles transpores que se pueden utilizar dentro de los manifiestos.");
         }
         else{
           $('#transportistaVehiculo').select2({
             placeholder: "Tipo de vehículo",
             allowClear: true,
             data: transportes
+          })
+        }
+      });
+
+      getResponsables().then(function(responsables){
+        console.log(responsables);
+        if(responsables.length == 1){
+          alert("No existen Responsables registrados en el sistema. Favor de solicitar al administrador del sistema de agregar los posibles Responsables que se pueden utilizar dentro de los manifiestos.");
+        }
+        else{
+          $('#destinatarioNombre').select2({
+            placeholder: "Nombre del Responsable",
+            allowClear: true,
+            data: responsables
           })
         }
       });
@@ -492,21 +507,21 @@
       var attributes = {
         registroBC: form.noRegister,
         noManifiesto: form.noManifest,
-        pagina: form.noPage,
+        // pagina: form.noPage,
         idGenerador: form.razonSocial,
         instruccionesEspeciales: form.instruccionesEspeciales,
         nombreResponsableGenerador: form.nombreResponsable,
         idTransportista: form.idTransportadora,
-        nombreTransportista: form.transportistaNombre,
-        cargoTransportista: form.transportistaCargo,
+        idChofer: form.transportistaNombre,
+        // cargoTransportista: form.transportistaCargo,
         fechaEmbarque: form.transportistaFecha,
-        ruta: form.transportistaRuta,
-        tipoVehiculo: form.transportistaVehiculo,
-        placa: form.transportistaPlacas,
+        idRuta: form.transportistaRuta,
+        idTransporte: form.transportistaVehiculo,
+        // placa: form.transportistaPlacas,
         idDestinatario: form.idDestinatario,
         // observaciones: form.destinatarioObservaciones,
-        nombreDestinatario: form.destinatarioNombre,
-        cargoDestinatario: form.destinatarioCargo,
+        idResponsable: form.destinatarioNombre,
+        // cargoDestinatario: form.destinatarioCargo,
         fechaRecepcion: form.destinatarioRecepcion,
         created_by:global.user.attributes.id
       }
@@ -566,11 +581,16 @@
       return residuos;
     }
 
+    //function that creates the pdf
     function createPdf(manifiesto){
       var generador = manifiesto.generador;
       var residuos = manifiesto.residuos;
       var transportista = manifiesto.transportista;
+      var transporte = manifiesto.transporte;
+      var chofer = manifiesto.chofer;
+      var ruta = manifiesto.ruta;
       var destinatario = manifiesto.destinatario;
+      var responsable = manifiesto.responsable;
       var writeStream = Fs.createWriteStream(global.views + "manifest/manifiesto.pdf");
       var doc = new PDFDocument();
 
@@ -626,16 +646,16 @@
       doc.text(transportista.telefono,420,389);
       //doc.text(transportista.autorizacionSemarnat,192,450);
       doc.text(transportista.sct,225,412);
-      doc.text(manifiesto.nombreTransportista,90,448);
+      doc.text(chofer.nombre,90,448);
       //doc.text(manifiesto.cargoTransportista,100,501);
       var date =(moment(manifiesto.fechaEmbarque).isValid())? moment(manifiesto.fechaEmbarque).format('D/MM/YYYY'):"";
       doc.text(date,155,425);
-      if(manifiesto.ruta.length > 90)
+      if(ruta.nombre.length > 90)
       doc.fontSize(7);
-      doc.text(manifiesto.ruta,90,475);
+      doc.text(ruta.nombre,90,475);
       doc.fontSize(9);
-      doc.text(manifiesto.tipoVehiculo,415,401);
-      doc.text(manifiesto.placa,195,401);
+      doc.text(transporte.tipoTransporte,415,401);
+      doc.text(transporte.placas,195,401);
 
       //Destinatario
       doc.text(destinatario.nombre,153,494);
@@ -649,7 +669,7 @@
       //doc.fontSize(7);
       //doc.text(manifiesto.observaciones,129,645);
       //doc.fontSize(9);
-      doc.text(manifiesto.nombreDestinatario,90,553);
+      doc.text(responsable.nombre,90,553);
       //doc.text(manifiesto.cargoDestinatario,100,693);
       date =(moment(manifiesto.fechaRecepcion).isValid())? moment(manifiesto.fechaRecepcion).format('D/MM/YYYY'):"";
       doc.text(date,155,530);
@@ -660,7 +680,7 @@
     function fetchNew(newManifest){
       new Manifiesto({
         identificador: newManifest
-      }).fetch({withRelated:['generador','transportista','residuos','destinatario']}).then(function(manifiesto){
+      }).fetch({withRelated:["transportista","residuos","generador","destinatario","chofer","transporte","ruta","responsable"]}).then(function(manifiesto){
         createPdf(manifiesto.toJSON());
       }).catch(function(err){
         alert(error);
@@ -741,6 +761,18 @@
       })
 
       return transportes;
+    }
+
+    //function to get all the responsibles from the db
+    function getResponsables(){
+      var responsables = new Responsable().fetchAll().then(function(responsables){
+        return modifySelect2(responsables.toJSON(),'id','nombre');
+      }).catch(function(err){
+        console.error(err);
+        notify("pe-7s-circle-close","Hubo un error con la base de datos. Favor de revisar que se encuentr encendido.","danger");
+      })
+
+      return responsables;
     }
 
     //Function to modify a collection to meet the requirements for the Select2 js

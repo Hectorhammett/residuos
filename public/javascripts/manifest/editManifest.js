@@ -539,7 +539,11 @@
       var generador = manifiesto.generador;
       var residuos = manifiesto.residuos;
       var transportista = manifiesto.transportista;
+      var transporte = manifiesto.transporte;
+      var chofer = manifiesto.chofer;
+      var rute = manifiesto.ruta;
       var destinatario = manifiesto.destinatario;
+      var responsable = manifiesto.responsable;
       var writeStream = Fs.createWriteStream(global.views + "manifest/manifiesto.pdf");
       var doc = new PDFDocument();
 
@@ -595,16 +599,16 @@
       doc.text(transportista.telefono,420,389);
       //doc.text(transportista.autorizacionSemarnat,192,450);
       doc.text(transportista.sct,225,412);
-      doc.text(manifiesto.nombreTransportista,90,448);
+      doc.text(chofer.nombre,90,448);
       //doc.text(manifiesto.cargoTransportista,100,501);
       var date =(moment(manifiesto.fechaEmbarque).isValid())? moment(manifiesto.fechaEmbarque).format('D/MM/YYYY'):"";
       doc.text(date,155,425);
-      if(manifiesto.ruta.length > 90)
+      if(ruta.nombre.length > 90)
       doc.fontSize(7);
-      doc.text(manifiesto.ruta,90,475);
+      doc.text(ruta.nombre,90,475);
       doc.fontSize(9);
-      doc.text(manifiesto.tipoVehiculo,415,401);
-      doc.text(manifiesto.placa,195,401);
+      doc.text(transporte.tipoTransporte,415,401);
+      doc.text(transpore.placas,195,401);
 
       //Destinatario
       doc.text(destinatario.nombre,153,494);
@@ -618,7 +622,7 @@
       //doc.fontSize(7);
       //doc.text(manifiesto.observaciones,129,645);
       //doc.fontSize(9);
-      doc.text(manifiesto.nombreDestinatario,90,553);
+      doc.text(responsable.nombre,90,553);
       //doc.text(manifiesto.cargoDestinatario,100,693);
       date =(moment(manifiesto.fechaRecepcion).isValid())? moment(manifiesto.fechaRecepcion).format('D/MM/YYYY'):"";
       doc.text(date,155,530);

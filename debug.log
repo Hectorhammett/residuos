@@ -86,3 +86,6 @@
 [0504/222051:INFO:nw_package.cc(175)] "C:\xampp\htdocs\Residuos\nw.exe"
 [0504/232135:INFO:nw_package.cc(175)] "C:\xampp\htdocs\Residuos\nw.exe"
 [0504/233348:INFO:nw_package.cc(175)] "C:\xampp\htdocs\Residuos\nw.exe"
+[0508/151711:INFO:nw_package.cc(175)] "C:\xampp\htdocs\Residuos\nw.exe"
+[0508/151813:ERROR:image_metadata_extractor.cc(114)] Couldn't load libexif. 126
+[0508/155607:INFO:nw_package.cc(175)] "C:\xampp\htdocs\Residuos\nw.exe"
