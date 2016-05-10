@@ -97,16 +97,20 @@
     //Handler for the options button
     $(document).on('click','.btn-options',function(){
       var $this = $(this);
+      var editOption = "";
+      if(global.user.attributes.userLevel == 1){
+        editOption = '<div class="btn-group" role="group">'+
+          '<button type="button" class="btn btn-sm btn-simple btn-edit" id="' + this.id + '"">Editar</button>'+
+        '</div>';
+      };
       if (!$this.data("bs.popover")) {
         var options = {
           placement: "left",
           content: '<div class="popover-content"><div class="btn-group btn-group-justified" role="group" aria-label="...">'+
             '<div class="btn-group" role="group">'+
               '<button type="button" class="btn btn-sm btn-simple btn-consult" id="' + this.id + '"">Consultar</button>'+
-            '</div>'+
-            '<div class="btn-group" role="group">'+
-              '<button type="button" class="btn btn-sm btn-simple btn-edit" id="' + this.id + '"">Editar</button>'+
-            '</div>'+
+            '</div>' +
+            editOption +
             '<div class="btn-group" role="group">'+
               '<button type="button" class="btn btn-sm btn-simple btn-upload" id="' + this.id + '"">Subir PDF</button>'+
             '</div>'+

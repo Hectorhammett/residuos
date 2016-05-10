@@ -41,9 +41,23 @@
         }
       });
 
-      addManifest.getCurrentManifest().then(function(data){
-        $("input[name='noManifest']").val(data.value);
-      })
+      var current = addManifest.getCurrentManifest();
+      var ending = getEndingManifest();
+
+      Promise.all([
+        current,
+        ending
+      ]).then(function(values){
+        console.log(values);
+        $("input[name='noManifest']").val(values[0].value);
+        if((values[1].value - values[0].value) == 0){
+          alert("El sistema ya no cuenta con números de manifiestos disponibles. Será redirigido a la sección de configuración del sistema.");
+          $("#configuracion-sistema").click();
+        }
+        if((values[1].value - values[0].value) <= 50){
+          notify("pe-7s-close-circle","Quedan " + (values[1].value - values[0].value) + " manifiestos disponibles en el sistema.","danger");
+        }
+      });
 
       getGenerators().then(function(generadores){
         console.log(generadores);
@@ -276,6 +290,19 @@
         })
       });
     }
+
+    function getEndingManifest(){
+      var ending = new Meta({
+        id: 1
+      }).fetch().then(function(meta){
+        return meta.toJSON();
+      }).catch(function(err){
+        notify("Hubo un error en la base de datos. Favor de revisar que el equipo servidor se encuentre encendido","danger");
+        console.error(err);
+      });
+      return ending;
+    }
+
     //function to ghet the curren manifest nnumber
     addManifest.getCurrentManifest = function(){
       var current = new Meta({

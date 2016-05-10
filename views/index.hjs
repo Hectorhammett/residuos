@@ -109,7 +109,7 @@
                 </li>
 								{{#admin}}
 									<li>
-										<a data-toggle="collapse" href=".tablesExamples" href="#">
+										<a data-toggle="collapse" href=".tablesExamples" href="#" id="admin-link">
 												<i class="pe-7s-news-paper"></i>
 												<p>Administrador
 													 <b class="caret"></b>
@@ -157,7 +157,7 @@
 										</div>
 										<div class="collapse tablesExamples zero-margin">
 												<ul class="nav">
-														<li><a href="admin/configuration.html">Configuración del sistema</a></li>
+														<li><a href="admin/configuration.html" id="configuracion-sistema">Configuración del sistema</a></li>
 												</ul>
 										</div>
 									</li>
